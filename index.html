@@ -82,8 +82,7 @@
         background: #2980b9;
         transform: scale(1.05);
     }
-
-    /* GALLERY: Full-width, responsive PNG images */
+    
     .gallery {
         display: block;
         margin-top: 2rem;
@@ -100,7 +99,7 @@
 
     .gallery img {
         width: 100%;
-        height: auto; /* preserve aspect ratio */
+        height: auto;
         display: block;
         object-fit: contain;
     }
@@ -136,7 +135,6 @@
 
 <main>
 
-<!-- ABOUT -->
 <section>
     <h2 data-lang="et">Minust</h2>
     <h2 data-lang="en" style="display:none;">About Me</h2>
@@ -162,7 +160,6 @@
     </p>
 </section>
 
-<!-- SKILLS -->
 <section>
     <h2 data-lang="et">Oskused</h2>
     <h2 data-lang="en" style="display:none;">Skills</h2>
@@ -196,7 +193,6 @@
     </ul>
 </section>
 
-<!-- GALLERY -->
 <section>
     <h2 data-lang="et">Galerii</h2>
     <h2 data-lang="en" style="display:none;">Gallery</h2>
@@ -207,11 +203,9 @@
             <figcaption data-lang="et">Ise ehitatud arvuti</figcaption>
             <figcaption data-lang="en" style="display:none;">Custom-built PC</figcaption>
         </figure>
-        <!-- Add more PNG images here if needed -->
     </div>
 </section>
 
-<!-- CONTACT -->
 <section>
     <h2 data-lang="et">Kontakt</h2>
     <h2 data-lang="en" style="display:none;">Contact</h2>
@@ -234,7 +228,7 @@ function setLanguage(lang) {
         el.style.display = el.getAttribute('data-lang') === lang ? '' : 'none';
     });
 }
-setLanguage('et'); // default language
+setLanguage('et');
 </script>
 
 </body>
