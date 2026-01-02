@@ -47,7 +47,7 @@
         }
 
         .language-switch button:hover {
-            background: rgba(255,255,255,0.2);
+            background: rgba(255, 255, 255, 0.2);
         }
 
         main {
@@ -55,7 +55,7 @@
             margin: 2rem auto;
             padding: 2rem;
             background: white;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
         }
 
@@ -90,6 +90,41 @@
         .skills li:hover {
             background: #2980b9;
             transform: scale(1.05);
+        }
+
+        /* GALLERY */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.2rem;
+            margin-top: 1.5rem;
+        }
+
+        .gallery figure {
+            margin: 0;
+            background: #f9f9f9;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+
+        .gallery figure:hover {
+            transform: translateY(-5px);
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery figcaption {
+            padding: 0.7rem;
+            font-size: 0.85rem;
+            text-align: center;
+            color: #555;
         }
 
         footer {
@@ -148,7 +183,6 @@
         <h2 data-lang="et">Oskused</h2>
         <h2 data-lang="en" style="display:none;">Skills</h2>
 
-        <!-- ESTONIAN SKILLS -->
         <ul class="skills" data-lang="et">
             <li>Arvutite ehitus</li>
             <li>Microsoft Windows 10/11</li>
@@ -163,7 +197,6 @@
             <li>IP-aadressid (põhitase)</li>
         </ul>
 
-        <!-- ENGLISH SKILLS -->
         <ul class="skills" data-lang="en" style="display:none;">
             <li>PC Building</li>
             <li>Microsoft Windows 10/11</li>
@@ -177,6 +210,20 @@
             <li>File Systems (NTFS, FAT32, exFAT)</li>
             <li>IP Addressing (basic)</li>
         </ul>
+    </section>
+
+    <!-- GALLERY -->
+    <section>
+        <h2 data-lang="et">Galerii</h2>
+        <h2 data-lang="en" style="display:none;">Gallery</h2>
+
+        <div class="gallery">
+            <figure>
+                <img src="images/pc-build.jpg" alt="Arvuti ehitus">
+                <figcaption data-lang="et">Ise ehitatud arvuti</figcaption>
+                <figcaption data-lang="en" style="display:none;">Custom-built PC</figcaption>
+            </figure>
+        </div>
     </section>
 
     <!-- CONTACT -->
@@ -203,7 +250,6 @@
         });
     }
 
-    // Vaikimisi keel
     setLanguage('et');
 </script>
 
