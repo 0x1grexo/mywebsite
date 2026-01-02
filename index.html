@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gregor Opmann – Portfoolio</title>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        header {
+            background: #2c3e50;
+            color: white;
+            padding: 2.5rem 1rem;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.2rem;
+        }
+
+        header p {
+            margin-top: 0.5rem;
+            opacity: 0.9;
+        }
+
+        .language-switch {
+            margin-top: 1rem;
+        }
+
+        .language-switch button {
+            background: transparent;
+            border: 1px solid white;
+            color: white;
+            padding: 5px 14px;
+            margin: 0 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .language-switch button:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        main {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        section {
+            margin-bottom: 2.5rem;
+        }
+
+        h2 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 8px;
+            color: #2c3e50;
+        }
+
+        .skills {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            list-style: none;
+            padding: 0;
+        }
+
+        .skills li {
+            background: #3498db;
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: 0.2s;
+        }
+
+        .skills li:hover {
+            background: #2980b9;
+            transform: scale(1.05);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.8rem;
+            color: #777;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Gregor Opmann</h1>
+
+    <p data-lang="et">IT-valdkond</p>
+    <p data-lang="en" style="display:none;">Information Technology</p>
+
+    <div class="language-switch">
+        <button onclick="setLanguage('et')">Eesti</button>
+        <button onclick="setLanguage('en')">English</button>
+    </div>
+</header>
+
+<main>
+
+    <!-- ABOUT -->
+    <section>
+        <h2 data-lang="et">Minust</h2>
+        <h2 data-lang="en" style="display:none;">About Me</h2>
+
+        <p data-lang="et">
+            Olen tehnikahuviline ja mulle meeldib õppida, kuidas igapäevased süsteemid töötavad ning neid ise ehitada.
+            Mind huvitab eriti riistvara ja erinevate komponentide koostöö.
+        </p>
+
+        <p data-lang="en" style="display:none;">
+            I am interested in technology and enjoy learning how everyday systems work and how to build them myself.
+            I am particularly interested in hardware and how different components work together.
+        </p>
+
+        <p data-lang="et">
+            Olen ehitanud arvuteid ning teinud väiksemaid elektroonikaprojekte, näiteks päikeseenergial töötava
+            miniventilaatori, ning katsetanud Raspberry Pi ja Arduino UNO platvormidega.
+        </p>
+
+        <p data-lang="en" style="display:none;">
+            I have built computers and worked on small electronics projects such as a solar-powered mini fan,
+            and experimented with Raspberry Pi and Arduino UNO platforms.
+        </p>
+    </section>
+
+    <!-- SKILLS -->
+    <section>
+        <h2 data-lang="et">Oskused</h2>
+        <h2 data-lang="en" style="display:none;">Skills</h2>
+
+        <ul class="skills">
+            <li>PC Building</li>
+            <li>Windows 10 / 11</li>
+            <li>Linux (basic)</li>
+            <li>HTML</li>
+            <li>Python (basic)</li>
+            <li>Arduino UNO</li>
+            <li>Raspberry Pi 3B</li>
+            <li>3D Modeling</li>
+            <li>Soldering</li>
+            <li>File Systems</li>
+            <li>Networking Basics</li>
+        </ul>
+    </section>
+
+    <!-- CONTACT -->
+    <section>
+        <h2 data-lang="et">Kontakt</h2>
+        <h2 data-lang="en" style="display:none;">Contact</h2>
+
+        <p data-lang="et">E-post:</p>
+        <p data-lang="en" style="display:none;">Email:</p>
+
+        <p><strong>opmanngregor@gmail.com</strong></p>
+    </section>
+
+</main>
+
+<footer>
+    &copy; 2026. GitHub Pages · Visual Studio Code
+</footer>
+
+<script>
+    function setLanguage(lang) {
+        document.querySelectorAll('[data-lang]').forEach(el => {
+            el.style.display = el.getAttribute('data-lang') === lang ? '' : 'none';
+        });
+    }
+
+    // Vaikimisi keel
+    setLanguage('et');
+</script>
+
+</body>
+</html>
