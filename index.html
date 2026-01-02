@@ -116,6 +116,36 @@
         font-size: 0.8rem;
         color: #777;
     }
+
+    @media (max-width: 600px) {
+    header h1 {
+        font-size: 1.6rem;
+    }
+
+    main {
+        padding: 1rem;
+        margin: 1rem;
+    }
+
+    .skills li {
+        padding: 5px 10px;
+        font-size: 0.8rem;
+    }
+
+    .language-switch button {
+        padding: 4px 8px;
+        margin: 0 3px;
+        font-size: 0.8rem;
+    }
+
+    .gallery figcaption {
+        font-size: 0.85rem;
+    }
+}
+
+html {
+    scroll-behavior: smooth;
+}
 </style>
 </head>
 
@@ -219,7 +249,7 @@
 </main>
 
 <footer>
-    &copy; 2026. GitHub Pages · Visual Studio Code
+    &copy; <span id="current-year"></span> GitHub Pages · Visual Studio Code
 </footer>
 
 <script>
@@ -229,6 +259,9 @@ function setLanguage(lang) {
     });
 }
 setLanguage('et');
+
+document.getElementById('current-year').textContent = new Date().getFullYear();
+
 </script>
 
 </body>
