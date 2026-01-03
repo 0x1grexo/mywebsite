@@ -6,7 +6,6 @@
 <title>Gregor Opmann – Portfoolio</title>
 
 <style>
-    /* BASE STYLES */
     body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         line-height: 1.6;
@@ -26,7 +25,6 @@
     header h1 { margin: 0; font-size: 2.2rem; }
     header p { margin-top: 0.5rem; opacity: 0.9; }
 
-    /* BUTTONS & CONTROLS */
     .language-switch { margin-top: 1rem; }
 
     .language-switch button, #dark-mode-btn {
@@ -45,11 +43,11 @@
         background: rgba(255,255,255,0.2);
     }
 
-    /* BACK TO TOP BUTTON */
     #backToTop {
         position: fixed;
         bottom: 20px;
-        right: 20px;
+        left: 50%;
+        transform: translateX(-50%);
         display: none; 
         background-color: #3498db;
         color: white;
@@ -61,15 +59,16 @@
         font-size: 20px;
         box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         z-index: 1000;
-        transition: background-color 0.3s, transform 0.2s;
+        opacity: 0.5;
+        transition: opacity 0.3s, background-color 0.3s, transform 0.2s;
     }
 
     #backToTop:hover {
         background-color: #2980b9;
-        transform: scale(1.1);
+        opacity: 1;
+        transform: translateX(-50%) scale(1.1);
     }
 
-    /* MAIN CONTAINER */
     main {
         max-width: 800px;
         margin: 2rem auto;
@@ -80,7 +79,6 @@
         transition: background-color 0.3s, box-shadow 0.3s;
     }
 
-    /* FADE-IN ANIMATION */
     .fade-in-section {
         opacity: 0;
         transform: translateY(20px);
@@ -100,7 +98,6 @@
         transition: color 0.3s, border-color 0.3s;
     }
 
-    /* SKILLS */
     .skills {
         display: flex;
         gap: 10px;
@@ -124,7 +121,6 @@
         transform: scale(1.05);
     }
     
-    /* GALLERY */
     .gallery { display: block; margin-top: 2rem; }
 
     .gallery figure {
@@ -158,7 +154,6 @@
         color: #777;
     }
 
-    /* DARK MODE OVERRIDES */
     body.dark-mode {
         background-color: #121212;
         color: #f0f0f0;
@@ -179,7 +174,6 @@
     body.dark-mode footer { color: #555; }
     body.dark-mode #backToTop { background-color: #4db8ff; color: #121212; }
 
-    /* RESPONSIVE */
     @media (max-width: 600px) {
         header h1 { font-size: 1.6rem; }
         main { padding: 1rem; margin: 1rem; }
@@ -277,18 +271,18 @@
 </footer>
 
 <script>
-// --- Language Logic ---
 function setLanguage(lang) {
     document.querySelectorAll('[data-lang]').forEach(el => {
         el.style.display = el.getAttribute('data-lang') === lang ? '' : 'none';
     });
+    localStorage.setItem('preferred-lang', lang);
 }
-setLanguage('et');
 
-// --- Current Year ---
+const savedLang = localStorage.getItem('preferred-lang') || 'et';
+setLanguage(savedLang);
+
 document.getElementById('current-year').textContent = new Date().getFullYear();
 
-// --- Dark Mode Logic ---
 function updateDarkModeUI(isDark) {
     const icon = document.getElementById('mode-icon');
     const etText = document.getElementById('mode-text');
@@ -316,7 +310,6 @@ function toggleDarkMode() {
 const savedTheme = localStorage.getItem('theme');
 if (savedTheme === 'dark') updateDarkModeUI(true);
 
-// --- Back to Top Logic ---
 const bttButton = document.getElementById("backToTop");
 
 window.onscroll = function() {
@@ -331,7 +324,6 @@ function scrollToTop() {
     window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
-// --- Scroll Fade-In Observer ---
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) entry.target.classList.add('is-visible');
