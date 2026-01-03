@@ -6,12 +6,14 @@
 <title>Gregor Opmann – Portfoolio</title>
 
 <style>
+    /* BASE STYLES */
     body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         line-height: 1.6;
         margin: 0;
         background-color: #f4f4f9;
         color: #333;
+        transition: background-color 0.3s, color 0.3s;
     }
 
     header {
@@ -24,25 +26,50 @@
     header h1 { margin: 0; font-size: 2.2rem; }
     header p { margin-top: 0.5rem; opacity: 0.9; }
 
-    .language-switch {
-        margin-top: 1rem;
-    }
+    /* BUTTONS & CONTROLS */
+    .language-switch { margin-top: 1rem; }
 
-    .language-switch button {
+    .language-switch button, #dark-mode-btn {
         background: transparent;
         border: 1px solid white;
         color: white;
-        padding: 5px 14px;
-        margin: 0 5px;
+        padding: 6px 14px;
+        margin: 5px;
         border-radius: 5px;
         cursor: pointer;
         font-size: 0.9rem;
+        transition: 0.2s;
     }
 
-    .language-switch button:hover {
+    .language-switch button:hover, #dark-mode-btn:hover {
         background: rgba(255,255,255,0.2);
     }
 
+    /* BACK TO TOP BUTTON */
+    #backToTop {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        display: none; /* Hidden by default */
+        background-color: #3498db;
+        color: white;
+        border: none;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 20px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        z-index: 1000;
+        transition: background-color 0.3s, transform 0.2s;
+    }
+
+    #backToTop:hover {
+        background-color: #2980b9;
+        transform: scale(1.1);
+    }
+
+    /* MAIN CONTAINER */
     main {
         max-width: 800px;
         margin: 2rem auto;
@@ -50,16 +77,30 @@
         background: white;
         box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         border-radius: 8px;
+        transition: background-color 0.3s, box-shadow 0.3s;
     }
 
-    section { margin-bottom: 2.5rem; }
+    /* FADE-IN ANIMATION */
+    .fade-in-section {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        margin-bottom: 2.5rem;
+    }
+
+    .fade-in-section.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
 
     h2 {
         border-bottom: 2px solid #3498db;
         padding-bottom: 8px;
         color: #2c3e50;
+        transition: color 0.3s, border-color 0.3s;
     }
 
+    /* SKILLS */
     .skills {
         display: flex;
         gap: 10px;
@@ -83,10 +124,8 @@
         transform: scale(1.05);
     }
     
-    .gallery {
-        display: block;
-        margin-top: 2rem;
-    }
+    /* GALLERY */
+    .gallery { display: block; margin-top: 2rem; }
 
     .gallery figure {
         margin: 0 0 2rem 0;
@@ -95,6 +134,7 @@
         overflow: hidden;
         box-shadow: 0 3px 10px rgba(0,0,0,0.1);
         text-align: center;
+        transition: background-color 0.3s;
     }
 
     .gallery img {
@@ -108,6 +148,7 @@
         padding: 0.7rem;
         font-size: 0.9rem;
         color: #555;
+        transition: color 0.3s;
     }
 
     footer {
@@ -117,46 +158,52 @@
         color: #777;
     }
 
+    /* DARK MODE OVERRIDES */
+    body.dark-mode {
+        background-color: #121212;
+        color: #f0f0f0;
+    }
+
+    body.dark-mode main {
+        background-color: #1e1e1e;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+
+    body.dark-mode h2 {
+        color: #4db8ff;
+        border-bottom-color: #4db8ff;
+    }
+
+    body.dark-mode .gallery figure { background-color: #2a2a2a; }
+    body.dark-mode .gallery figcaption { color: #bbb; }
+    body.dark-mode footer { color: #555; }
+    body.dark-mode #backToTop { background-color: #4db8ff; color: #121212; }
+
+    /* RESPONSIVE */
     @media (max-width: 600px) {
-    header h1 {
-        font-size: 1.6rem;
+        header h1 { font-size: 1.6rem; }
+        main { padding: 1rem; margin: 1rem; }
     }
 
-    main {
-        padding: 1rem;
-        margin: 1rem;
-    }
-
-    .skills li {
-        padding: 5px 10px;
-        font-size: 0.8rem;
-    }
-
-    .language-switch button {
-        padding: 4px 8px;
-        margin: 0 3px;
-        font-size: 0.8rem;
-    }
-
-    .gallery figcaption {
-        font-size: 0.85rem;
-    }
-}
-
-html {
-    scroll-behavior: smooth;
-}
+    html { scroll-behavior: smooth; }
 </style>
 </head>
 
 <body>
 
+<button onclick="scrollToTop()" id="backToTop" title="Tagasi üles">↑</button>
+
 <header>
     <h1>Gregor Opmann</h1>
-
     <p data-lang="et">IT-valdkond</p>
     <p data-lang="en" style="display:none;">Information Technology</p>
 
+    <button onclick="toggleDarkMode()" id="dark-mode-btn">
+        <span id="mode-icon">🌙</span> 
+        <span id="mode-text" data-lang="et">Tume režiim</span>
+        <span id="mode-text-en" data-lang="en" style="display:none;">Dark Mode</span>
+    </button>
+    
     <div class="language-switch">
         <button onclick="setLanguage('et')">Eesti</button>
         <button onclick="setLanguage('en')">English</button>
@@ -164,94 +211,47 @@ html {
 </header>
 
 <main>
+    <section class="fade-in-section">
+        <h2 data-lang="et">Minust</h2>
+        <h2 data-lang="en" style="display:none;">About Me</h2>
+        <p data-lang="et">Olen tehnikahuviline ja mulle meeldib õppida, kuidas igapäevased süsteemid töötavad ning neid ise ehitada. Mind huvitab eriti riistvara ja erinevate komponentide koostöö.</p>
+        <p data-lang="en" style="display:none;">I am interested in technology and enjoy learning how everyday systems work and how to build them myself. I am particularly interested in hardware and how different components work together.</p>
+    </section>
 
-<section>
-    <h2 data-lang="et">Minust</h2>
-    <h2 data-lang="en" style="display:none;">About Me</h2>
+    <section class="fade-in-section">
+        <h2 data-lang="et">Oskused</h2>
+        <h2 data-lang="en" style="display:none;">Skills</h2>
+        <ul class="skills" data-lang="et">
+            <li>Arvutite ehitus</li><li>Microsoft Windows 10/11</li><li>Linux</li><li>HTML</li><li>Python</li><li>Arduino UNO</li><li>Raspberry Pi 3B</li><li>3D-modelleerimine</li><li>Jootmine</li><li>Failisüsteemid</li><li>IP-aadressid</li>
+        </ul>
+        <ul class="skills" data-lang="en" style="display:none;">
+            <li>PC Building</li><li>Microsoft Windows 10/11</li><li>Linux</li><li>HTML</li><li>Python</li><li>Arduino UNO</li><li>Raspberry Pi 3B</li><li>3D Modeling</li><li>Soldering</li><li>File Systems</li><li>IP Addressing</li>
+        </ul>
+    </section>
 
-    <p data-lang="et">
-        Olen tehnikahuviline ja mulle meeldib õppida, kuidas igapäevased süsteemid töötavad ning neid ise ehitada.
-        Mind huvitab eriti riistvara ja erinevate komponentide koostöö.
-    </p>
+    <section class="fade-in-section">
+        <h2 data-lang="et">Galerii</h2>
+        <h2 data-lang="en" style="display:none;">Gallery</h2>
+        <div class="gallery">
+            <figure>
+                <img src="images/pc-build.png" alt="PC Build">
+                <figcaption data-lang="et">Ise ehitatud arvuti</figcaption>
+                <figcaption data-lang="en" style="display:none;">Custom-built PC</figcaption>
+            </figure>
+            <figure>
+                <img src="images/solar_powered_mini_fan.png" alt="Solar Fan">
+                <figcaption data-lang="et">Päikeseenergial töötav ventilaator</figcaption>
+                <figcaption data-lang="en" style="display:none;">Solar-powered mini fan</figcaption>
+            </figure>
+        </div>
+    </section>
 
-    <p data-lang="en" style="display:none;">
-        I am interested in technology and enjoy learning how everyday systems work and how to build them myself.
-        I am particularly interested in hardware and how different components work together.
-    </p>
-
-    <p data-lang="et">
-        Olen ehitanud arvuteid ning teinud väiksemaid elektroonikaprojekte, näiteks päikeseenergial töötava
-        miniventilaatori, ning katsetanud Raspberry Pi ja Arduino UNO platvormidega.
-    </p>
-
-    <p data-lang="en" style="display:none;">
-        I have built computers and worked on small electronics projects such as a solar-powered mini fan,
-        and experimented with Raspberry Pi and Arduino UNO platforms.
-    </p>
-</section>
-
-<section>
-    <h2 data-lang="et">Oskused</h2>
-    <h2 data-lang="en" style="display:none;">Skills</h2>
-
-    <ul class="skills" data-lang="et">
-        <li>Arvutite ehitus</li>
-        <li>Microsoft Windows 10/11</li>
-        <li>Linux (põhitase, käsurida)</li>
-        <li>HTML (see veebileht)</li>
-        <li>Python (põhitase)</li>
-        <li>Arduino UNO (põhitase)</li>
-        <li>Raspberry Pi 3B</li>
-        <li>3D-modelleerimine</li>
-        <li>Jootmine</li>
-        <li>Failisüsteemid (NTFS, FAT32, exFAT)</li>
-        <li>IP-aadressid (põhitase)</li>
-    </ul>
-
-    <ul class="skills" data-lang="en" style="display:none;">
-        <li>PC Building</li>
-        <li>Microsoft Windows 10/11</li>
-        <li>Linux (basic, command line)</li>
-        <li>HTML (this website)</li>
-        <li>Python (basic)</li>
-        <li>Arduino UNO (basic)</li>
-        <li>Raspberry Pi 3B</li>
-        <li>3D Modeling</li>
-        <li>Soldering</li>
-        <li>File Systems (NTFS, FAT32, exFAT)</li>
-        <li>IP Addressing (basic)</li>
-    </ul>
-</section>
-
-<section>
-    <h2 data-lang="et">Galerii</h2>
-    <h2 data-lang="en" style="display:none;">Gallery</h2>
-
-    <div class="gallery">
-        <figure>
-            <img src="images/pc-build.png">
-            <figcaption data-lang="et">Ise ehitatud arvuti</figcaption>
-            <figcaption data-lang="en" style="display:none;">Custom-built PC</figcaption>
-        </figure>
-
-        <figure>
-            <img src="images/solar_powered_mini_fan.png">
-            <figcaption data-lang="et">Päikeseenergial töötav ventilaator</figcaption>
-            <figcaption data-lang="en" style="display:none;">Solar-powered mini fan</figcaption>
-        </figure>
-    </div>
-</section>
-
-<section>
-    <h2 data-lang="et">Kontakt</h2>
-    <h2 data-lang="en" style="display:none;">Contact</h2>
-
-    <p data-lang="et">E-post:</p>
-    <p data-lang="en" style="display:none;">Email:</p>
-
-    <p><strong>opmanngregor@gmail.com</strong></p>
-</section>
-
+    <section class="fade-in-section">
+        <h2 data-lang="et">Kontakt</h2>
+        <h2 data-lang="en" style="display:none;">Contact</h2>
+        <p data-lang="et">E-post: <strong>opmanngregor@gmail.com</strong></p>
+        <p data-lang="en" style="display:none;">Email: <strong>opmanngregor@gmail.com</strong></p>
+    </section>
 </main>
 
 <footer>
@@ -259,6 +259,7 @@ html {
 </footer>
 
 <script>
+// --- Language Logic ---
 function setLanguage(lang) {
     document.querySelectorAll('[data-lang]').forEach(el => {
         el.style.display = el.getAttribute('data-lang') === lang ? '' : 'none';
@@ -266,8 +267,60 @@ function setLanguage(lang) {
 }
 setLanguage('et');
 
+// --- Current Year ---
 document.getElementById('current-year').textContent = new Date().getFullYear();
 
+// --- Dark Mode Logic ---
+function updateDarkModeUI(isDark) {
+    const icon = document.getElementById('mode-icon');
+    const etText = document.getElementById('mode-text');
+    const enText = document.getElementById('mode-text-en');
+    
+    if (isDark) {
+        document.body.classList.add('dark-mode');
+        icon.textContent = '☀️';
+        etText.textContent = 'Hele režiim';
+        enText.textContent = 'Light Mode';
+    } else {
+        document.body.classList.remove('dark-mode');
+        icon.textContent = '🌙';
+        etText.textContent = 'Tume režiim';
+        enText.textContent = 'Dark Mode';
+    }
+}
+
+function toggleDarkMode() {
+    const isDark = !document.body.classList.contains('dark-mode');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    updateDarkModeUI(isDark);
+}
+
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'dark') updateDarkModeUI(true);
+
+// --- Back to Top Logic ---
+const bttButton = document.getElementById("backToTop");
+
+window.onscroll = function() {
+    if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+        bttButton.style.display = "block";
+    } else {
+        bttButton.style.display = "none";
+    }
+};
+
+function scrollToTop() {
+    window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+// --- Scroll Fade-In Observer ---
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('is-visible');
+    });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.fade-in-section').forEach(section => observer.observe(section));
 </script>
 
 </body>
