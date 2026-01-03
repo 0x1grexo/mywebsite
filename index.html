@@ -1,57 +1,33 @@
 <!DOCTYPE html>
 <html lang="et">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="site-title">Gregor Opmann – Portfoolio</title>
-    
-    <link rel="icon" type="image/png" href="images/favicon.png">
-    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="images/android-chrome-192x192.png">
-    <link rel="icon" type="image/png" sizes="512x512" href="images/android-chrome-512x512.png">
-
-    <meta name="description" content="Gregor Opmann – IT-huviline, arvutiehitaja ja Pythoni arendaja. Vaata minu projekte ja oskusi!">
-    <meta name="keywords" content="Gregor Opmann, portfoolio, IT, arvutiehitus, Python, programmeerimine, Eesti">
-    <meta name="author" content="Gregor Opmann">
-    <meta name="robots" content="index, follow">
-
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://gregoropmann.github.io/aboutme/">
-    <meta property="og:title" content="Gregor Opmann – Portfoolio">
-    <meta property="og:description" content="IT-huviline, arvutiehitaja ja Pythoni arendaja.">
-    <meta property="og:image" content="https://gregoropmann.github.io/aboutme/images/og-image.png"> <meta property="og:locale" content="et_EE">
-
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Gregor Opmann – Portfoolio">
-    <meta name="twitter:description" content="IT-huviline ja Pythoni arendaja.">
-    <meta name="twitter:image" content="https://gregoropmann.github.io/aboutme/images/og-image.png">
-
-    <meta name="theme-color" content="#3498db">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gregor Opmann – Portfoolio</title>
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="images/android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="images/android-chrome-512x512.png">
+<meta name="description" content="Gregor Opmann – IT-huviline, arvutiehitaja ja Pythoni arendaja portfoolio.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://gregoropmann.github.io/aboutme/">
+<meta property="og:title" content="Gregor Opmann – Portfoolio">
+<meta property="og:description" content="IT-huviline, arvutiehitaja ja Pythoni arendaja. Vaata minu projekte!">
+<meta property="og:image" content="https://gregoropmann.github.io/aboutme/images/favicon.png">
+<meta name="theme-color" content="#3498db">
 
 <style>
-    :root {
-        --primary-blue: #3498db;
-        --secondary-blue: #2980b9;
-        --dark-navy: #2c3e50;
-        --light-bg: #f4f4f9;
-        --card-bg: #ffffff;
-        --text-color: #333333;
-        --dark-mode-blue: #4db8ff;
-        --dark-mode-bg: #121212;
-        --dark-mode-card: #1e1e1e;
-    }
-
     body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         line-height: 1.6;
         margin: 0;
-        background-color: var(--light-bg);
-        color: var(--text-color);
+        background-color: #f4f4f9;
+        color: #333;
         transition: background-color 0.3s, color 0.3s;
     }
 
     header {
-        background: var(--dark-navy);
+        background: #2c3e50;
         color: white;
         padding: 2.5rem 1rem;
         text-align: center;
@@ -61,11 +37,6 @@
     header p { margin-top: 0.5rem; opacity: 0.9; }
 
     .language-switch { margin-top: 1rem; }
-
-    .language-switch button:focus, #dark-mode-btn:focus, .action-button:focus {
-        outline: 3px solid var(--dark-mode-blue);
-        outline-offset: 2px;
-    }
 
     .language-switch button, #dark-mode-btn {
         background: transparent;
@@ -89,7 +60,7 @@
         left: 50%;
         transform: translateX(-50%);
         display: none; 
-        background-color: var(--primary-blue);
+        background-color: #3498db;
         color: white;
         border: none;
         width: 45px;
@@ -104,7 +75,7 @@
     }
 
     #backToTop:hover {
-        background-color: var(--secondary-blue);
+        background-color: #2980b9;
         opacity: 1;
         transform: translateX(-50%) scale(1.1);
     }
@@ -113,7 +84,7 @@
         max-width: 800px;
         margin: 2rem auto;
         padding: 2rem;
-        background: var(--card-bg);
+        background: white;
         box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         border-radius: 8px;
         transition: background-color 0.3s, box-shadow 0.3s;
@@ -132,9 +103,9 @@
     }
 
     h2 {
-        border-bottom: 2px solid var(--primary-blue);
+        border-bottom: 2px solid #3498db;
         padding-bottom: 8px;
-        color: var(--dark-navy);
+        color: #2c3e50;
         transition: color 0.3s, border-color 0.3s;
     }
 
@@ -148,7 +119,7 @@
     }
 
     .skills li {
-        background: var(--primary-blue);
+        background: #3498db;
         color: white;
         padding: 6px 16px;
         border-radius: 20px;
@@ -157,8 +128,34 @@
     }
 
     .skills li:hover {
-        background: var(--secondary-blue);
+        background: #2980b9;
         transform: scale(1.05);
+    }
+    
+    .gallery { display: block; margin-top: 2rem; }
+
+    .gallery figure {
+        margin: 0 0 2rem 0;
+        background: #f9f9f9;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        text-align: center;
+        transition: background-color 0.3s;
+    }
+
+    .gallery img {
+        width: 100%;
+        height: auto;
+        display: block;
+        object-fit: contain;
+    }
+
+    .gallery figcaption {
+        padding: 0.7rem;
+        font-size: 0.9rem;
+        color: #555;
+        transition: color 0.3s;
     }
 
     footer {
@@ -169,22 +166,24 @@
     }
 
     body.dark-mode {
-        background-color: var(--dark-mode-bg);
+        background-color: #121212;
         color: #f0f0f0;
     }
 
     body.dark-mode main {
-        background-color: var(--dark-mode-card);
+        background-color: #1e1e1e;
         box-shadow: 0 4px 20px rgba(0,0,0,0.5);
     }
 
     body.dark-mode h2 {
-        color: var(--dark-mode-blue);
-        border-bottom-color: var(--dark-mode-blue);
+        color: #4db8ff;
+        border-bottom-color: #4db8ff;
     }
 
+    body.dark-mode .gallery figure { background-color: #2a2a2a; }
+    body.dark-mode .gallery figcaption { color: #bbb; }
     body.dark-mode footer { color: #555; }
-    body.dark-mode #backToTop { background-color: var(--dark-mode-blue); color: #121212; }
+    body.dark-mode #backToTop { background-color: #4db8ff; color: #121212; }
 
     @media (max-width: 600px) {
         header h1 { font-size: 1.6rem; }
@@ -193,120 +192,61 @@
 
     html { scroll-behavior: smooth; }
 
-    .contact-wrapper {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        flex-wrap: wrap;
+    .fade-in-section p a:hover {
+        text-decoration: underline;
+        color: #3498db;
+    }
+
+    .specs-container {
+        overflow-x: auto;
         margin-top: 1rem;
     }
-
-    .email-link {
-        color: var(--primary-blue);
-        text-decoration: none;
-        font-weight: bold;
-        transition: color 0.2s;
+    
+    .specs-table {
+        width: 100%;
+        border-collapse: collapse;
+        background: #fff;
+        border-radius: 8px;
+        overflow: hidden;
     }
-
-    .email-link:hover {
-        color: var(--secondary-blue);
-        text-decoration: underline;
+    
+    .specs-table th, .specs-table td {
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
     }
-
-    body.dark-mode .email-link {
-        color: var(--dark-mode-blue);
-    }
-
-    .copy-btn {
-        background: var(--primary-blue);
+    
+    .specs-table th {
+        background-color: #2c3e50;
         color: white;
-        border: none;
-        padding: 6px 12px;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 0.85rem;
-        transition: 0.2s;
-        position: relative;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-    }
-
-    .copy-btn:hover {
-        background: var(--secondary-blue);
-        transform: translateY(-1px);
-    }
-
-    .copy-tooltip {
-        visibility: hidden;
-        background-color: #333;
-        color: #fff;
-        text-align: center;
-        border-radius: 6px;
-        padding: 5px 10px;
-        position: absolute;
-        z-index: 10;
-        bottom: 125%;
-        left: 50%;
-        transform: translateX(-50%);
-        opacity: 0;
-        transition: opacity 0.3s;
-        font-size: 0.75rem;
-        white-space: nowrap;
-    }
-
-    .copy-btn.show-tooltip .copy-tooltip {
-        visibility: visible;
-        opacity: 1;
-    }
-
-    .specs-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 15px;
-        margin-top: 1.5rem;
-    }
-    
-    .spec-card {
-        background: var(--card-bg);
-        padding: 20px;
-        border-radius: 12px;
-        border: 1px solid #ddd;
-        text-align: center;
-        transition: all 0.3s ease;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    }
-    
-    .spec-card:hover {
-        transform: translateY(-5px);
-        border-color: var(--primary-blue);
-        box-shadow: 0 5px 15px rgba(52, 152, 219, 0.2);
-    }
-    
-    .spec-card strong {
-        display: block;
-        color: var(--primary-blue);
-        font-size: 0.85rem;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        margin-bottom: 8px;
-    }
-    
-    .spec-card span {
         font-weight: 600;
-        font-size: 1.1rem;
     }
     
-    body.dark-mode .spec-card {
-        background: #2a2a2a;
-        border-color: #444;
+    .specs-table tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+    
+    body.dark-mode .specs-table {
+        background-color: #2a2a2a;
         color: #f0f0f0;
+    }
+    
+    body.dark-mode .specs-table tr:nth-child(even) {
+        background-color: #333;
+    }
+    
+    body.dark-mode .specs-table td {
+        border-bottom-color: #444;
+    }
+
+    a:hover, button:hover {
+        cursor: pointer;
     }
 
     .action-button {
         display: inline-block;
         padding: 12px 24px;
-        background-color: var(--primary-blue);
+        background-color: #3498db;
         color: white !important;
         text-decoration: none;
         border-radius: 5px;
@@ -316,8 +256,31 @@
     }
     
     .action-button:hover {
-        background-color: var(--secondary-blue);
-        transform: scale(1.05);
+        background-color: #2980b9;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    
+    body.dark-mode .action-button {
+        background-color: #4db8ff;
+        color: #121212 !important;
+    }
+
+    .button-description {
+        font-size: 0.9rem;
+        color: #666;
+        margin-top: 10px;
+        font-style: italic;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    
+    .course-container:hover .button-description {
+        opacity: 1;
+    }
+
+    body.dark-mode .button-description {
+        color: #bbb;
     }
 </style>
 </head>
@@ -331,15 +294,15 @@
     <p data-lang="et">IT-valdkond</p>
     <p data-lang="en" style="display:none;">Information Technology</p>
 
-    <button onclick="toggleDarkMode()" id="dark-mode-btn" aria-label="Toggle dark mode">
+    <button onclick="toggleDarkMode()" id="dark-mode-btn">
         <span id="mode-icon">🌙</span> 
         <span id="mode-text" data-lang="et">Tume režiim</span>
         <span id="mode-text-en" data-lang="en" style="display:none;">Dark Mode</span>
     </button>
     
     <div class="language-switch">
-        <button onclick="setLanguage('et')" aria-label="Vali eesti keel">Eesti</button>
-        <button onclick="setLanguage('en')" aria-label="Switch to English">English</button>
+        <button onclick="setLanguage('et')">Eesti</button>
+        <button onclick="setLanguage('en')">English</button>
     </div>
 </header>
 
@@ -347,88 +310,160 @@
     <section class="fade-in-section">
         <h2 data-lang="et">Minust</h2>
         <h2 data-lang="en" style="display:none;">About Me</h2>
-        <p data-lang="et">Olen tehnikahuviline ja mulle meeldib õppida, kuidas igapäevased süsteemid töötavad ning neid ise ehitada. Mind huvitab eriti riistvara ja erinevate komponentide koostöö.</p>
-        <p data-lang="en" style="display:none;">I am interested in technology and enjoy learning how everyday systems work and how to build them myself. I am particularly interested in hardware and how different components work together.</p>
+
+        <p data-lang="et">
+            Olen tehnikahuviline ja mulle meeldib õppida, kuidas igapäevased süsteemid töötavad ning neid ise ehitada.
+            Mind huvitab eriti riistvara ja erinevate komponentide koostöö.
+        </p>
+
+        <p data-lang="en" style="display:none;">
+            I am interested in technology and enjoy learning how everyday systems work and how to build them myself.
+            I am particularly interested in hardware and how different components work together.
+        </p>
+
+        <p data-lang="et">
+            Olen ehitanud arvuteid ning teinud väiksemaid elektroonikaprojekte, näiteks päikeseenergial töötava
+            miniventilaatori, ning katsetanud Raspberry Pi ja Arduino UNO platvormidega.
+        </p>
+
+        <p data-lang="en" style="display:none;">
+            I have built computers and worked on small electronics projects such as a solar-powered mini fan,
+            and experimented with Raspberry Pi and Arduino UNO platforms.
+        </p>
     </section>
 
     <section class="fade-in-section">
         <h2 data-lang="et">Oskused</h2>
         <h2 data-lang="en" style="display:none;">Skills</h2>
         <ul class="skills" data-lang="et">
-            <li>Arvutite ehitus</li><li>Python (põhitase)</li><li>Linux</li><li>HTML</li><li>3D-modelleerimine</li>
+            <li>Arvutite ehitus</li><li>Microsoft Windows 10/11</li><li>Linux (põhitase; käsurida)</li><li>HTML (see veebileht)</li><li>Python (põhitase)</li><li>Arduino UNO (põhitase)</li><li>Raspberry Pi 3B</li><li>3D-modelleerimine</li><li>Jootmine</li><li>Failisüsteemid (NTFS, FAT32, exFAT)</li><li>IP-aadressid (põhitase)</li>
         </ul>
         <ul class="skills" data-lang="en" style="display:none;">
-            <li>PC Building</li><li>Python (basic)</li><li>Linux</li><li>HTML</li><li>3D Modeling</li>
+            <li>PC Building</li><li>Microsoft Windows 10/11</li><li>Linux (basic; terminal)</li><li>HTML (this website)</li><li>Python (basic)</li><li>Arduino UNO (basic)</li><li>Raspberry Pi 3B</li><li>3D Modeling</li><li>Soldering</li><li>File Systems (NTFS, FAT32, exFAT)</li><li>IP Addressing (basic)</li>
         </ul>
-        <div style="text-align: center; margin-top: 30px;">
-            <a href="https://didaktika.cs.ut.ee/progestart/" target="_blank" class="action-button">ProgeStart 2025</a>
+
+        <div class="course-container" style="text-align: center; margin-top: 30px;">
+            <a href="https://didaktika.cs.ut.ee/progestart/" target="_blank" class="action-button">
+                <span data-lang="et">ProgeStart 2025</span>
+                <span data-lang="en" style="display:none;">ProgeStart 2025</span>
+            </a>
+            <div class="button-description">
+                <p data-lang="et">Läbitud Pythoni kursus.</p>
+                <p data-lang="en" style="display:none;">Completed Python course.</p>
+            </div>
         </div>
     </section>
     
     <section class="fade-in-section">
-        <h2 data-lang="et">Minu arvuti tehnilised andmed</h2>
-        <h2 data-lang="en" style="display:none;">My PC Hardware Specs</h2>
-        <div class="specs-grid">
-            <div class="spec-card"><strong>💾 CPU</strong><span>AMD Ryzen 5 7600X</span></div>
-            <div class="spec-card"><strong>🎮 GPU</strong><span>Radeon RX 7600 XT 16GB</span></div>
-            <div class="spec-card"><strong>⚡ RAM</strong><span>32GB DDR5-6000</span></div>
-            <div class="spec-card"><strong>🐧 OS</strong><span>Win 11 / Linux Mint</span></div>
+        <h2 data-lang="et">Galerii</h2>
+        <h2 data-lang="en" style="display:none;">Gallery</h2>
+        <div class="gallery">
+            <figure>
+                <img src="images/pc-build.png" alt="PC Build">
+                <figcaption data-lang="et">Ise ehitatud arvuti</figcaption>
+                <figcaption data-lang="en" style="display:none;">Custom-built PC</figcaption>
+            </figure>
+            <figure>
+                <img src="images/solar_powered_mini_fan.png" alt="Solar Fan">
+                <figcaption data-lang="et">Päikeseenergial töötav ventilaator</figcaption>
+                <figcaption data-lang="en" style="display:none;">Solar-powered mini fan</figcaption>
+            </figure>
+            <figure>
+                <img src="images/line_follower.png" alt="Arduino Robot">
+                <figcaption data-lang="et">Arduino joonejärgija robot (pooleli)</figcaption>
+                <figcaption data-lang="en" style="display:none;">Arduino line-follower robot (WiP)</figcaption>
+            </figure>
         </div>
+    </section>
+
+    <section class="fade-in-section">
+    <h2 data-lang="et">Minu arvuti tehnilised andmed</h2>
+    <h2 data-lang="en" style="display:none;">My PC Hardware Specs</h2>
+    
+    <div class="specs-container">
+        <table class="specs-table">
+            <thead>
+                <tr>
+                    <th data-lang="et">Komponent</th>
+                    <th data-lang="en" style="display:none;">Component</th>
+                    <th data-lang="et">Mudel</th>
+                    <th data-lang="en" style="display:none;">Model</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>CPU</strong></td><td>AMD Ryzen 5 7600X</td></tr>
+                <tr><td><strong>GPU</strong></td><td>Radeon RX 7600 XT 16GB</td></tr>
+                <tr><td><strong>RAM</strong></td><td>32GB DDR5-6000 CL30</td></tr>
+                <tr><td><strong>Storage</strong></td><td>2TB WD Black SN850X NVMe SSD</td></tr>
+                <tr><td><strong>OS</strong></td><td>Windows 11 Pro / Linux Mint (Dual-boot)</td></tr>
+                <tr><td><strong>Motherboard</strong></td><td>Gigabyte Aorus Elite AX V2 B650</td></tr>
+            </tbody>
+        </table>
+    </div>
     </section>
 
     <section class="fade-in-section" style="text-align: center;">
         <h2 data-lang="et">Minu projektid</h2>
         <h2 data-lang="en" style="display:none;">My Projects</h2>
-        <div style="background: rgba(52, 152, 219, 0.1); padding: 2rem; border-radius: 8px; border: 1px dashed var(--primary-blue); margin-top: 1rem;">
-            <p><strong>Python Game</strong></p>
-            <a href="https://github.com/gregoropmann/aboutme/raw/main/game.zip" class="action-button">Download</a>
+        
+        <div style="background: rgba(52, 152, 219, 0.1); padding: 2rem; border-radius: 8px; border: 1px dashed #3498db; margin-top: 1rem;">
+            <p data-lang="et"><strong>Tere! Siin on minu enda koostatud Pythoni mäng.</strong></p>
+            <p data-lang="en" style="display:none;"><strong>Hello! Here is a Python game I created myself.</strong></p>
+            
+            <a href="https://github.com/gregoropmann/aboutme/raw/main/game.zip" style="text-decoration: none;">
+                <button style="background-color: #3498db; color: white; padding: 12px 24px; border: none; border-radius: 5px; cursor: pointer; font-size: 1.1rem; font-weight: bold; transition: 0.3s; margin: 10px 0;">
+                    Download
+                </button>
+            </a>            
+            <p data-lang="et" style="font-size: 0.75rem; color: #888; max-width: 400px; margin: 10px auto 0;">
+                *Märkus: Windows võib küsida luba. Vali "More info" ja "Run anyway".
+            </p>
+            <p data-lang="en" style="display:none; font-size: 0.75rem; color: #888; max-width: 400px; margin: 10px auto 0;">
+                *Note: Windows might show a warning. Select "More info" and "Run anyway".
+            </p>
         </div>
     </section>
     
     <section class="fade-in-section">
         <h2 data-lang="et">Kontakt</h2>
         <h2 data-lang="en" style="display:none;">Contact</h2>
-        <div class="contact-wrapper">
-            <p style="margin: 0;">
-                <span data-lang="et">E-post:</span>
-                <span data-lang="en" style="display:none;">Email:</span>
-                <strong><a class="email-link" href="mailto:opmanngregor@gmail.com">opmanngregor@gmail.com</a></strong>
-            </p>
-            <button class="copy-btn" onclick="copyEmail()">
-                <span data-lang="et">Kopeeri</span>
-                <span data-lang="en" style="display:none;">Copy</span>
-                <span class="copy-tooltip" id="myTooltip">OK!</span>
-            </button>
-        </div>
+        <p data-lang="et">E-post: <strong><a href="mailto:opmanngregor@gmail.com" style="color: inherit; text-decoration: none;">opmanngregor@gmail.com</a></strong></p>
+        <p data-lang="en" style="display:none;">Email: <strong><a href="mailto:opmanngregor@gmail.com" style="color: inherit; text-decoration: none;">opmanngregor@gmail.com</a></strong></p>
     </section>
 </main>
 
 <footer>
-    &copy; <span id="current-year"></span> Gregor Opmann · GitHub Pages
+    &copy; <span id="current-year"></span> GitHub Pages · Visual Studio Code
 </footer>
 
 <script>
-
 function setLanguage(lang) {
     document.querySelectorAll('[data-lang]').forEach(el => {
         el.style.display = el.getAttribute('data-lang') === lang ? '' : 'none';
     });
-    
-    const titleEl = document.getElementById('site-title');
-    titleEl.textContent = lang === 'en' ? 'Gregor Opmann – Portfolio' : 'Gregor Opmann – Portfoolio';
-    
     localStorage.setItem('preferred-lang', lang);
 }
 
-setLanguage(localStorage.getItem('preferred-lang') || 'et');
+const savedLang = localStorage.getItem('preferred-lang') || 'et';
+setLanguage(savedLang);
+
+document.getElementById('current-year').textContent = new Date().getFullYear();
 
 function updateDarkModeUI(isDark) {
+    const icon = document.getElementById('mode-icon');
+    const etText = document.getElementById('mode-text');
+    const enText = document.getElementById('mode-text-en');
+    
     if (isDark) {
         document.body.classList.add('dark-mode');
-        document.getElementById('mode-icon').textContent = '☀️';
+        icon.textContent = '☀️';
+        etText.textContent = 'Hele režiim';
+        enText.textContent = 'Light Mode';
     } else {
         document.body.classList.remove('dark-mode');
-        document.getElementById('mode-icon').textContent = '🌙';
+        icon.textContent = '🌙';
+        etText.textContent = 'Tume režiim';
+        enText.textContent = 'Dark Mode';
     }
 }
 
@@ -438,39 +473,43 @@ function toggleDarkMode() {
     updateDarkModeUI(isDark);
 }
 
-if (localStorage.getItem('theme') === 'dark') updateDarkModeUI(true);
-
-function copyEmail() {
-    const email = "opmanngregor@gmail.com";
-    navigator.clipboard.writeText(email).then(() => {
-        const btn = document.querySelector('.copy-btn');
-        const tooltip = document.getElementById("myTooltip");
-        
-        btn.classList.add('show-tooltip');
-        tooltip.innerHTML = (localStorage.getItem('preferred-lang') === 'en') ? "Copied!" : "Kopeeritud!";
-        
-        setTimeout(() => {
-            btn.classList.remove('show-tooltip');
-        }, 2000);
-    });
-}
-
-document.getElementById('current-year').textContent = new Date().getFullYear();
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'dark') updateDarkModeUI(true);
 
 const bttButton = document.getElementById("backToTop");
-window.onscroll = () => {
-    bttButton.style.display = (window.scrollY > 300) ? "block" : "none";
+
+window.onscroll = function() {
+    if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+        bttButton.style.display = "block";
+    } else {
+        bttButton.style.display = "none";
+    }
 };
 
-function scrollToTop() { window.scrollTo({top: 0, behavior: 'smooth'}); }
+function scrollToTop() {
+    window.scrollTo({top: 0, behavior: 'smooth'});
+}
 
 const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => { 
-        if (entry.isIntersecting) entry.target.classList.add('is-visible'); 
+    entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('is-visible');
     });
 }, { threshold: 0.1 });
 
-document.querySelectorAll('.fade-in-section').forEach(s => observer.observe(s));
+document.querySelectorAll('.fade-in-section').forEach(section => observer.observe(section));
+</script>
+
+<script 
+    data-name="BMC-Widget" 
+    data-cfasync="false" 
+    src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" 
+    data-id="gregoropmann" 
+    data-description="Support me here" 
+    data-message="" 
+    data-color="#5F7FFF" 
+    data-position="Right" 
+    data-x_margin="18" 
+    data-y_margin="18">
 </script>
 
 </body>
