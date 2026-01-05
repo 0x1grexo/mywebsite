@@ -8,7 +8,7 @@
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="192x192" href="images/android-chrome-192x192.png">
 <link rel="icon" type="image/png" sizes="512x512" href="images/android-chrome-512x512.png">
-<meta name="description" content="Gregor Opmann – IT">
+<meta name="description" content="Gregor Opmann – IT-huviline, arvutiehitaja ja Pythoni arendaja portfoolio.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://gregoropmann.github.io/aboutme/">
 <meta property="og:title" content="Gregor Opmann – Portfoolio">
@@ -118,18 +118,30 @@
         margin-top: 1rem;
     }
 
+    /* Updated Skill Buttons Styles */
     .skills li {
         background: #3498db;
-        color: white;
-        padding: 6px 16px;
         border-radius: 20px;
         font-size: 0.9rem;
         transition: 0.2s;
+        padding: 0; /* Removed padding to let <a> fill the space */
+        overflow: hidden;
+    }
+
+    .skills li a {
+        display: block;
+        padding: 6px 16px;
+        color: white;
+        text-decoration: none;
+        transition: background 0.2s;
     }
 
     .skills li:hover {
-        background: #2980b9;
         transform: scale(1.05);
+    }
+
+    .skills li a:hover {
+        background: #2980b9;
     }
     
     .gallery { display: block; margin-top: 2rem; }
@@ -336,10 +348,30 @@
         <h2 data-lang="et">Oskused</h2>
         <h2 data-lang="en" style="display:none;">Skills</h2>
         <ul class="skills" data-lang="et">
-            <li>Arvutite ehitus</li><li>Microsoft Windows 10/11</li><li>Linux (põhitase; käsurida)</li><li>HTML (see veebileht)</li><li>Python (põhitase)</li><li>Arduino UNO (põhitase)</li><li>Raspberry Pi 3B</li><li>3D-modelleerimine</li><li>Jootmine</li><li>Failisüsteemid (NTFS, FAT32, exFAT)</li><li>IP-aadressid (põhitase)</li>
+            <li><a href="https://et.wikibooks.org/wiki/Arvuti_koostamine">Arvutite ehitus</a></li>
+            <li><a href="https://www.microsoft.com/et-ee/software-download/windows11">Microsoft Windows 10/11</a></li>
+            <li><a href="https://www.linux.org/pages/download/">Linux (põhitase; käsurida)</a></li>
+            <li><a href="https://et.wikipedia.org/wiki/HTML">HTML (see veebileht)</a></li>
+            <li><a href="https://thonny.org/">Python (põhitase)</a></li>
+            <li><a href="https://www.arduino.cc/en/hardware/#uno-family">Arduino UNO (põhitase)</a></li>
+            <li><a href="https://www.raspberrypi.com/products/raspberry-pi-3-model-b/">Raspberry Pi 3B</a></li>
+            <li><a href="https://www.tinkercad.com/">3D-modelleerimine</a></li>
+            <li><a href="https://et.wikipedia.org/wiki/Jootmine">Jootmine</a></li>
+            <li><a href="https://et.wikipedia.org/wiki/NTFS">Failisüsteemid (NTFS, FAT32, exFAT)</a></li>
+            <li><a href="https://whatismyipaddress.com/">IP-aadressid (põhitase)</a></li>
         </ul>
         <ul class="skills" data-lang="en" style="display:none;">
-            <li>PC Building</li><li>Microsoft Windows 10/11</li><li>Linux (basic; terminal)</li><li>HTML (this website)</li><li>Python (basic)</li><li>Arduino UNO (basic)</li><li>Raspberry Pi 3B</li><li>3D Modeling</li><li>Soldering</li><li>File Systems (NTFS, FAT32, exFAT)</li><li>IP Addressing (basic)</li>
+            <li><a href="https://en.wikipedia.org/wiki/Homebuilt_computer">PC Building</a></li>
+            <li><a href="https://www.microsoft.com/en-us/software-download/windows11">Microsoft Windows 10/11</a></li>
+            <li><a href="https://www.linux.org/pages/download/">Linux (basic; terminal)</a></li>
+            <li><a href="https://en.wikipedia.org/wiki/HTML">HTML (this website)</a></li>
+            <li><a href="https://www.python.org/downloads/">Python (basic)</a></li>
+            <li><a href="https://www.arduino.cc/en/hardware/#uno-family">Arduino UNO (basic)</a></li>
+            <li><a href="https://www.raspberrypi.com/products/raspberry-pi-3-model-b/">Raspberry Pi 3B</a></li>
+            <li><a href="https://www.tinkercad.com/">3D Modeling</a></li>
+            <li><a href="https://en.wikipedia.org/wiki/Soldering">Soldering</a></li>
+            <li><a href="https://en.wikipedia.org/wiki/NTFS">File Systems (NTFS, FAT32, exFAT)</a></li>
+            <li><a href="https://whatismyipaddress.com/">IP Addressing (basic)</a></li>
         </ul>
 
         <div class="course-container" style="text-align: center; margin-top: 30px;">
