@@ -303,12 +303,24 @@
     body.dark-mode .button-description {
         color: #bbb;
     }
+
+nav {
+    display: block !important;
+    text-align: center;
+    background: #34495e;
+    padding: 10px 0;
+}
+
+nav ul { list-style: none; padding: 0; margin: 0; }
+nav li { display: inline; margin: 0 15px; }
+nav a { color: white; text-decoration: none; font-weight: bold; }
+
 </style>
 </head>
 
 <body>
 
-<nav style="display:none;">
+<nav>
   <ul>
     <li><a href="#minust">Minust</a></li>
     <li><a href="#oskused">Oskused</a></li>
@@ -346,20 +358,14 @@
             Mind huvitab eriti riistvara ja erinevate komponentide koostöö.
         </p>
 
-        <p data-lang="en" style="display:none;">
-            I am interested in technology and enjoy learning how everyday systems work and how to build them myself.
-            I am particularly interested in hardware and how different components work together.
-        </p>
+<p data-lang="en" style="display:none;">
+    I am a dedicated <strong>IT enthusiast and PC builder</strong> driven by a passion for understanding how complex digital systems function from the ground up. My focus lies in <strong>hardware optimization</strong>, custom computer assembly, and ensuring seamless synergy between software and physical components.
+</p>
 
-        <p data-lang="et">
-            Olen ehitanud arvuteid ning teinud väiksemaid elektroonikaprojekte, näiteks päikeseenergial töötava
-            miniventilaatori, ning katsetanud Raspberry Pi ja Arduino UNO platvormidega.
-        </p>
+<p data-lang="en" style="display:none;">
+    I have successfully completed various technical projects, ranging from assembling high-performance <strong>gaming rigs</strong> to creating practical electronics like solar-powered cooling systems. Beyond hardware, I am actively developing my skills in <strong>Python programming</strong> and exploring the World of IoT using <strong>Raspberry Pi and Arduino UNO</strong> platforms to automate everyday tasks.
+</p>
 
-        <p data-lang="en" style="display:none;">
-            I have built computers and worked on small electronics projects such as a solar-powered mini fan,
-            and experimented with Raspberry Pi and Arduino UNO platforms.
-        </p>
     </section>
 
 <section id="oskused" class="fade-in-section">
@@ -465,7 +471,7 @@
             <p data-lang="en" style="display:none;"><strong>Hello! Here is a Python game I created myself.</strong></p>
 
             <figure>
-                <img src="images/game.png" loading="lazy">
+                <img src="images/game.png" alt="Screenshot of my custom Python game project" loading="lazy">
             </figure>
           
             <a href="https://github.com/gregoropmann/aboutme/raw/main/game.zip" style="text-decoration: none;">
