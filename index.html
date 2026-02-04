@@ -308,6 +308,15 @@
 
 <body>
 
+<nav style="display:none;">
+  <ul>
+    <li><a href="#minust">Minust</a></li>
+    <li><a href="#oskused">Oskused</a></li>
+    <li><a href="#galerii">Galerii</a></li>
+    <li><a href="#kontakt">Kontakt</a></li>
+  </ul>
+</nav>
+
 <button onclick="scrollToTop()" id="backToTop" title="Tagasi üles">↑</button>
 
 <header>
@@ -328,7 +337,7 @@
 </header>
 
 <main>
-    <section class="fade-in-section">
+    <section id="minust" class="fade-in-section">
         <h2 data-lang="et">Minust</h2>
         <h2 data-lang="en" style="display:none;">About Me</h2>
 
@@ -353,10 +362,10 @@
         </p>
     </section>
 
-<section class="fade-in-section">
+<section id="oskused" class="fade-in-section">
     <h2 data-lang="et">Oskused & Tehnoloogiad</h2>
     <h2 data-lang="en" style="display:none;">Skills & Technologies</h2>
-  
+
     <div class="skills-wrapper">
         <h3 class="skill-category-title">
             <span data-lang="et">Riistvara</span>
@@ -398,9 +407,10 @@
         </div>
     </section>
     
-    <section class="fade-in-section">
+    <section id="galerii" class="fade-in-section">
         <h2 data-lang="et">Galerii</h2>
         <h2 data-lang="en" style="display:none;">Gallery</h2>
+
         <div class="gallery">
             <figure>
                 <img src="images/pc-build.png" alt="PC Build" loading="lazy">
@@ -466,7 +476,7 @@
         </div>
     </section>
     
-    <section class="fade-in-section">
+    <section id="kontakt" class="fade-in-section">
     <h2 data-lang="et">Kontakt</h2>
     <h2 data-lang="en" style="display:none;">Contact</h2>
     <p data-lang="et">E-post: <strong>
