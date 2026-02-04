@@ -19,13 +19,11 @@
 <meta name="theme-color" content="#3498db">
 <meta name="google-site-verification" content="evLh_s8NUTBzcndfoJ3MNhBJH9SNUV_10m8ROfrUezM" />
 
-<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-GE1NLJBC8F"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-GE1NLJBC8F');
 </script>
 
@@ -41,7 +39,6 @@
   "jobTitle": "IT Enthusiast / Python Developer",
   "knowsAbout": ["Python", "Computer Hardware", "IT"]
 }
-
 </script>
 
 <style>
@@ -321,6 +318,20 @@
     body.dark-mode .button-description {
         color: #bbb;
     }
+
+    [data-lang="en"] { 
+        display: none; 
+    }
+    
+    body.lang-en [data-lang="et"] { 
+        display: none; 
+    }
+    body.lang-en [data-lang="en"] { 
+        display: block; 
+    }
+    body.lang-en span[data-lang="en"] { 
+        display: inline; 
+    }
 </style>
 </head>
 
@@ -331,12 +342,12 @@
 <header>
     <h1>Gregor Opmann</h1>
     <p data-lang="et">IT-valdkond</p>
-    <p data-lang="en" style="display:none;">Information Technology</p>
+    <p data-lang="en">Information Technology</p>
 
     <button onclick="toggleDarkMode()" id="dark-mode-btn">
         <span id="mode-icon">🌙</span> 
         <span id="mode-text" data-lang="et">Tume režiim</span>
-        <span id="mode-text-en" data-lang="en" style="display:none;">Dark Mode</span>
+        <span id="mode-text-en" data-lang="en">Dark Mode</span>
     </button>
     
     <div class="language-switch">
@@ -348,14 +359,14 @@
 <main>
     <section class="fade-in-section">
         <h2 data-lang="et">Minust</h2>
-        <h2 data-lang="en" style="display:none;">About Me</h2>
+        <h2 data-lang="en">About Me</h2>
 
         <p data-lang="et">
             Olen tehnikahuviline ja mulle meeldib õppida, kuidas igapäevased süsteemid töötavad ning neid ise ehitada.
             Mind huvitab eriti riistvara ja erinevate komponentide koostöö.
         </p>
 
-        <p data-lang="en" style="display:none;">
+        <p data-lang="en">
             I am interested in technology and enjoy learning how everyday systems work and how to build them myself.
             I am particularly interested in hardware and how different components work together.
         </p>
@@ -365,7 +376,7 @@
             miniventilaatori, ning katsetanud Raspberry Pi ja Arduino UNO platvormidega.
         </p>
 
-        <p data-lang="en" style="display:none;">
+        <p data-lang="en">
             I have built computers and worked on small electronics projects such as a solar-powered mini fan,
             and experimented with Raspberry Pi and Arduino UNO platforms.
         </p>
@@ -373,7 +384,7 @@
 
     <section class="fade-in-section">
         <h2 data-lang="et">Oskused</h2>
-        <h2 data-lang="en" style="display:none;">Skills</h2>
+        <h2 data-lang="en">Skills</h2>
         <ul class="skills" data-lang="et">
             <li><a href="https://et.wikibooks.org/wiki/Arvuti_koostamine">Arvutite ehitus</a></li>
             <li><a href="https://www.microsoft.com/et-ee/software-download/windows11">Microsoft Windows 10/11</a></li>
@@ -388,7 +399,7 @@
             <li><a href="https://whatismyipaddress.com/">IP-aadressid (põhitase)</a></li>
             <li><a href="https://et.wikipedia.org/wiki/Android_(operatsioonis%C3%BCsteem)">Android seadmed</a></li>
         </ul>
-        <ul class="skills" data-lang="en" style="display:none;">
+        <ul class="skills" data-lang="en">
             <li><a href="https://en.wikipedia.org/wiki/Homebuilt_computer">PC Building</a></li>
             <li><a href="https://www.microsoft.com/en-us/software-download/windows11">Microsoft Windows 10/11</a></li>
             <li><a href="https://www.linux.org/pages/download/">Linux (basic; terminal)</a></li>
@@ -406,87 +417,75 @@
         <div class="course-container" style="text-align: center; margin-top: 30px;">
             <a href="https://didaktika.cs.ut.ee/progestart/" target="_blank" class="action-button">
                 <span data-lang="et">ProgeStart 2025</span>
-                <span data-lang="en" style="display:none;">ProgeStart 2025</span>
+                <span data-lang="en">ProgeStart 2025</span>
             </a>
             <div class="button-description">
                 <p data-lang="et">Läbitud Pythoni kursus.</p>
-                <p data-lang="en" style="display:none;">Completed Python course.</p>
+                <p data-lang="en">Completed Python course.</p>
             </div>
         </div>
     </section>
     
     <section class="fade-in-section">
         <h2 data-lang="et">Galerii</h2>
-        <h2 data-lang="en" style="display:none;">Gallery</h2>
+        <h2 data-lang="en">Gallery</h2>
         <div class="gallery">
             <figure>
                 <img src="images/pc-build.png" alt="PC Build" loading="lazy">
                 <figcaption data-lang="et">Ise ehitatud arvuti</figcaption>
-                <figcaption data-lang="en" style="display:none;">Custom-built PC</figcaption>
+                <figcaption data-lang="en">Custom-built PC</figcaption>
             </figure>
             <figure>
                 <img src="images/solar_powered_mini_fan.png" alt="Solar Fan" loading="lazy">
                 <figcaption data-lang="et">Päikeseenergial töötav ventilaator</figcaption>
-                <figcaption data-lang="en" style="display:none;">Solar-powered mini fan</figcaption>
+                <figcaption data-lang="en">Solar-powered mini fan</figcaption>
             </figure>
             <figure>
                 <img src="images/line_follower.png" alt="Arduino Robot" loading="lazy">
                 <figcaption data-lang="et">Arduino joonejärgija robot (pooleli)</figcaption>
-                <figcaption data-lang="en" style="display:none;">Arduino line-follower robot (WiP)</figcaption>
+                <figcaption data-lang="en">Arduino line-follower robot (WiP)</figcaption>
             </figure>
         </div>
     </section>
 
  <section class="fade-in-section">
     <h2 data-lang="et">Minu arvuti tehnilised andmed</h2>
-    <h2 data-lang="en" style="display:none;">My PC Hardware Specs</h2>
+    <h2 data-lang="en">My PC Hardware Specs</h2>
 
     <div class="specs-container">
         <table class="specs-table">
             <thead>
                 <tr>
                     <th data-lang="et">Komponent</th>
-                    <th data-lang="en" style="display:none;">Component</th>
+                    <th data-lang="en">Component</th>
                     <th data-lang="et">Mudel</th>
-                    <th data-lang="en" style="display:none;">Model</th>
+                    <th data-lang="en">Model</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td data-lang="et"><strong>Kesktöötlusseade</strong></td>
-                    <td data-lang="en" style="display:none;"><strong>CPU</strong></td>
-                    <td data-lang="et">AMD Ryzen 5 7600X</td>
-                    <td data-lang="en" style="display:none;">AMD Ryzen 5 7600X</td>
+                    <td><strong data-lang="et">Kesktöötlusseade</strong><strong data-lang="en">CPU</strong></td>
+                    <td>AMD Ryzen 5 7600X</td>
                 </tr>
                 <tr>
-                    <td data-lang="et"><strong>Graafikaprotsessor</strong></td>
-                    <td data-lang="en" style="display:none;"><strong>GPU</strong></td>
-                    <td data-lang="et">Radeon RX 7600 XT 16GB</td>
-                    <td data-lang="en" style="display:none;">Radeon RX 7600 XT 16GB</td>
+                    <td><strong data-lang="et">Graafikaprotsessor</strong><strong data-lang="en">GPU</strong></td>
+                    <td>Radeon RX 7600 XT 16GB</td>
                 </tr>
                 <tr>
-                    <td data-lang="et"><strong>Muutmälu</strong></td>
-                    <td data-lang="en" style="display:none;"><strong>RAM</strong></td>
-                    <td data-lang="et">32GB DDR5-6000 CL30</td>
-                    <td data-lang="en" style="display:none;">32GB DDR5-6000 CL30</td>
+                    <td><strong data-lang="et">Muutmälu</strong><strong data-lang="en">RAM</strong></td>
+                    <td>32GB DDR5-6000 CL30</td>
                 </tr>
                 <tr>
-                    <td data-lang="et"><strong>Pooljuhtketas</strong></td>
-                    <td data-lang="en" style="display:none;"><strong>Storage</strong></td>
-                    <td data-lang="et">2TB WD Black SN850X NVMe SSD</td>
-                    <td data-lang="en" style="display:none;">2TB WD Black SN850X NVMe SSD</td>
+                    <td><strong data-lang="et">Pooljuhtketas</strong><strong data-lang="en">Storage</strong></td>
+                    <td>2TB WD Black SN850X NVMe SSD</td>
                 </tr>
                 <tr>
-                    <td data-lang="et"><strong>Operatsioonisüsteem</strong></td>
-                    <td data-lang="en" style="display:none;"><strong>OS</strong></td>
-                    <td data-lang="et">Linux Mint / CachyOS</td>
-                    <td data-lang="en" style="display:none;">Linux Mint / CachyOS</td>
+                    <td><strong data-lang="et">Operatsioonisüsteem</strong><strong data-lang="en">OS</strong></td>
+                    <td>Linux Mint / CachyOS</td>
                 </tr>
                 <tr>
-                    <td data-lang="et"><strong>Emaplaat</strong></td>
-                    <td data-lang="en" style="display:none;"><strong>Motherboard</strong></td>
-                    <td data-lang="et">Gigabyte Aorus Elite AX V2 B650</td>
-                    <td data-lang="en" style="display:none;">Gigabyte Aorus Elite AX V2 B650</td>
+                    <td><strong data-lang="et">Emaplaat</strong><strong data-lang="en">Motherboard</strong></td>
+                    <td>Gigabyte Aorus Elite AX V2 B650</td>
                 </tr>
             </tbody>
         </table>
@@ -495,27 +494,45 @@
 
 <section class="fade-in-section" style="text-align: center;">
     <h2 data-lang="et">Minu projektid</h2>
-    <h2 data-lang="en" style="display:none;">My Projects</h2>
-    
-    <div style="background: rgba(52, 152, 219, 0.1); padding: 2rem; border-radius: 8px; border: 1px dashed #3498db; margin-top: 1rem;">
-        <p data-lang="et"><strong>Tere! Siin on minu enda koostatud Pythoni mäng.</strong></p>
-        <p data-lang="en" style="display:none;"><strong>Hello! Here is a Python game I created myself.</strong></p>
-        
+    <h2 data-lang="en">My Projects</h2>
+    <div style="background: rgba(52, 152, 219, 0.1); padding: 2rem; border-radius: 12px; border: 1px dashed #3498db; margin-top: 1rem;">
+        <h3 style="margin-top: 0;">Python: 'Keskkonnakangelane'</h3>
+        <div style="margin: 20px auto; max-width: 500px; overflow: hidden; border-radius: 8px; box-shadow: 0 8px 20px rgba(0,0,0,0.3); border: 2px solid #333;">
+            <img src="images/game.png" alt="Mängu 'Keskkonnakangelane' vaade" style="width: 100%; height: auto; display: block;">
+        </div>
+        <p data-lang="et" style="font-size: 1rem; line-height: 1.5;">
+            Tekstipõhine valikute mäng, mis paneb proovile mängija keskkonnateadlikkuse. 
+            Loodud õppe-eesmärgil <strong>ProgeStart 2025</strong> kursuse raames.
+        </p>
+        <p data-lang="en" style="font-size: 1rem; line-height: 1.5;">
+            A text-based choice game that tests the player's environmental awareness. 
+            Created for educational purposes as part of the <strong>ProgeStart 2025</strong> course.
+        </p>
         <a href="https://github.com/gregoropmann/aboutme/raw/main/game.zip" 
-           style="display: inline-block; background-color: #3498db; color: white; padding: 12px 24px; 
-                  border: none; border-radius: 5px; cursor: pointer; font-size: 1.1rem; font-weight: bold; 
-                  text-decoration: none; transition: 0.3s; margin: 10px 0;">
-            Download
+           class="action-button"
+           style="font-size: 1.1rem; text-decoration: none; padding: 15px 30px;">
+            📥 Download .ZIP
         </a>
     </div>
 </section>
     
-    <section class="fade-in-section">
-        <h2 data-lang="et">Kontakt</h2>
-        <h2 data-lang="en" style="display:none;">Contact</h2>
-        <p data-lang="et">E-post: <strong><a href="mailto:opmanngregor@gmail.com" style="color: inherit; text-decoration: none;">opmanngregor@gmail.com</a></strong></p>
-        <p data-lang="en" style="display:none;">Email: <strong><a href="mailto:opmanngregor@gmail.com" style="color: inherit; text-decoration: none;">opmanngregor@gmail.com</a></strong></p>
-    </section>
+<section class="fade-in-section">
+    <h2 data-lang="et">Kontakt</h2>
+    <h2 data-lang="en">Contact</h2>
+    
+    <p data-lang="et">E-post: <strong>
+        <a href="mailto:opmanngregor@gmail.com" onclick="playMailSound(event)" style="color: inherit; text-decoration: none;">opmanngregor@gmail.com</a>
+    </strong></p>
+    
+    <p data-lang="en">Email: <strong>
+        <a href="mailto:opmanngregor@gmail.com" onclick="playMailSound(event)" style="color: inherit; text-decoration: none;">opmanngregor@gmail.com</a>
+    </strong></p>
+
+    <audio id="mailSound">
+        <source src="sounds/yougotmail.mp3" type="audio/mpeg">
+    </audio>
+</section>
+
 </main>
 
 <footer>
@@ -523,10 +540,9 @@
 </footer>
 
 <script>
+
 function setLanguage(lang) {
-    document.querySelectorAll('[data-lang]').forEach(el => {
-        el.style.display = el.getAttribute('data-lang') === lang ? '' : 'none';
-    });
+    document.body.classList.toggle('lang-en', lang === 'en');
     localStorage.setItem('preferred-lang', lang);
 }
 
@@ -560,10 +576,22 @@ function toggleDarkMode() {
 }
 
 const savedTheme = localStorage.getItem('theme');
-if (savedTheme === 'dark') updateDarkModeUI(true);
+if (savedTheme === 'dark') {
+    updateDarkModeUI(true);
+} else if (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    updateDarkModeUI(true);
+}
+
+function playMailSound(event) {
+    const audio = document.getElementById('mailSound');
+    audio.play().catch(error => console.log("Heli viga:", error));
+
+    event.preventDefault();
+    const href = event.currentTarget.href;
+    setTimeout(() => { window.location.href = href; }, 600);
+}
 
 const bttButton = document.getElementById("backToTop");
-
 window.onscroll = function() {
     if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
         bttButton.style.display = "block";
