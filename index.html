@@ -8,6 +8,7 @@
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="192x192" href="images/android-chrome-192x192.png">
 <link rel="icon" type="image/png" sizes="512x512" href="images/android-chrome-512x512.png">
+<link rel="manifest" href="manifest.json">
 <meta name="description" content="Gregor Opmann – IT-huviline ja arvutiehitaja">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -361,6 +362,21 @@ body.dark-mode .gallery figure {
     background: rgba(255,255,255,0.03);
 }
 
+.status-pulse {
+    width: 10px;
+    height: 10px;
+    background-color: #2ecc71;
+    border-radius: 50%;
+    box-shadow: 0 0 0 rgba(46, 204, 113, 0.4);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(46, 204, 113, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0); }
+}
+
 
 </style>
 </head>
@@ -533,6 +549,11 @@ body.dark-mode .gallery figure {
         </div>
     </section>
     
+<div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 20px;">
+    <span class="status-pulse"></span>
+    <span style="font-size: 0.8rem; opacity: 0.8;">Portfolio Status: Active</span>
+</div>
+
     <section id="kontakt" class="fade-in-section">
     <h2 data-lang="et">Kontakt</h2>
     <h2 data-lang="en" style="display:none;">Contact</h2>
