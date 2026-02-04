@@ -9,6 +9,9 @@
 <link rel="icon" type="image/png" sizes="192x192" href="images/android-chrome-192x192.png">
 <link rel="icon" type="image/png" sizes="512x512" href="images/android-chrome-512x512.png">
 <meta name="description" content="Gregor Opmann – IT-huviline ja arvutiehitaja">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="mobile-web-app-capable" content="yes">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://gregoropmann.github.io/aboutme/">
 <meta property="og:title" content="Gregor Opmann – Portfoolio">
@@ -277,10 +280,11 @@
     }
     
     .action-button:hover {
-        background-color: #2980b9;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    }
+    background-color: #2980b9;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(52, 152, 219, 0.3);
+}
+
     
     body.dark-mode .action-button {
         background-color: #4db8ff;
@@ -314,6 +318,49 @@ nav {
 nav ul { list-style: none; padding: 0; margin: 0; }
 nav li { display: inline; margin: 0 15px; }
 nav a { color: white; text-decoration: none; font-weight: bold; }
+
+.fade-in-section img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+    margin: 0 auto;
+}
+
+
+@media (max-width: 600px) {
+    .fade-in-section div[style*="padding: 2rem"] {
+        padding: 1rem !important;
+    }
+}
+
+.project-card {
+    background: rgba(52, 152, 219, 0.1);
+    padding: 2rem;
+    border-radius: 8px;
+    border: 1px dashed #3498db;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+@media (max-width: 600px) {
+    .project-card {
+        padding: 1rem;
+    }
+}
+
+.gallery figure {
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: rgba(0,0,0,0.03);
+}
+
+body.dark-mode .gallery figure {
+    background: rgba(255,255,255,0.03);
+}
+
 
 </style>
 </head>
@@ -354,9 +401,13 @@ nav a { color: white; text-decoration: none; font-weight: bold; }
         <h2 data-lang="en" style="display:none;">About Me</h2>
 
         <p data-lang="et">
-            Olen tehnikahuviline ja mulle meeldib õppida, kuidas igapäevased süsteemid töötavad ning neid ise ehitada.
-            Mind huvitab eriti riistvara ja erinevate komponentide koostöö.
-        </p>
+    Olen pühendunud <strong>IT-huviline ja arvutiehitaja</strong>, keda kannab huvi mõista, kuidas keerulised digitaalsüsteemid rohujuuretasandilt toimivad. Minu põhifookus on <strong>riistvara optimeerimisel</strong>, eritellimusel arvutite kokkupanemisel ning tarkvara ja füüsiliste komponentide sujuva koostöö tagamisel.
+</p>
+
+<p data-lang="et">
+    Olen edukalt lõpule viinud mitmeid tehnilisi projekte, alates suure jõudlusega <strong>mänguarvutite</strong> koostamisest kuni praktilise elektroonikani, nagu päikeseenergial töötavad jahutussüsteemid. Lisaks riistvarale arendan aktiivselt oma oskusi <strong>Pythoni programmeerimises</strong> ja uurin asjade interneti (IoT) maailma, kasutades <strong>Raspberry Pi ja Arduino UNO</strong> platvorme igapäevaste ülesannete automatiseerimiseks.
+</p>
+
 
 <p data-lang="en" style="display:none;">
     I am a dedicated <strong>IT enthusiast and PC builder</strong> driven by a passion for understanding how complex digital systems function from the ground up. My focus lies in <strong>hardware optimization</strong>, custom computer assembly, and ensuring seamless synergy between software and physical components.
@@ -466,7 +517,7 @@ nav a { color: white; text-decoration: none; font-weight: bold; }
         <h2 data-lang="et">Minu projektid</h2>
         <h2 data-lang="en" style="display:none;">My Projects</h2>
         
-        <div style="background: rgba(52, 152, 219, 0.1); padding: 2rem; border-radius: 8px; border: 1px dashed #3498db; margin-top: 1rem;">
+        <div class="project-card">
             <p data-lang="et"><strong>Tere! Siin on minu enda koostatud Pythoni mäng.</strong></p>
             <p data-lang="en" style="display:none;"><strong>Hello! Here is a Python game I created myself.</strong></p>
 
