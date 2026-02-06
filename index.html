@@ -377,7 +377,58 @@ body.dark-mode .gallery figure {
     100% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0); }
 }
 
+.docs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+    margin-top: 1.5rem;
+}
 
+.doc-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 1.2rem;
+    border-radius: 8px;
+    text-align: center;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.doc-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.2);
+    border-color: #3498db;
+}
+
+.doc-icon {
+    font-size: 2.2rem;
+    margin-bottom: 8px;
+}
+
+.doc-title {
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+}
+
+.doc-type {
+    font-size: 0.75rem;
+    color: #3498db;
+    font-weight: bold;
+}
+
+body.dark-mode .doc-card {
+    background: #2a2a2a;
+    border-color: #444;
+}
+
+body.dark-mode .doc-type {
+    color: #4db8ff;
+}
 </style>
 </head>
 
@@ -401,6 +452,12 @@ body.dark-mode .gallery figure {
       <a href="#galerii">
         <span data-lang="et">Galerii</span>
         <span data-lang="en" style="display:none;">Gallery</span>
+      </a>
+    </li>
+    <li>
+      <a href="#dokumendid">
+        <span data-lang="et">Dokumendid</span>
+        <span data-lang="en" style="display:none;">Documents</span>
       </a>
     </li>
     <li>
@@ -527,6 +584,21 @@ body.dark-mode .gallery figure {
             </figure>
         </div>
     </section>
+
+    <section id="dokumendid" class="fade-in-section">
+      <h2 data-lang="et">Dokumendid</h2>
+      <h2 data-lang="en" style="display:none;">Documents</h2>
+      <div class="docs-grid">
+          <a href="docs/loovtoo_kiituskiri.pdf" class="doc-card" target="_blank">
+              <div class="doc-icon">🎖️</div>
+              <div class="doc-title">
+                  <span data-lang="et">Loovtöö kiituskiri (Päikeseenergial töötav ventilaator; AR+)</span>
+                  <span data-lang="en" style="display:none;">Creative Work Commendation (Solar-powered mini fan; Pass with Distinction)</span>
+              </div>
+              <div class="doc-type">PDF</div>
+          </a>
+      </div>
+  </section>
 
     <section class="fade-in-section">
     <h2 data-lang="et">Minu arvuti tehnilised andmed</h2>
