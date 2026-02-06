@@ -2,7 +2,7 @@
   "name": "Gregor Opmann Portfoolio",
   "short_name": "G.O. IT",
   "description": "Gregor Opmann – IT-huviline ja arvutiehitaja",
-  "start_url": "/aboutme/",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#2c3e50",
   "theme_color": "#3498db",
