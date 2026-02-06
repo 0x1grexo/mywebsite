@@ -1,6 +1,6 @@
 # Gregor Opmann – IT Portfolio
 
-A high-performance, responsive portfolio website built with a focus on hardware optimization and clean UI.
+A high-performance, responsive portfolio website built with a focus on optimization and clean UI.
 
 ## 🚀 Features
 * **Glassmorphism UI:** Modern frosted-glass aesthetic using `backdrop-filter`.
