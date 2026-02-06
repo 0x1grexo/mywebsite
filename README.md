@@ -14,5 +14,9 @@ A high-performance, responsive portfolio website built with a focus on hardware 
 * **Tools:** VS Code, GitHub Pages, Google Analytics
 * **Hardware Experience:** Python (ProgeStart 2025), Arduino, Raspberry Pi
 
+
+## 🎮 Python Game
+*A custom game built in Python. The download includes both the Windows executable for immediate play and the source code for those interested in the logic behind it.
+
 ## 📸 Preview
 Visit the live site: [gregoropmann.github.io/aboutme/](https://gregoropmann.github.io/aboutme/)
