@@ -16,7 +16,7 @@ A high-performance, responsive portfolio website built with a focus on hardware 
 
 
 ## 🎮 Python Game
-*A custom game built in Python. The download includes both the Windows executable for immediate play and the source code for those interested in the logic behind it.
+# A custom game built in Python. The download includes both the Windows executable for immediate play and the source code for those interested in the logic behind it.
 
 ## 📸 Preview
 Visit the live site: [gregoropmann.github.io/aboutme/](https://gregoropmann.github.io/aboutme/)
