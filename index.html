@@ -42,20 +42,54 @@
 </script>
 
 <style>
+    
+    body {
+        position: relative;
+    }
+    
+    header,
+    nav,
+    main,
+    footer {
+        position: relative;
+        z-index: 1;
+    }
+
+    body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        background: linear-gradient(120deg, rgba(0,0,0,0.25), rgba(0,0,0,0.05));
+        transition: background 0.5s ease;
+    }
+
+
+    body.dark-mode::before {
+        background: linear-gradient(120deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3));
+    }
+
     body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        line-height: 1.6;
         margin: 0;
-        background-color: #f4f4f9;
         color: #333;
-        transition: background-color 0.3s, color 0.3s;
+    
+        background: url("images/background-light.jpg") no-repeat center center fixed;
+        background-size: cover;
+    
+        transition: color 0.3s, background 0.5s;
+    }
+    
+    body.dark-mode {
+        background: url("images/background-dark.jpg") no-repeat center center fixed;
+        background-size: cover;
     }
 
     header {
-        background: #2c3e50;
-        color: white;
-        padding: 2.5rem 1rem;
-        text-align: center;
+        background: rgba(44, 62, 80, 0.65);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
     }
 
     header h1 { margin: 0; font-size: 2.2rem; }
@@ -106,21 +140,67 @@
     }
 
     main {
-        max-width: 800px;
-        margin: 2rem auto;
-        padding: 2rem;
-        background: white;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        border-radius: 8px;
-        transition: background-color 0.3s, box-shadow 0.3s;
+        max-width: 900px;
+        margin: 3rem auto;
+        padding: 2.5rem;
+    
+        background: rgba(255, 255, 255, 0.35);
+        backdrop-filter: blur(18px) saturate(140%);
+        -webkit-backdrop-filter: blur(18px) saturate(140%);
+    
+        border-radius: 20px;
+    
+        border: 1px solid rgba(255, 255, 255, 0.4);
+    
+        box-shadow:
+            0 8px 32px rgba(0, 0, 0, 0.25),
+            inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    
+        transition: background 0.3s, box-shadow 0.3s;
     }
+
+      body.dark-mode main {
+        background: rgba(20, 20, 20, 0.45);
+        backdrop-filter: blur(20px) saturate(130%);
+        -webkit-backdrop-filter: blur(20px) saturate(130%);
+    
+        border: 1px solid rgba(255, 255, 255, 0.12);
+    
+        box-shadow:
+            0 10px 40px rgba(0, 0, 0, 0.8),
+            inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+
 
     .fade-in-section {
         opacity: 0;
         transform: translateY(20px);
-        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        transition: opacity 0.6s ease, transform 0.6s ease;
+    
+        background: rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+    
+        border-radius: 16px;
+        padding: 2rem;
         margin-bottom: 2.5rem;
+    
+        border: 1px solid rgba(255, 255, 255, 0.35);
+    
+        box-shadow:
+            0 6px 20px rgba(0, 0, 0, 0.15),
+            inset 0 1px 0 rgba(255, 255, 255, 0.3);
     }
+
+    body.dark-mode .fade-in-section {
+        background: rgba(25, 25, 25, 0.35);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+    
+        box-shadow:
+            0 8px 25px rgba(0, 0, 0, 0.7),
+            inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+
 
     .fade-in-section.is-visible {
         opacity: 1;
@@ -188,16 +268,6 @@
         padding: 2rem;
         font-size: 0.8rem;
         color: #777;
-    }
-
-    body.dark-mode {
-        background-color: #121212;
-        color: #f0f0f0;
-    }
-
-    body.dark-mode main {
-        background-color: #1e1e1e;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.5);
     }
 
     body.dark-mode h2 {
@@ -269,23 +339,21 @@
     }
 
     .action-button {
-        display: inline-block;
-        padding: 12px 24px;
-        background-color: #3498db;
-        color: white !important;
-        text-decoration: none;
-        border-radius: 5px;
-        font-weight: bold;
-        transition: transform 0.2s, background-color 0.2s;
-        margin-top: 20px;
-    }
+        background: rgba(52, 152, 219, 0.35);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
     
-    .action-button:hover {
-    background-color: #2980b9;
-    transform: translateY(-3px);
-    box-shadow: 0 6px 15px rgba(52, 152, 219, 0.3);
-}
+        border: 1px solid rgba(255, 255, 255, 0.35);
+    
+        box-shadow:
+            0 6px 20px rgba(52, 152, 219, 0.25),
+            inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    }
 
+    .action-button:hover {
+        background: rgba(52, 152, 219, 0.55);
+        transform: translateY(-3px);
+    }
     
     body.dark-mode .action-button {
         background-color: #4db8ff;
@@ -309,126 +377,125 @@
         color: #bbb;
     }
 
-nav {
-    display: block !important;
-    text-align: center;
-    background: #34495e;
-    padding: 10px 0;
-}
-
-nav ul { list-style: none; padding: 0; margin: 0; }
-nav li { display: inline; margin: 0 15px; }
-nav a { color: white; text-decoration: none; font-weight: bold; }
-
-.fade-in-section img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-    display: block;
-    margin: 0 auto;
-}
-
-
-@media (max-width: 600px) {
-    .fade-in-section div[style*="padding: 2rem"] {
-        padding: 1rem !important;
+    nav {
+        background: rgba(52, 73, 94, 0.65);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
     }
-}
-
-.project-card {
-    background: rgba(52, 152, 219, 0.1);
-    padding: 2rem;
-    border-radius: 8px;
-    border: 1px dashed #3498db;
-    margin-top: 1rem;
-    text-align: center;
-}
-
-@media (max-width: 600px) {
+    
+    nav ul { list-style: none; padding: 0; margin: 0; }
+    nav li { display: inline; margin: 0 15px; }
+    nav a { color: white; text-decoration: none; font-weight: bold; }
+    
+    .fade-in-section img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        display: block;
+        margin: 0 auto;
+    }
+    
+    
+    @media (max-width: 600px) {
+        .fade-in-section div[style*="padding: 2rem"] {
+            padding: 1rem !important;
+        }
+    }
+    
     .project-card {
-        padding: 1rem;
+        background: rgba(52, 152, 219, 0.1);
+        padding: 2rem;
+        border-radius: 8px;
+        border: 1px dashed #3498db;
+        margin-top: 1rem;
+        text-align: center;
     }
-}
-
-.gallery figure {
-    min-height: 200px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background: rgba(0,0,0,0.03);
-}
-
-body.dark-mode .gallery figure {
-    background: rgba(255,255,255,0.03);
-}
-
-.status-pulse {
-    width: 10px;
-    height: 10px;
-    background-color: #2ecc71;
-    border-radius: 50%;
-    box-shadow: 0 0 0 rgba(46, 204, 113, 0.4);
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.7); }
-    70% { box-shadow: 0 0 0 10px rgba(46, 204, 113, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0); }
-}
-
-.docs-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 15px;
-    margin-top: 1.5rem;
-}
-
-.doc-card {
-    background: #fff;
-    border: 1px solid #ddd;
-    padding: 1.2rem;
-    border-radius: 8px;
-    text-align: center;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    color: inherit;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.doc-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.2);
-    border-color: #3498db;
-}
-
-.doc-icon {
-    font-size: 2.2rem;
-    margin-bottom: 8px;
-}
-
-.doc-title {
-    font-weight: 600;
-    font-size: 0.95rem;
-    margin-bottom: 4px;
-}
-
-.doc-type {
-    font-size: 0.75rem;
-    color: #3498db;
-    font-weight: bold;
-}
-
-body.dark-mode .doc-card {
-    background: #2a2a2a;
-    border-color: #444;
-}
-
-body.dark-mode .doc-type {
-    color: #4db8ff;
-}
+    
+    @media (max-width: 600px) {
+        .project-card {
+            padding: 1rem;
+        }
+    }
+    
+    .gallery figure {
+        min-height: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background: rgba(0,0,0,0.03);
+    }
+    
+    body.dark-mode .gallery figure {
+        background: rgba(255,255,255,0.03);
+    }
+    
+    .status-pulse {
+        width: 10px;
+        height: 10px;
+        background-color: #2ecc71;
+        border-radius: 50%;
+        box-shadow: 0 0 0 rgba(46, 204, 113, 0.4);
+        animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+        0% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.7); }
+        70% { box-shadow: 0 0 0 10px rgba(46, 204, 113, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0); }
+    }
+    
+    .docs-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 15px;
+        margin-top: 1.5rem;
+    }
+    
+    .doc-card {
+        background: #fff;
+        border: 1px solid #ddd;
+        padding: 1.2rem;
+        border-radius: 8px;
+        text-align: center;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        color: inherit;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .doc-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(52, 152, 219, 0.2);
+        border-color: #3498db;
+    }
+    
+    .doc-icon {
+        font-size: 2.2rem;
+        margin-bottom: 8px;
+    }
+    
+    .doc-title {
+        font-weight: 600;
+        font-size: 0.95rem;
+        margin-bottom: 4px;
+    }
+    
+    .doc-type {
+        font-size: 0.75rem;
+        color: #3498db;
+        font-weight: bold;
+    }
+    
+    body.dark-mode .doc-card {
+        background: #2a2a2a;
+        border-color: #444;
+    }
+    
+    body.dark-mode .doc-type {
+        color: #4db8ff;
+    }
 </style>
 </head>
 
@@ -608,10 +675,14 @@ body.dark-mode .doc-type {
         <table class="specs-table">
             <thead>
                 <tr>
-                    <th data-lang="et">Komponent</th>
-                    <th data-lang="en" style="display:none;">Component</th>
-                    <th data-lang="et">Mudel</th>
-                    <th data-lang="en" style="display:none;">Model</th>
+                  <th>
+                    <span data-lang="et">Komponent</span>
+                    <span data-lang="en" style="display:none;">Component</span>
+                  </th>
+                  <th>
+                    <span data-lang="et">Mudel</span>
+                    <span data-lang="en" style="display:none;">Model</span>
+                  </th>
                 </tr>
             </thead>
             <tbody>
@@ -633,15 +704,16 @@ body.dark-mode .doc-type {
         <div class="project-card">
             <p data-lang="et"><strong>Tere! Siin on minu enda koostatud Pythoni mäng.</strong></p>
             <p data-lang="en" style="display:none;"><strong>Hello! Here is a Python game I created myself.</strong></p>
-
+          
             <figure>
                 <img src="images/game.png" alt="Screenshot of my custom Python game project" loading="lazy">
             </figure>
           
-            <a href="https://github.com/gregoropmann/aboutme/raw/main/game.zip" style="text-decoration: none;">
-                <button style="background-color: #3498db; color: white; padding: 12px 24px; border: none; border-radius: 5px; cursor: pointer; font-size: 1.1rem; font-weight: bold; transition: 0.3s; margin: 10px 0;">
-                    Download .ZIP
-                </button>
+              <a href="https://github.com/gregoropmann/aboutme/raw/main/game.zip"
+                 class="action-button"
+                 download>
+                 Download .ZIP
+              </a>
             </a>            
         </div>
     </section>
@@ -751,7 +823,11 @@ function scrollToTop() {
 
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('is-visible');
+    if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+    }
+
     });
 }, { threshold: 0.1 });
 
