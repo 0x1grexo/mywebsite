@@ -386,3 +386,73 @@ body.dark-mode .doc-card {
 body.dark-mode .doc-type {
     color: #4db8ff;
 }
+
+/* --- Share Button Styles --- */
+.share-container {
+    text-align: center;
+    margin-top: 1.5rem;
+    padding-bottom: 1rem;
+}
+
+.share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 22px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 25px; /* Rounded pill shape */
+    font-weight: bold;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.share-btn:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(52, 152, 219, 0.3);
+}
+
+.share-btn:active {
+    transform: translateY(0);
+}
+
+#share-msg {
+    font-size: 0.85rem;
+    margin-top: 8px;
+    height: 1.2rem; /* Prevents layout jump when text appears */
+    color: #2ecc71; /* Success green */
+    font-weight: 600;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* --- Dark Mode Share Styles --- */
+body.dark-mode .share-btn {
+    background-color: #4db8ff;
+    color: #121212;
+}
+
+body.dark-mode .share-btn:hover {
+    background-color: #3ca0e6;
+    box-shadow: 0 6px 12px rgba(77, 184, 255, 0.3);
+}
+
+body.dark-mode #share-msg {
+    color: #2ecc71;
+}
+
+/* Animation for the icon */
+.share-btn:hover #share-icon {
+    animation: wiggle 0.5s ease-in-out;
+}
+
+@keyframes wiggle {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(-15deg); }
+    75% { transform: rotate(15deg); }
+    100% { transform: rotate(0deg); }
+}
