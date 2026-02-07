@@ -279,6 +279,16 @@
     <span style="font-size: 0.8rem; opacity: 0.8;">Portfolio Status: Active</span>
 </div>
 
+<div class="share-container" style="text-align: center; margin-top: 15px;">
+    <button onclick="sharePortfolio()" id="share-btn" class="action-button">
+        <span id="share-icon">🔗</span>
+        <span data-lang="et">Jaga portfooliot</span>
+        <span data-lang="en" style="display:none;">Share Portfolio</span>
+    </button>
+    <p id="share-msg" style="font-size: 0.8rem; margin-top: 5px; opacity: 0; transition: 0.3s;"></p>
+</div>
+
+
 <footer>
     &copy; <span id="current-year"></span> Gregor Opmann · GitHub Pages · Visual Studio Code
 </footer>
@@ -377,6 +387,34 @@ if ('serviceWorker' in navigator) {
       .catch(err => console.log('Service Worker registration failed:', err));
   });
 }
+
+async function sharePortfolio() {
+    const shareData = {
+        title: 'Gregor Opmann – Portfoolio',
+        text: 'Vaata Gregor Opmanni IT-portfooliot ja projekte!',
+        url: window.location.href
+    };
+
+    const msgEl = document.getElementById('share-msg');
+    const lang = localStorage.getItem('preferred-lang') || 'et';
+
+    try {
+        if (navigator.share) {
+            // Mobile: Opens native share menu
+            await navigator.share(shareData);
+        } else {
+            // Desktop: Fallback to copy link
+            await navigator.clipboard.writeText(window.location.href);
+            msgEl.innerText = lang === 'et' ? 'Link kopeeritud!' : 'Link copied!';
+            msgEl.style.opacity = '1';
+            setTimeout(() => msgEl.style.opacity = '0', 2000);
+        }
+    } catch (err) {
+        console.log('Share failed:', err);
+    }
+}
+
+
 
 </script>
 
