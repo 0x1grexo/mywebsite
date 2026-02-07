@@ -400,24 +400,22 @@ async function sharePortfolio() {
 
     try {
         if (navigator.share) {
-            // Mobile: Opens native share menu
             await navigator.share(shareData);
         } else {
-            // Desktop: Fallback to copy link
             await navigator.clipboard.writeText(window.location.href);
-            msgEl.innerText = lang === 'et' ? 'Link kopeeritud!' : 'Link copied!';
+            msgEl.innerText = lang === 'et' ? 'Link kopeeritud lõikelauale!' : 'Link copied to clipboard!';
             msgEl.style.opacity = '1';
-            setTimeout(() => msgEl.style.opacity = '0', 2000);
+            
+            setTimeout(() => {
+                msgEl.style.opacity = '0';
+            }, 2000);
         }
     } catch (err) {
-        console.log('Share failed:', err);
+        console.log('Sharing failed', err);
     }
 }
 
-
-
 </script>
-
 
 </body>
 </html>
