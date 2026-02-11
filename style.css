@@ -387,7 +387,6 @@ body.dark-mode .doc-type {
     color: #4db8ff;
 }
 
-/* --- Share Button Styles --- */
 .share-container {
     text-align: center;
     margin-top: 1.5rem;
@@ -402,7 +401,7 @@ body.dark-mode .doc-type {
     background-color: #3498db;
     color: white;
     border: none;
-    border-radius: 25px; /* Rounded pill shape */
+    border-radius: 25px;
     font-weight: bold;
     font-size: 0.95rem;
     cursor: pointer;
@@ -423,14 +422,13 @@ body.dark-mode .doc-type {
 #share-msg {
     font-size: 0.85rem;
     margin-top: 8px;
-    height: 1.2rem; /* Prevents layout jump when text appears */
-    color: #2ecc71; /* Success green */
+    height: 1.2rem;
+    color: #2ecc71;
     font-weight: 600;
     opacity: 0;
     transition: opacity 0.3s ease;
 }
 
-/* --- Dark Mode Share Styles --- */
 body.dark-mode .share-btn {
     background-color: #4db8ff;
     color: #121212;
@@ -445,7 +443,6 @@ body.dark-mode #share-msg {
     color: #2ecc71;
 }
 
-/* Animation for the icon */
 .share-btn:hover #share-icon {
     animation: wiggle 0.5s ease-in-out;
 }
@@ -455,4 +452,28 @@ body.dark-mode #share-msg {
     25% { transform: rotate(-15deg); }
     75% { transform: rotate(15deg); }
     100% { transform: rotate(0deg); }
+}
+
+.github-source-button {
+    display: inline-flex;
+    align-items: center;
+    background-color: #24292e; /* GitHubi tüüpiline tumehall */
+    color: #ffffff !important;
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.github-source-button:hover {
+    background-color: #444d56;
+    transform: translateY(-2px);
+}
+
+.dark-mode .github-source-button {
+    background-color: #161b22;
+    border: 1px solid #30363d;
 }
