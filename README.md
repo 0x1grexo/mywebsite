@@ -18,3 +18,27 @@ A custom game built in Python. The download includes both the Windows executable
 
 ## 📸 Preview
 Visit the live site: [gregoropmann.github.io/aboutme/](https://gregoropmann.github.io/aboutme/)
+
+
+
+
+# Gregor Opmann – IT Portfoolio
+
+Kõrge jõudlusega reageeriv portfoolio-veebisait, mille loomisel on keskendutud optimeerimisele ja puhtale kasutajaliidesele.
+
+## 🚀 Funktsioonid
+* **Kakskeelne tugi:** Täielik lülitus eesti ja inglise keele vahel.
+* **Dünaamiline teemavahetaja:** Hele/tume režiim koos süsteemse mäluga.
+* **Optimeeritud jõudlus:** Lazy-load pildid ja intersection observer tehnikad sujuvateks kerimisanimatsioonideks.
+* **Riistvarale suunatud:** Integreeritud spetsifikatsioonide tabel ja projektigalerii.
+
+## 🛠️ Tehnoloogiad
+* **Frontend:** HTML5, CSS3 (Flexbox/Grid), JavaScript (ES6)
+* **Tööriistad:** VS Code, GitHub Pages, Google Analytics
+* **Riistvaraline kogemus:** Python (ProgeStart 2025), Arduino, Raspberry Pi
+
+## 🎮 Pythoni mäng
+Pythonis loodud kohandatud mäng. Allalaadimine sisaldab nii Windowsi käivitusfaili (.exe) koheseks mängimiseks kui ka lähtekoodi neile, keda huvitab selle taga peituv loogika.
+
+## 📸 Eelvaade
+Külasta veebisaiti: [gregoropmann.github.io/aboutme/](https://gregoropmann.github.io/aboutme/)
