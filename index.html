@@ -416,8 +416,8 @@ if ('serviceWorker' in navigator) {
 async function sharePortfolio() {
     const shareData = {
         title: 'Gregor Opmann – Portfoolio',
-        text: 'Vaata Gregor Opmanni IT-portfooliot ja projekte!',
-        url: window.location.href
+        text: 'Vaata Gregor Opmanni IT-portfooliot!',
+        url: 'https://gregoropmann.github.io/aboutme/'
     };
 
     const msgEl = document.getElementById('share-msg');
@@ -427,7 +427,7 @@ async function sharePortfolio() {
         if (navigator.share) {
             await navigator.share(shareData);
         } else {
-            await navigator.clipboard.writeText(window.location.href);
+            await navigator.clipboard.writeText('https://gregoropmann.github.io/aboutme/');
             msgEl.innerText = lang === 'et' ? 'Link kopeeritud lõikelauale!' : 'Link copied to clipboard!';
             msgEl.style.opacity = '1';
             
