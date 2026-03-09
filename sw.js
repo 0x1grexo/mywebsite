@@ -1,4 +1,4 @@
-const CACHE_NAME = 'gregor_opmann-portfolio-v2.3';
+const CACHE_NAME = 'gregor_opmann-portfolio-v2.4';
 
 const ASSETS_TO_CACHE = [
   './',
@@ -20,6 +20,8 @@ const ASSETS_TO_CACHE = [
   './docs/loovtoo_raport.pdf',
   './images/klassi_naljamees.png',
   './docs/srcdoc.pdf',
+  './android_app.apk',
+  './images/android_app.png',
 ];
 
 self.addEventListener('install', (event) => {
