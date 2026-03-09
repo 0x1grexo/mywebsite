@@ -19,6 +19,13 @@ A custom game built in Python. The download includes both the Windows executable
 ## 📸 Preview
 Visit the live site: [gregoropmann.github.io/aboutme/](https://gregoropmann.github.io/aboutme/)
 
+## You are welcome to use this as a template!
+1. Download the 'aboutme-main.zip'
+2. Make a new GitHub repo
+3. Replace the text in my code, sounds, images, documents with your own.
+4. Publish with GitHub Pages
+
+Good luck!
 
 
 
@@ -42,3 +49,11 @@ Pythonis loodud kohandatud mäng. Allalaadimine sisaldab nii Windowsi käivitusf
 
 ## 📸 Eelvaade
 Külasta veebisaiti: [gregoropmann.github.io/aboutme/](https://gregoropmann.github.io/aboutme/)
+
+## Kasuta seda julgelt mallina!
+1. Lae alla 'aboutme-main.zip'
+2. Loo uus GitHub repo
+3. Asenda koodis olev tekst, helid, pildid ja dokumendid enda omadega.
+4. Avalda GitHub Pagesi kaudu
+
+Edu!
