@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Terminal — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0d0f14;
+      --surface:   #13161e;
+      --border:    #1e2330;
+      --green:     #39ff8f;
+      --cyan:      #00e5ff;
+      --yellow:    #ffd93d;
+      --red:       #ff4d6d;
+      --purple:    #b48eff;
+      --dim:       #4a5068;
+      --text:      #c8cfe8;
+      --prompt-user:  #39ff8f;
+      --prompt-host:  #00e5ff;
+      --prompt-path:  #b48eff;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text);
+    }
+
+    .terminal-wrap {
+      width: min(860px, 96vw);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 60px rgba(57,255,143,.07), 0 24px 80px rgba(0,0,0,.7);
+    }
+
+    .title-bar {
+      background: #0a0c11;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .dot { width: 12px; height: 12px; border-radius: 50%; }
+    .dot.close  { background: #ff5f57; }
+    .dot.min    { background: #febc2e; }
+    .dot.max    { background: #28c840; }
+    .title-text {
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 12px;
+      color: var(--dim);
+      letter-spacing: .06em;
+      transform: translateX(-22px);
+    }
+
+    #output {
+      background: var(--surface);
+      min-height: 400px;
+      max-height: 60vh;
+      overflow-y: auto;
+      padding: 18px 22px 8px;
+      font-size: 13.5px;
+      line-height: 1.7;
+      scroll-behavior: smooth;
+    }
+    #output::-webkit-scrollbar { width: 5px; }
+    #output::-webkit-scrollbar-track { background: transparent; }
+    #output::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+    .input-row {
+      display: flex;
+      align-items: center;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 10px 22px 14px;
+      gap: 6px;
+    }
+    .prompt-static { white-space: nowrap; font-size: 13.5px; }
+    .ps-user  { color: var(--prompt-user);  }
+    .ps-at    { color: var(--dim);          }
+    .ps-host  { color: var(--prompt-host);  }
+    .ps-colon { color: var(--dim);          }
+    .ps-path  { color: var(--prompt-path);  }
+    .ps-dollar{ color: var(--green); margin-left: 4px; }
+
+    #cmd-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--text);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13.5px;
+      caret-color: var(--green);
+    }
+
+    .line       { display: block; white-space: pre-wrap; word-break: break-word; }
+    .line.blank { height: .8em; }
+
+    .c-green    { color: var(--green);  }
+    .c-cyan     { color: var(--cyan);   }
+    .c-yellow   { color: var(--yellow); }
+    .c-red      { color: var(--red);    }
+    .c-purple   { color: var(--purple); }
+    .c-dim      { color: var(--dim);    }
+    .c-text     { color: var(--text);   }
+
+    .echo-prompt { color: var(--dim); }
+    .t-key   { color: var(--cyan);   min-width: 160px; }
+    .t-val   { color: var(--text);   }
+
+    .skills-cat  { color: var(--yellow); margin-top: 4px; margin-bottom: 2px; }
+    .skills-list { display: flex; flex-wrap: wrap; gap: 6px; }
+    .skill-tag {
+      background: rgba(57,255,143,.08);
+      border: 1px solid rgba(57,255,143,.18);
+      color: var(--green);
+      padding: 1px 10px;
+      border-radius: 3px;
+      font-size: 12px;
+    }
+
+    .neofetch-wrap {
+      display: flex;
+      gap: 28px;
+      padding: 6px 0 6px 2px;
+      align-items: flex-start;
+    }
+    .neofetch-logo {
+      color: var(--cyan);
+      font-size: 11px;
+      line-height: 1.45;
+      white-space: pre;
+      flex-shrink: 0;
+      user-select: none;
+    }
+    .neofetch-info {
+      font-size: 12.5px;
+      line-height: 1.75;
+      white-space: nowrap;
+    }
+    .nf-title { color: var(--green); font-weight: 700; }
+    .nf-sep   { color: var(--dim); }
+    .nf-key   { color: var(--cyan); }
+    .nf-val   { color: var(--text); }
+    .nf-colors { display: flex; gap: 4px; margin-top: 6px; }
+    .nf-swatch { width: 14px; height: 14px; border-radius: 2px; display: inline-block; }
+
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+    .boot-line { animation: fadeIn .25s ease both; }
+
+    @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+    .cursor { display: inline-block; width: 7px; height: 14px; background: var(--green); vertical-align: text-bottom; animation: blink 1s step-end infinite; margin-left: 1px; }
+  </style>
+</head>
+<body>
+
+<div class="terminal-wrap">
+  <div class="title-bar">
+    <div class="dot close"></div>
+    <div class="dot min"></div>
+    <div class="dot max"></div>
+    <span class="title-text">guest@portfolio — bash</span>
+  </div>
+  <div id="output"></div>
+  <div class="input-row">
+    <span class="prompt-static">
+      <span class="ps-user">guest</span><span class="ps-at">@</span><span class="ps-host">portfolio</span><span class="ps-colon">:</span><span class="ps-path">~</span><span class="ps-dollar">$</span>
+    </span>
+    <input id="cmd-input" type="text" autocomplete="off" spellcheck="false" autofocus/>
+  </div>
+</div>
+
+<script>
+const out = document.getElementById('output');
+const inp = document.getElementById('cmd-input');
+const history = [];
+let histIdx = -1;
+
+const DATA = {
+  about: `I'm a dedicated IT enthusiast and computer builder fascinated by the inner
+workings of digital systems. My primary focus is hardware optimization,
+custom PC assembly, and seamless software-hardware integration.
+
+I've built high-performance gaming rigs, solar-powered cooling systems, and
+more. Beyond hardware, I'm actively developing skills in Python & Bash
+scripting, plus IoT projects on Raspberry Pi and Arduino platforms.`,
+
+  specs: [
+    ['CPU',        'AMD Ryzen 5 7600X'],
+    ['GPU',        'Radeon RX 7600 XT 16 GB'],
+    ['RAM',        '32 GB Silicon Power XPOWER Storm RGB DDR5-6000 CL30'],
+    ['Storage',    '2 TB WD Black SN850X NVMe SSD'],
+    ['Motherboard','Gigabyte Aorus Elite AX V2 B650'],
+    ['OS',         'CachyOS (Arch + KDE Plasma) / Windows 11 Pro'],
+  ],
+
+  skills: {
+    Hardware:           ['PC Building','Arduino UNO R3','Raspberry Pi 3B+','Raspberry Pi Zero 2 W','3D Modeling','Soldering'],
+    'Software & Systems':['Windows 10/11','Linux','Python','HTML/CSS','NTFS/FAT32/EXT4','Android'],
+  },
+
+  contact: [
+    ['Email', 'opmannguest@gmail.com'],
+  ],
+};
+
+const CACHY_LOGO =
+`          .-------------------------:
+          .+=========================.
+         :++===++==================-
+        :*++====+++++=============-
+       -*+++=====+***++==========:
+      =*++++========------------:
+     =*+++++=====-
+    .+*+++++=-===:                    .=+++=:
+   :++++=====-==:                     -*****+
+   :++========-=.                      .=+**+.
+   .+==========-.
+   :+++++++====-
+   :++==========.                             :+++++++:
+    .-===========.                            =*****+*+
+    .-===========:                           .+*****+:
+      -=======++++:::::::::::::::::::::::::-:  .---:
+       :======++++====+++******************=.
+        :=====+++==========++++++++++++++*-
+         .====++==============++++++++++*-
+          .===+==================+++++++:
+           .-=======================+++:
+             ..........................`;
+
+const NEOFETCH_INFO = [
+  { type: 'title', val: 'guest@gregor-portfolio' },
+  { type: 'sep' },
+  { key: 'OS',          val: 'CachyOS x86_64' },
+  { key: 'Host',        val: 'B650 AORUS ELITE AX V2' },
+  { key: 'Kernel',      val: 'Linux 6.19.6-2-cachyos' },
+  { key: 'Packages',    val: '1322 (pacman)' },
+  { key: 'Shell',       val: 'fish 4.5.0' },
+  { key: 'Display',     val: '1920x1080 @ 75Hz, 22" [External]' },
+  { key: 'DE',          val: 'KDE Plasma 6.6.2' },
+  { key: 'WM',          val: 'KWin (Wayland)' },
+  { key: 'WM Theme',    val: 'Breeze' },
+  { key: 'Theme',       val: 'Breeze (Dark)' },
+  { key: 'Icons',       val: 'breeze-dark' },
+  { key: 'Font',        val: 'Noto Sans (10pt)' },
+  { key: 'Cursor',      val: 'breeze (24px)' },
+  { key: 'Terminal',    val: 'konsole 25.12.3' },
+  { key: 'CPU',         val: 'AMD Ryzen 5 7600X (12) @ 5.46 GHz' },
+  { key: 'GPU 1',       val: 'AMD Radeon RX 7600 XT [Discrete]' },
+  { key: 'GPU 2',       val: 'AMD Raphael [Integrated]' },
+  { key: 'Memory',      val: '8.23 GiB / 30.46 GiB (27%)' },
+  { key: 'Swap',        val: '0 B / 30.46 GiB (0%)' },
+  { key: 'Disk (/)',    val: '19.17 GiB / 146.59 GiB (13%) - ext4' },
+  { key: 'Disk (/home)',val: '156.77 GiB / 1.50 TiB (10%) - ext4' },
+  { key: 'Locale',      val: 'en_GB.UTF-8' },
+  { type: 'colors' },
+];
+
+const COMMANDS = {
+  help() {
+    return [
+      h('', ''),
+      h('c-cyan', '  Available commands:'),
+      h('', ''),
+      h('c-green',  '  help        ') + h('c-dim','  you already know what this does'),
+      h('c-green',  '  about       ') + h('c-dim','  who am I'),
+      h('c-green',  '  whoami      ') + h('c-dim','  alias for about'),
+      h('c-green',  '  skills      ') + h('c-dim','  technologies I work with'),
+      h('c-green',  '  specs       ') + h('c-dim','  my PC hardware specs'),
+      h('c-green',  '  neofetch    ') + h('c-dim','  system info'),
+      h('c-green',  '  contact     ') + h('c-dim','  get in touch'),
+      h('c-green',  '  clear       ') + h('c-dim','  clear the terminal'),
+      h('c-green',  '  exit        ') + h('c-dim','  return to main site'),
+      h('c-green',  '  cd /        ') + h('c-dim','  same as exit'),
+      h('', ''),
+    ];
+  },
+
+  about() {
+    const lines = [h('',''), h('c-yellow','  ── About Me ──────────────────────────────────'), h('','')];
+    DATA.about.split('\n').forEach(l => lines.push(h('c-text','  ' + l)));
+    lines.push(h('',''));
+    return lines;
+  },
+
+  whoami() { return COMMANDS.about(); },
+
+  skills() {
+    const lines = [h('',''), h('c-yellow','  ── Skills & Technologies ──────────────────────'), h('','')];
+    Object.entries(DATA.skills).forEach(([cat, list]) => {
+      lines.push(mkSkillSection(cat, list));
+    });
+    lines.push(h('',''));
+    return lines;
+  },
+
+  specs() {
+    const lines = [h('',''), h('c-yellow','  ── My PC Build ────────────────────────────────'), h('','')];
+    DATA.specs.forEach(([k,v]) => {
+      lines.push(mkRow(k, v));
+    });
+    lines.push(h('',''));
+    return lines;
+  },
+
+  neofetch() {
+    const swatchColors = ['#ff4d6d','#ffd93d','#39ff8f','#00e5ff','#b48eff','#c8cfe8','#4a5068','#ffffff'];
+    let infoHtml = '';
+    NEOFETCH_INFO.forEach(item => {
+      if (item.type === 'title') {
+        const [user, host] = item.val.split('@');
+        infoHtml += `<div><span class="nf-title">${user}</span><span class="nf-sep">@</span><span class="nf-title">${host}</span></div>`;
+      } else if (item.type === 'sep') {
+        infoHtml += `<div><span class="nf-sep">──────────────────────────</span></div>`;
+      } else if (item.type === 'colors') {
+        const swatches = swatchColors.map(c => `<span class="nf-swatch" style="background:${c}"></span>`).join('');
+        infoHtml += `<div class="nf-colors">${swatches}</div>`;
+      } else {
+        infoHtml += `<div><span class="nf-key">${item.key}</span><span class="nf-sep">: </span><span class="nf-val">${item.val}</span></div>`;
+      }
+    });
+
+    appendHTML(`<div class="neofetch-wrap"><pre class="neofetch-logo">${CACHY_LOGO}</pre><div class="neofetch-info">${infoHtml}</div></div>`);
+    out.scrollTop = out.scrollHeight;
+    return [];
+  },
+
+  contact() {
+    const lines = [h('',''), h('c-yellow','  ── Contact ────────────────────────────────────'), h('','')];
+    DATA.contact.forEach(([k,v]) => lines.push(mkRow(k, v)));
+    lines.push(h('',''));
+    return lines;
+  },
+
+  clear() { out.innerHTML = ''; return []; },
+
+  exit() {
+    appendLines([h('c-dim', '  Redirecting / ...'), h('', '')]);
+    setTimeout(() => { window.location.href = 'https://gregoropmann.github.io/aboutme/'; }, 1200);
+    return [];
+  },
+
+  'cd /'() {
+    appendLines([h('c-dim', '  Redirecting / ...'), h('', '')]);
+    setTimeout(() => { window.location.href = 'https://gregoropmann.github.io/aboutme/'; }, 1200);
+    return [];
+  },
+};
+
+function h(cls, text) {
+  return `<span class="line ${cls}">${text}</span>`;
+}
+function mkRow(key, val) {
+  return `<span class="line"><span class="t-key">  ${key.padEnd(14)}</span><span class="t-val">${val}</span></span>`;
+}
+function mkSkillSection(cat, list) {
+  const tags = list.map(s => `<span class="skill-tag">${s}</span>`).join('');
+  return `<span class="line"><span class="skills-cat">  ${cat}</span></span><span class="line">  <span class="skills-list">${tags}</span></span><span class="line"> </span>`;
+}
+function appendHTML(html) {
+  const div = document.createElement('div');
+  div.innerHTML = html;
+  Array.from(div.childNodes).forEach(n => out.appendChild(n.cloneNode ? n.cloneNode(true) : n));
+}
+function appendLines(lines) {
+  appendHTML(lines.join('\n'));
+  out.scrollTop = out.scrollHeight;
+}
+function echoPrompt(cmd) {
+  appendHTML(`<span class="line echo-prompt"><span style="color:var(--green)">guest</span><span style="color:var(--dim)">@</span><span style="color:var(--cyan)">portfolio</span><span style="color:var(--dim)">:</span><span style="color:var(--purple)">~</span><span style="color:var(--green)">$</span> <span style="color:var(--text)">${cmd}</span></span>`);
+}
+
+function boot() {
+  const lines = [
+    `<span class="line boot-line c-green" style="animation-delay:.05s">  ██████╗ ██████╗ ███████╗ ██████╗  ██████╗ ██████╗ </span>`,
+    `<span class="line boot-line c-green" style="animation-delay:.10s">  ██╔════╝ ██╔══██╗██╔════╝██╔════╝ ██╔═══██╗██╔══██╗</span>`,
+    `<span class="line boot-line c-green" style="animation-delay:.15s">  ██║  ███╗██████╔╝█████╗  ██║  ███╗██║   ██║██████╔╝</span>`,
+    `<span class="line boot-line c-green" style="animation-delay:.20s">  ██║   ██║██╔══██╗██╔══╝  ██║   ██║██║   ██║██╔══██╗</span>`,
+    `<span class="line boot-line c-green" style="animation-delay:.25s">  ╚██████╔╝██║  ██║███████╗╚██████╔╝╚██████╔╝██║  ██║</span>`,
+    `<span class="line boot-line c-dim"   style="animation-delay:.30s">   ╚═════╝ ╚═╝  ╚═╝╚══════╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═╝</span>`,
+    `<span class="line boot-line" style="animation-delay:.40s"> </span>`,
+    `<span class="line boot-line c-cyan"  style="animation-delay:.50s">  Welcome to Gregor's Portfolio Terminal  v1.0.0</span>`,
+    `<span class="line boot-line c-dim"   style="animation-delay:.60s">  Type <span class="c-green">help</span> to see available commands.</span>`,
+    `<span class="line boot-line" style="animation-delay:.65s"> </span>`,
+  ];
+  appendHTML(lines.join(''));
+}
+
+inp.addEventListener('keydown', e => {
+  if (e.key === 'Enter') {
+    const raw = inp.value.trim();
+    inp.value = '';
+    histIdx = -1;
+    if (!raw) return;
+    history.unshift(raw);
+    echoPrompt(raw);
+    const cmd = raw.toLowerCase();
+    const handler = COMMANDS[cmd] || COMMANDS[cmd.split(' ')[0]];
+    if (handler) {
+      const result = handler();
+      if (result.length) appendLines(result);
+    } else {
+      appendLines([
+        h('c-red', `  bash: ${raw}: command not found`),
+        h('c-dim', `  Type <span class="c-green">help</span> for available commands.`),
+        h('', ''),
+      ]);
+    }
+  } else if (e.key === 'ArrowUp') {
+    e.preventDefault();
+    if (histIdx < history.length - 1) { histIdx++; inp.value = history[histIdx]; }
+  } else if (e.key === 'ArrowDown') {
+    e.preventDefault();
+    if (histIdx > 0) { histIdx--; inp.value = history[histIdx]; }
+    else { histIdx = -1; inp.value = ''; }
+  } else if (e.key === 'Tab') {
+    e.preventDefault();
+    const partial = inp.value.toLowerCase();
+    const match = Object.keys(COMMANDS).find(c => c.startsWith(partial));
+    if (match) inp.value = match;
+  }
+});
+
+document.querySelector('.terminal-wrap').addEventListener('click', () => inp.focus());
+
+boot();
+</script>
+</body>
+</html>
