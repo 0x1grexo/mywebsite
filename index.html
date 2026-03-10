@@ -411,6 +411,12 @@ I am a dedicated IT enthusiast and computer builder interested in the inner work
 
 <script>
 
+document.addEventListener('keydown', e => {
+  if (e.ctrlKey && e.altKey && e.key === 't') {
+    window.location.href = 'terminal.html';
+  }
+});
+  
 function playMailSound(event) {
     event.preventDefault();
     const link = event.currentTarget;
