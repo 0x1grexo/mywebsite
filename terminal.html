@@ -104,7 +104,6 @@
       caret-color: var(--green);
     }
 
-    /* Output lines */
     .line       { display: block; white-space: pre-wrap; word-break: break-word; }
     .line.blank { height: .8em; }
 
@@ -201,7 +200,7 @@ const COMMANDS = {
       h('', ''),
       h('c-cyan', '  Available commands:'),
       h('', ''),
-      h('c-green',  '  help        ') + h('c-dim','  show this help message'),
+      h('c-green',  '  help        ') + h('c-dim','  you already know what this does'),
       h('c-green',  '  about       ') + h('c-dim','  who am I'),
       h('c-green',  '  whoami      ') + h('c-dim','  alias for about'),
       h('c-green',  '  skills      ') + h('c-dim','  technologies I work with'),
@@ -251,7 +250,7 @@ const COMMANDS = {
 
   exit() {
     appendLines([
-      h('c-dim', '  Redirecting to main site...'),
+      h('c-dim', '  Redirecting ./...'),
       h('', ''),
     ]);
     setTimeout(() => { window.location.href = 'https://gregoropmann.github.io/aboutme/'; }, 1200);
@@ -279,7 +278,7 @@ function appendLines(lines) {
   out.scrollTop = out.scrollHeight;
 }
 function echoPrompt(cmd) {
-  appendHTML(`<span class="line echo-prompt"><span style="color:var(--green)">gregor</span><span style="color:var(--dim)">@</span><span style="color:var(--cyan)">portfolio</span><span style="color:var(--dim)">:</span><span style="color:var(--purple)">~</span><span style="color:var(--green)">$</span> <span style="color:var(--text)">${cmd}</span></span>`);
+  appendHTML(`<span class="line echo-prompt"><span style="color:var(--green)">guest</span><span style="color:var(--dim)">@</span><span style="color:var(--cyan)">portfolio</span><span style="color:var(--dim)">:</span><span style="color:var(--purple)">~</span><span style="color:var(--green)">$</span> <span style="color:var(--text)">${cmd}</span></span>`);
 }
 
 
