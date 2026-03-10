@@ -346,7 +346,7 @@ const COMMANDS = {
   clear() { out.innerHTML = ''; return []; },
 
   exit() {
-    appendLines([h('c-dim', '  Redirecting / ...'), h('', '')]);
+    appendLines([h('c-dim', '  Redirecting to the main site...'), h('', '')]);
     setTimeout(() => { window.location.href = 'https://gregoropmann.github.io/aboutme/'; }, 1200);
     return [];
   },
