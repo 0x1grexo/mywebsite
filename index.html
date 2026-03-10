@@ -1,440 +1,526 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="et">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Terminal — Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet"/>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gregor Opmann – Portfoolio</title>
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="images/android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="images/android-chrome-512x512.png">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="style.css">
+<meta name="description" content="Gregor Opmann – IT-huviline ja arvutiehitaja">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="mobile-web-app-capable" content="yes">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://gregoropmann.github.io/aboutme/">
+<meta property="og:title" content="Gregor Opmann – Portfoolio">
+<meta property="og:description" content="IT-huviline ja arvutiehitaja">
+<meta property="og:image" content="https://gregoropmann.github.io/aboutme/images/favicon.png">
+<meta name="theme-color" content="#3498db">
+<meta name="google-site-verification" content="evLh_s8NUTBzcndfoJ3MNhBJH9SNUV_10m8ROfrUezM" />
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Gregor Opmann – Portfoolio">
+<meta name="twitter:description" content="IT-huviline ja arvutiehitaja">
+<meta name="twitter:image" content="https://gregoropmann.github.io/aboutme/images/favicon.png">
 
-    :root {
-      --bg:        #0d0f14;
-      --surface:   #13161e;
-      --border:    #1e2330;
-      --green:     #39ff8f;
-      --cyan:      #00e5ff;
-      --yellow:    #ffd93d;
-      --red:       #ff4d6d;
-      --purple:    #b48eff;
-      --dim:       #4a5068;
-      --text:      #c8cfe8;
-      --prompt-user:  #39ff8f;
-      --prompt-host:  #00e5ff;
-      --prompt-path:  #b48eff;
-    }
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GE1NLJBC8F"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-GE1NLJBC8F');
+</script>
 
-    html, body {
-      height: 100%;
-      background: var(--bg);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'JetBrains Mono', monospace;
-      color: var(--text);
-    }
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Gregor Opmann",
+  "url": "https://gregoropmann.github.io/aboutme/",
+  "sameAs": ["https://github.com/gregoropmann"],
+  "jobTitle": "IT Enthusiast / Python Developer",
+  "knowsAbout": ["Python", "Computer Hardware", "IT"]
+}
+</script>
 
-    .terminal-wrap {
-      width: min(860px, 96vw);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 0 60px rgba(57,255,143,.07), 0 24px 80px rgba(0,0,0,.7);
-    }
+<script src="https://apis.google.com/js/platform.js" async></script>
 
-    .title-bar {
-      background: #0a0c11;
-      padding: 10px 16px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      border-bottom: 1px solid var(--border);
-    }
-    .dot { width: 12px; height: 12px; border-radius: 50%; }
-    .dot.close  { background: #ff5f57; }
-    .dot.min    { background: #febc2e; }
-    .dot.max    { background: #28c840; }
-    .title-text {
-      margin-left: auto;
-      margin-right: auto;
-      font-size: 12px;
-      color: var(--dim);
-      letter-spacing: .06em;
-      transform: translateX(-22px);
-    }
-
-    #output {
-      background: var(--surface);
-      min-height: 400px;
-      max-height: 60vh;
-      overflow-y: auto;
-      padding: 18px 22px 8px;
-      font-size: 13.5px;
-      line-height: 1.7;
-      scroll-behavior: smooth;
-    }
-    #output::-webkit-scrollbar { width: 5px; }
-    #output::-webkit-scrollbar-track { background: transparent; }
-    #output::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
-
-    .input-row {
-      display: flex;
-      align-items: center;
-      background: var(--surface);
-      border-top: 1px solid var(--border);
-      padding: 10px 22px 14px;
-      gap: 6px;
-    }
-    .prompt-static { white-space: nowrap; font-size: 13.5px; }
-    .ps-user  { color: var(--prompt-user);  }
-    .ps-at    { color: var(--dim);          }
-    .ps-host  { color: var(--prompt-host);  }
-    .ps-colon { color: var(--dim);          }
-    .ps-path  { color: var(--prompt-path);  }
-    .ps-dollar{ color: var(--green); margin-left: 4px; }
-
-    #cmd-input {
-      flex: 1;
-      background: transparent;
-      border: none;
-      outline: none;
-      color: var(--text);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 13.5px;
-      caret-color: var(--green);
-    }
-
-    .line       { display: block; white-space: pre-wrap; word-break: break-word; }
-    .line.blank { height: .8em; }
-
-    .c-green    { color: var(--green);  }
-    .c-cyan     { color: var(--cyan);   }
-    .c-yellow   { color: var(--yellow); }
-    .c-red      { color: var(--red);    }
-    .c-purple   { color: var(--purple); }
-    .c-dim      { color: var(--dim);    }
-    .c-text     { color: var(--text);   }
-
-    .echo-prompt { color: var(--dim); }
-    .t-key   { color: var(--cyan);   min-width: 160px; }
-    .t-val   { color: var(--text);   }
-
-    .skills-cat  { color: var(--yellow); margin-top: 4px; margin-bottom: 2px; }
-    .skills-list { display: flex; flex-wrap: wrap; gap: 6px; }
-    .skill-tag {
-      background: rgba(57,255,143,.08);
-      border: 1px solid rgba(57,255,143,.18);
-      color: var(--green);
-      padding: 1px 10px;
-      border-radius: 3px;
-      font-size: 12px;
-    }
-
-    .neofetch-wrap {
-      display: flex;
-      gap: 28px;
-      padding: 6px 0 6px 2px;
-      align-items: flex-start;
-    }
-    .neofetch-logo {
-      color: var(--cyan);
-      font-size: 11px;
-      line-height: 1.45;
-      white-space: pre;
-      flex-shrink: 0;
-      user-select: none;
-    }
-    .neofetch-info {
-      font-size: 12.5px;
-      line-height: 1.75;
-      white-space: nowrap;
-    }
-    .nf-title { color: var(--green); font-weight: 700; }
-    .nf-sep   { color: var(--dim); }
-    .nf-key   { color: var(--cyan); }
-    .nf-val   { color: var(--text); }
-    .nf-colors { display: flex; gap: 4px; margin-top: 6px; }
-    .nf-swatch { width: 14px; height: 14px; border-radius: 2px; display: inline-block; }
-
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
-    .boot-line { animation: fadeIn .25s ease both; }
-
-    @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
-    .cursor { display: inline-block; width: 7px; height: 14px; background: var(--green); vertical-align: text-bottom; animation: blink 1s step-end infinite; margin-left: 1px; }
-  </style>
 </head>
+
 <body>
 
-<div class="terminal-wrap">
-  <div class="title-bar">
-    <div class="dot close"></div>
-    <div class="dot min"></div>
-    <div class="dot max"></div>
-    <span class="title-text">guest@portfolio — bash</span>
-  </div>
-  <div id="output"></div>
-  <div class="input-row">
-    <span class="prompt-static">
-      <span class="ps-user">guest</span><span class="ps-at">@</span><span class="ps-host">portfolio</span><span class="ps-colon">:</span><span class="ps-path">~</span><span class="ps-dollar">$</span>
-    </span>
-    <input id="cmd-input" type="text" autocomplete="off" spellcheck="false" autofocus/>
-  </div>
+<nav>
+  <ul>
+    <li>
+      <a href="#minust">
+        <span data-lang="et">Minust</span>
+        <span data-lang="en" style="display:none;">About Me</span>
+      </a>
+    </li>
+    <li>
+      <a href="#oskused">
+        <span data-lang="et">Oskused</span>
+        <span data-lang="en" style="display:none;">Skills</span>
+      </a>
+    </li>
+    <li>
+      <a href="#galerii">
+        <span data-lang="et">Galerii</span>
+        <span data-lang="en" style="display:none;">Gallery</span>
+      </a>
+    </li>
+    <li>
+      <a href="#dokumendid">
+        <span data-lang="et">Dokumendid</span>
+        <span data-lang="en" style="display:none;">Documents</span>
+      </a>
+    </li>
+    <li>
+      <a href="#kontakt">
+        <span data-lang="et">Kontakt</span>
+        <span data-lang="en" style="display:none;">Contact</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<button onclick="scrollToTop()" id="backToTop" title="Tagasi üles">↑</button>
+
+<header>
+    <h1>Gregor Opmann</h1>
+    <p data-lang="et">IT-valdkond</p>
+    <p data-lang="en" style="display:none;">Information Technology</p>
+
+    <button onclick="toggleDarkMode()" id="dark-mode-btn">
+        <span id="mode-icon">🌙</span> 
+        <span id="mode-text" data-lang="et">Tume režiim</span>
+        <span id="mode-text-en" data-lang="en" style="display:none;">Dark Mode</span>
+    </button>
+    
+    <div class="language-switch">
+        <button onclick="setLanguage('et')">Eesti</button>
+        <button onclick="setLanguage('en')">English</button>
+    </div>
+</header>
+
+<main>
+    <section id="minust" class="fade-in-section">
+        <h2 data-lang="et">Minust</h2>
+        <h2 data-lang="en" style="display:none;">About Me</h2>
+
+        <p data-lang="et">
+        Olen pühendunud IT-huviline ja arvutiehitaja, kes huvitub digitaalsüsteemide tööpõhimõtteist. Minu põhifookus on riistvara optimeerimine, arvutite kokkupanemine ning tarkvara ja füüsiliste komponentide sujuva koostöö tagamisel. Liigun süsteemiadministraatori ja riistvaraspetsialisti ala suunas.
+</p>
+
+<p data-lang="et">
+    Olen edukalt lõpule viinud mitmeid tehnilisi projekte, alates suure jõudlusega mänguarvutite koostamisest kuni praktilise elektroonikani, nagu päikeseenergial töötavad jahutussüsteemid. Lisaks riistvarale arendan aktiivselt oma oskusi Pythoni programmeerimises ja Bash skriptimises ning uurin asjade interneti (IoT) maailma, kasutades Raspberry Pi ja Arduino UNO platvorme igapäevaste ülesannete automatiseerimiseks.
+</p>
+
+
+<p data-lang="en" style="display:none;">
+I am a dedicated IT enthusiast and computer builder interested in the inner workings of digital systems. My primary focus is on hardware optimization, custom PC assembly, and ensuring the seamless integration of software and physical components. I am working towards a career as a systems administrator and hardware specialist.</p>
+
+<p data-lang="en" style="display:none;">
+    I have successfully completed various technical projects, ranging from assembling high-performance gaming rigs to creating practical electronics like solar-powered cooling systems. Beyond hardware, I am actively developing my skills in Python programming and Bash scripting, exploring the world of IoT using Raspberry Pi and Arduino UNO platforms to automate everyday tasks.
+</p>
+
+    </section>
+
+<section id="oskused" class="fade-in-section">
+    <h2 data-lang="et">Oskused & Tehnoloogiad</h2>
+    <h2 data-lang="en" style="display:none;">Skills & Technologies</h2>
+
+    <div class="skills-wrapper">
+        <h3 class="skill-category-title">
+            <span data-lang="et">Riistvara</span>
+            <span data-lang="en" style="display:none;">Hardware</span>
+        </h3>
+        <ul class="skills">
+            <li data-lang="et"><a href="https://et.wikibooks.org/wiki/Arvuti_koostamine">Arvuti ehitus</a></li>
+            <li data-lang="en" style="display:none;"><a href="https://en.wikipedia.org/wiki/Homebuilt_computer">PC building</a></li>
+            <li><a href="https://docs.arduino.cc/hardware/uno-rev3/">Arduino UNO R3</a></li>
+            <li><a href="https://www.raspberrypi.com/products/raspberry-pi-3-model-b-plus/">Raspberry Pi 3B+</a></li>
+            <li><a href="https://www.raspberrypi.com/products/raspberry-pi-zero-2-w/">Raspberry Pi Zero 2 W</a></li>
+            <li data-lang="et"><a href="https://et.wikipedia.org/wiki/3D-modelleerimine">3D-modelleerimine</a></li>
+            <li data-lang="en" style="display:none;"><a href="https://en.wikipedia.org/wiki/3D_modeling">3D Modeling</a></li>
+            <li data-lang="et"><a href="https://et.wikipedia.org/wiki/Jootmine">Jootmine</a></li>
+            <li data-lang="en" style="display:none;"><a href="https://en.wikipedia.org/wiki/Soldering">Soldering</a></li>
+        </ul>
+
+        <h3 class="skill-category-title">
+            <span data-lang="et">Tarkvara & Süsteemid</span>
+            <span data-lang="en" style="display:none;">Software & Systems</span>
+        </h3>
+        <ul class="skills">
+            <li><a href="https://www.microsoft.com/et-ee/windows/windows-11">Windows 10/11</a></li>
+            <li><a href="https://linux.org">Linux</a></li>
+            <li><a href="https://thonny.org">Python</a></li>
+            <li><a href="https://en.wikipedia.org/wiki/HTML">HTML/CSS</a></li>
+            <li><a href="https://en.wikipedia.org/wiki/File_Allocation_Table">File Systems (NTFS/FAT32/EXT4)</a></li>
+            <li><a href="https://android.org">Android</a></li>
+        </ul>
+
+        <div class="course-container" style="text-align: center; margin-top: 30px;">
+            <a href="https://didaktika.cs.ut.ee/progestart/" target="_blank" class="action-button">
+                <span data-lang="et">ProgeStart 2025</span>
+                <span data-lang="en" style="display:none;">ProgeStart 2025</span>
+            </a>
+            <div class="button-description">
+                <p data-lang="et">Läbitud Pythoni kursus.</p>
+                <p data-lang="en" style="display:none;">Completed Python course.</p>
+            </div>
+          </div>
+        </div>
+    </section>
+    
+    <section id="galerii" class="fade-in-section">
+        <h2 data-lang="et">Galerii</h2>
+        <h2 data-lang="en" style="display:none;">Gallery</h2>
+
+        <div class="gallery">
+            <figure>
+                <img src="images/pc-build.png" alt="PC Build">
+                <figcaption data-lang="et">Ise ehitatud arvuti</figcaption>
+                <figcaption data-lang="en" style="display:none;">Custom-built PC</figcaption>
+            </figure>
+            <figure>
+                <img src="images/solar_powered_mini_fan.png" alt="Solar Fan">
+                <figcaption data-lang="et">Päikeseenergial töötav ventilaator</figcaption>
+                <figcaption data-lang="en" style="display:none;">Solar-powered mini fan</figcaption>
+            </figure>
+            <figure>
+                <img src="images/line_follower.png" alt="Arduino Robot">
+                <figcaption data-lang="et">Arduino joonejärgija robot (pooleli)</figcaption>
+                <figcaption data-lang="en" style="display:none;">Arduino line-follower robot (WiP💔)</figcaption>
+            </figure>
+            <figure>
+                <img src="images/neofetch.png" alt="CachyOS">
+                <figcaption data-lang="et">CachyOS</figcaption>
+                <figcaption data-lang="en" style="display:none;">CachyOS</figcaption>
+            </figure>
+            <figure>
+                <img src="images/teachersday.png" alt="Teachers Day">
+                <figcaption data-lang="et">Õpetajate päev</figcaption>
+                <figcaption data-lang="en" style="display:none;">Teacher's day</figcaption>
+            </figure>
+            <figure>
+                <img src="images/klassi_naljamees.png" alt="Joker">
+                <figcaption data-lang="et">Klassi naljamees</figcaption>
+                <figcaption data-lang="en" style="display:none;">The Joker of the class</figcaption>
+            </figure>
+        </div>
+    </section>
+
+    <section id="dokumendid" class="fade-in-section">
+      <h2 data-lang="et">Dokumendid</h2>
+      <h2 data-lang="en" style="display:none;">Documents</h2>
+      <div class="docs-grid">
+          <a href="docs/loovtoo_kiituskiri.pdf" class="doc-card" target="_blank" rel="noopener noreferrer">
+              <div class="doc-icon">🎖️</div>
+              <div class="doc-title">
+                  <span data-lang="et">Loovtöö kiituskiri (Päikeseenergial töötav ventilaator; AR+)</span>
+                  <span data-lang="en" style="display:none;">Creative Work Commendation (Solar-powered mini fan; Pass with Distinction)</span>
+              </div>
+              <div class="doc-type">PDF</div>
+          </a>
+          <a href="docs/loovtoo_raport.pdf" class="doc-card" target="_blank" rel="noopener noreferrer">
+              <div class="doc-icon">📄</div>
+              <div class="doc-title">
+                  <span data-lang="et">Loovtöö raport (Päikeseenergial töötav ventilaator)</span>
+                  <span data-lang="en" style="display:none;">Creative Work Report (Solar-powered mini fan)</span>
+              </div>
+              <div class="doc-type">PDF</div>
+          </a>
+          <a href="docs/srcdoc.pdf" class="doc-card" target="_blank" rel="noopener noreferrer">
+              <div class="doc-icon">💲</div>
+              <div class="doc-title">
+                  <span data-lang="et">Codecademy sertifikaat (Introduction to Linux: Bash Scripting)</span>
+                  <span data-lang="en" style="display:none;">Codecademy certificate (Introduction to Linux: Bash Scripting)</span>
+              </div>
+              <div class="doc-type">PDF</div>
+          </a>
+      </div>
+  </section>
+
+    <section class="fade-in-section">
+    <h2 data-lang="et">Minu arvuti tehnilised andmed</h2>
+    <h2 data-lang="en" style="display:none;">My PC Hardware Specs</h2>
+    
+    <div class="specs-container">
+        <table class="specs-table">
+            <thead>
+                <tr>
+                    <th data-lang="et">Komponent</th>
+                    <th data-lang="en" style="display:none;">Component</th>
+                    <th data-lang="et">Mudel</th>
+                    <th data-lang="en" style="display:none;">Model</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>CPU</strong></td><td>AMD Ryzen 5 7600X</td></tr>
+                <tr><td><strong>GPU</strong></td><td>Radeon RX 7600 XT 16GB</td></tr>
+                <tr><td><strong>RAM</strong></td><td>32GB Silicon Power XPOWER Storm RGB DDR5-6000MHz CL30</td></tr>
+                <tr><td><strong>Storage</strong></td><td>2TB WD Black SN850X NVMe SSD</td></tr>
+<tr><td><strong>Motherboard</strong></td><td>Gigabyte Aorus Elite AX V2 B650</td></tr>
+                <tr><td><strong>OS</strong></td><td>CachyOS (Arch Linux + KDE Plasma) / Windows 11 Pro</td></tr>
+            </tbody>
+        </table>
+    </div>
+    </section>
+
+    <section class="fade-in-section" style="text-align: center;">
+        <h2 data-lang="et">Minu projektid</h2>
+        <h2 data-lang="en" style="display:none;">My Projects</h2>
+        
+        <div class="project-card">
+            <p data-lang="et"><strong>Tere! Siin on minu enda koostatud Pythoni mäng.</strong></p>
+            <p data-lang="en" style="display:none;"><strong>Hello! Here is a Python game I created myself.</strong></p>
+
+            <figure>
+                <img src="images/game.png" alt="Screenshot of my custom Python game project">
+            </figure>
+          
+            <a href="https://github.com/gregoropmann/aboutme/raw/main/game.zip" style="text-decoration: none;">
+                <button style="background-color: #3498db; color: white; padding: 12px 24px; border: none; border-radius: 5px; cursor: pointer; font-size: 1.1rem; font-weight: bold; transition: 0.3s; margin: 10px 0;">
+                    Download .ZIP
+                </button>
+            </a>            
+        </div>
+        <div class="project-card">
+            <p data-lang="et"><strong>Lae alla portfoolio Android äpina.</strong></p>
+            <p data-lang="en" style="display:none;"><strong>Download this portfolio as an Android app.</strong></p>
+
+            <figure>
+                <img src="images/android_app.png" alt="Screenshot of installation of the Android app.">
+            </figure>
+
+            <a href="https://github.com/gregoropmann/aboutme/raw/main/android_app.apk" style="text-decoration: none;">
+                <button style="background-color: #3498db; color: white; padding: 12px 24px; border: none; border-radius: 5px; cursor: pointer; font-size: 1.1rem; font-weight: bold; transition: 0.3s; margin: 10px 0;">
+                    Download .APK
+                </button>
+            </a>            
+        </div>
+    </section>
+
+<section id="debloat" class="fade-in-section" style="text-align: center;">
+    <h2 data-lang="et">Windows 11 optimeerimine</h2>
+    <h2 data-lang="en" style="display:none;">Windows 11 optimization</h2>
+
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-top: 20px;">
+        <a href="https://www.microsoft.com/en-us/software-download/windows11" target="_blank" class="action-button" style="text-decoration: none;">
+            <span data-lang="et">Lae alla Windows 11 .iso</span>
+            <span data-lang="en" style="display:none;">Download Windows 11 .iso</span>
+        </a>
+
+        <a href="https://rufus.ie/en/#download" target="_blank" class="action-button" style="text-decoration: none;">
+            <span data-lang="et">Lae alla Rufus (Möödaminek: TPM 2.0, RAM, kohalik, telemeetria, BitLocker, Secure Boot)</span>
+            <span data-lang="en" style="display:none;">Download Rufus (Bypass: TPM 2.0, RAM, local, telemetry, BitLocker, Secure Boot)</span>
+        </a>
+
+        <a href="https://raventechnologiesgroup.com/explore/#talon" target="_blank" class="action-button" style="text-decoration: none;">
+            <span data-lang="et">Lae alla Raven Talon (debloat)</span>
+            <span data-lang="en" style="display:none;">Download Raven Talon (debloat)</span>
+        </a>
+
+<a href="https://massgrave.dev" target="_blank" class="action-button" style="text-decoration: none;">
+            <span data-lang="et">Windowsi aktiveerimine</span>
+            <span data-lang="en" style="display:none;">Windows activation</span>
+        </a>
+    </div>
+</section>
+
+
+    <section id="kontakt" class="fade-in-section">
+    <h2 data-lang="et">Kontakt</h2>
+    <h2 data-lang="en" style="display:none;">Contact</h2>
+
+<div style="max-width: 800px; margin: 0 auto;">
+  <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScgBG4k-Z9PxXW_2dXQX4X3effsw52K2QJiIV6TqSbNuVr3kA/viewform?embedded=true&hl=en" 
+          width="100%" 
+          height="300" 
+          frameborder="0" 
+          marginheight="0" 
+          marginwidth="0">Loading…</iframe>
 </div>
 
+    <p data-lang="et">E-post: <strong>
+        <a href="mailto:opmanngregor@gmail.com" onclick="playMailSound(event)" style="color: inherit; text-decoration: none;">opmanngregor@gmail.com</a>
+    </strong></p>
+    <p data-lang="en" style="display:none;">Email: <strong>
+        <a href="mailto:opmanngregor@gmail.com" onclick="playMailSound(event)" style="color: inherit; text-decoration: none;">opmanngregor@gmail.com</a>
+    </strong></p>
+  <audio id="mailSound" preload="auto">
+      <source src="sounds/yougotmail.mp3" type="audio/mpeg">
+  </audio>
+</section>
+</main>
+
+<div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 20px;">
+    <span class="status-pulse"></span>
+    <span style="font-size: 0.8rem; opacity: 0.8;">Portfolio Status: Active</span>
+</div>
+
+<div class="share-container" style="text-align: center; margin-top: 15px;">
+    <button onclick="sharePortfolio()" id="share-btn" class="action-button">
+        <span id="share-icon">🔗</span>
+        <span data-lang="et">Jaga portfooliot</span>
+        <span data-lang="en" style="display:none;">Share Portfolio</span>
+    </button>
+    <p id="share-msg" style="font-size: 0.8rem; margin-top: 5px; opacity: 0; transition: 0.3s;"></p>
+</div>
+
+<div class="youtube-container" style="text-align: center; margin: 30px 0;">
+    <div class="g-ytsubscribe" 
+         data-channelid="UC1FJSJGNo2OMj4CGUpscUxw" 
+         data-layout="default" 
+         data-theme="dark" 
+         data-count="hidden">
+    </div>
+</div>
+
+<div class="github-source-container" style="text-align: center; margin-top: 20px;">
+    <a href="https://github.com/gregoropmann/aboutme" target="_blank" class="github-source-button">
+        <svg height="20" viewBox="0 0 16 16" width="20" style="fill: currentColor; vertical-align: middle; margin-right: 8px;">
+            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+        </svg>
+        <span data-lang="et">Vaata lähtekoodi GitHubis</span>
+        <span data-lang="en" style="display:none;">View Source on GitHub</span>
+    </a>
+</div>
+
+
+<footer>
+    &copy; <span id="current-year"></span> Gregor Opmann · GitHub Pages
+</footer>
+
 <script>
-const out = document.getElementById('output');
-const inp = document.getElementById('cmd-input');
-const history = [];
-let histIdx = -1;
 
-const DATA = {
-  about: `I'm a dedicated IT enthusiast and computer builder fascinated by the inner
-workings of digital systems. My primary focus is hardware optimization,
-custom PC assembly, and seamless software-hardware integration.
+function playMailSound(event) {
+    event.preventDefault();
+    const link = event.currentTarget;
+    const originalText = link.innerHTML;
+    const audio = document.getElementById('mailSound');
+    
+    link.style.opacity = '0.5';
+    link.innerText = 'Opening...'; 
 
-I've built high-performance gaming rigs, solar-powered cooling systems, and
-more. Beyond hardware, I'm actively developing skills in Python & Bash
-scripting, plus IoT projects on Raspberry Pi and Arduino platforms.`,
+    const navigate = () => {
+        window.location.href = link.href;
+        setTimeout(() => {
+            link.style.opacity = '1';
+            link.innerHTML = originalText;
+        }, 2000);
+    };
 
-  specs: [
-    ['CPU',        'AMD Ryzen 5 7600X'],
-    ['GPU',        'Radeon RX 7600 XT 16 GB'],
-    ['RAM',        '32 GB Silicon Power XPOWER Storm RGB DDR5-6000 CL30'],
-    ['Storage',    '2 TB WD Black SN850X NVMe SSD'],
-    ['Motherboard','Gigabyte Aorus Elite AX V2 B650'],
-    ['OS',         'CachyOS (Arch + KDE Plasma) / Windows 11 Pro'],
-  ],
-
-  skills: {
-    Hardware:           ['PC Building','Arduino UNO R3','Raspberry Pi 3B+','Raspberry Pi Zero 2 W','3D Modeling','Soldering'],
-    'Software & Systems':['Windows 10/11','Linux','Python','HTML/CSS','NTFS/FAT32/EXT4','Android'],
-  },
-
-  contact: [
-    ['Email', 'opmannguest@gmail.com'],
-  ],
-};
-
-const CACHY_LOGO =
-`          .-------------------------:
-          .+=========================.
-         :++===++==================-
-        :*++====+++++=============-
-       -*+++=====+***++==========:
-      =*++++========------------:
-     =*+++++=====-
-    .+*+++++=-===:                    .=+++=:
-   :++++=====-==:                     -*****+
-   :++========-=.                      .=+**+.
-   .+==========-.
-   :+++++++====-
-   :++==========.                             :+++++++:
-    .-===========.                            =*****+*+
-    .-===========:                           .+*****+:
-      -=======++++:::::::::::::::::::::::::-:  .---:
-       :======++++====+++******************=.
-        :=====+++==========++++++++++++++*-
-         .====++==============++++++++++*-
-          .===+==================+++++++:
-           .-=======================+++:
-             ..........................`;
-
-const NEOFETCH_INFO = [
-  { type: 'title', val: 'guest@gregor-portfolio' },
-  { type: 'sep' },
-  { key: 'OS',          val: 'CachyOS x86_64' },
-  { key: 'Host',        val: 'B650 AORUS ELITE AX V2' },
-  { key: 'Kernel',      val: 'Linux 6.19.6-2-cachyos' },
-  { key: 'Packages',    val: '1322 (pacman)' },
-  { key: 'Shell',       val: 'fish 4.5.0' },
-  { key: 'Display',     val: '1920x1080 @ 75Hz, 22" [External]' },
-  { key: 'DE',          val: 'KDE Plasma 6.6.2' },
-  { key: 'WM',          val: 'KWin (Wayland)' },
-  { key: 'WM Theme',    val: 'Breeze' },
-  { key: 'Theme',       val: 'Breeze (Dark)' },
-  { key: 'Icons',       val: 'breeze-dark' },
-  { key: 'Font',        val: 'Noto Sans (10pt)' },
-  { key: 'Cursor',      val: 'breeze (24px)' },
-  { key: 'Terminal',    val: 'konsole 25.12.3' },
-  { key: 'CPU',         val: 'AMD Ryzen 5 7600X (12) @ 5.46 GHz' },
-  { key: 'GPU 1',       val: 'AMD Radeon RX 7600 XT [Discrete]' },
-  { key: 'GPU 2',       val: 'AMD Raphael [Integrated]' },
-  { key: 'Memory',      val: '8.23 GiB / 30.46 GiB (27%)' },
-  { key: 'Swap',        val: '0 B / 30.46 GiB (0%)' },
-  { key: 'Disk (/)',    val: '19.17 GiB / 146.59 GiB (13%) - ext4' },
-  { key: 'Disk (/home)',val: '156.77 GiB / 1.50 TiB (10%) - ext4' },
-  { key: 'Locale',      val: 'en_GB.UTF-8' },
-  { type: 'colors' },
-];
-
-const COMMANDS = {
-  help() {
-    return [
-      h('', ''),
-      h('c-cyan', '  Available commands:'),
-      h('', ''),
-      h('c-green',  '  help        ') + h('c-dim','  you already know what this does'),
-      h('c-green',  '  about       ') + h('c-dim','  who am I'),
-      h('c-green',  '  whoami      ') + h('c-dim','  alias for about'),
-      h('c-green',  '  skills      ') + h('c-dim','  technologies I work with'),
-      h('c-green',  '  specs       ') + h('c-dim','  my PC hardware specs'),
-      h('c-green',  '  neofetch    ') + h('c-dim','  system info'),
-      h('c-green',  '  contact     ') + h('c-dim','  get in touch'),
-      h('c-green',  '  clear       ') + h('c-dim','  clear the terminal'),
-      h('c-green',  '  exit        ') + h('c-dim','  return to main site'),
-      h('c-green',  '  cd /        ') + h('c-dim','  same as exit'),
-      h('', ''),
-    ];
-  },
-
-  about() {
-    const lines = [h('',''), h('c-yellow','  ── About Me ──────────────────────────────────'), h('','')];
-    DATA.about.split('\n').forEach(l => lines.push(h('c-text','  ' + l)));
-    lines.push(h('',''));
-    return lines;
-  },
-
-  whoami() { return COMMANDS.about(); },
-
-  skills() {
-    const lines = [h('',''), h('c-yellow','  ── Skills & Technologies ──────────────────────'), h('','')];
-    Object.entries(DATA.skills).forEach(([cat, list]) => {
-      lines.push(mkSkillSection(cat, list));
+    audio.play().then(() => {
+        setTimeout(navigate, 800);
+    }).catch(() => {
+        navigate();
     });
-    lines.push(h('',''));
-    return lines;
-  },
+}
 
-  specs() {
-    const lines = [h('',''), h('c-yellow','  ── My PC Build ────────────────────────────────'), h('','')];
-    DATA.specs.forEach(([k,v]) => {
-      lines.push(mkRow(k, v));
+function setLanguage(lang) {
+    document.querySelectorAll('[data-lang]').forEach(el => {
+        el.style.display = el.getAttribute('data-lang') === lang ? '' : 'none';
     });
-    lines.push(h('',''));
-    return lines;
-  },
-
-  neofetch() {
-    const swatchColors = ['#ff4d6d','#ffd93d','#39ff8f','#00e5ff','#b48eff','#c8cfe8','#4a5068','#ffffff'];
-    let infoHtml = '';
-    NEOFETCH_INFO.forEach(item => {
-      if (item.type === 'title') {
-        const [user, host] = item.val.split('@');
-        infoHtml += `<div><span class="nf-title">${user}</span><span class="nf-sep">@</span><span class="nf-title">${host}</span></div>`;
-      } else if (item.type === 'sep') {
-        infoHtml += `<div><span class="nf-sep">──────────────────────────</span></div>`;
-      } else if (item.type === 'colors') {
-        const swatches = swatchColors.map(c => `<span class="nf-swatch" style="background:${c}"></span>`).join('');
-        infoHtml += `<div class="nf-colors">${swatches}</div>`;
-      } else {
-        infoHtml += `<div><span class="nf-key">${item.key}</span><span class="nf-sep">: </span><span class="nf-val">${item.val}</span></div>`;
-      }
-    });
-
-    appendHTML(`<div class="neofetch-wrap"><pre class="neofetch-logo">${CACHY_LOGO}</pre><div class="neofetch-info">${infoHtml}</div></div>`);
-    out.scrollTop = out.scrollHeight;
-    return [];
-  },
-
-  contact() {
-    const lines = [h('',''), h('c-yellow','  ── Contact ────────────────────────────────────'), h('','')];
-    DATA.contact.forEach(([k,v]) => lines.push(mkRow(k, v)));
-    lines.push(h('',''));
-    return lines;
-  },
-
-  clear() { out.innerHTML = ''; return []; },
-
-  exit() {
-    appendLines([h('c-dim', '  Redirecting / ...'), h('', '')]);
-    setTimeout(() => { window.location.href = 'https://gregoropmann.github.io/aboutme/'; }, 1200);
-    return [];
-  },
-
-  'cd /'() {
-    appendLines([h('c-dim', '  Redirecting / ...'), h('', '')]);
-    setTimeout(() => { window.location.href = 'https://gregoropmann.github.io/aboutme/'; }, 1200);
-    return [];
-  },
-};
-
-function h(cls, text) {
-  return `<span class="line ${cls}">${text}</span>`;
-}
-function mkRow(key, val) {
-  return `<span class="line"><span class="t-key">  ${key.padEnd(14)}</span><span class="t-val">${val}</span></span>`;
-}
-function mkSkillSection(cat, list) {
-  const tags = list.map(s => `<span class="skill-tag">${s}</span>`).join('');
-  return `<span class="line"><span class="skills-cat">  ${cat}</span></span><span class="line">  <span class="skills-list">${tags}</span></span><span class="line"> </span>`;
-}
-function appendHTML(html) {
-  const div = document.createElement('div');
-  div.innerHTML = html;
-  Array.from(div.childNodes).forEach(n => out.appendChild(n.cloneNode ? n.cloneNode(true) : n));
-}
-function appendLines(lines) {
-  appendHTML(lines.join('\n'));
-  out.scrollTop = out.scrollHeight;
-}
-function echoPrompt(cmd) {
-  appendHTML(`<span class="line echo-prompt"><span style="color:var(--green)">guest</span><span style="color:var(--dim)">@</span><span style="color:var(--cyan)">portfolio</span><span style="color:var(--dim)">:</span><span style="color:var(--purple)">~</span><span style="color:var(--green)">$</span> <span style="color:var(--text)">${cmd}</span></span>`);
+    localStorage.setItem('preferred-lang', lang);
 }
 
-function boot() {
-  const lines = [
-    `<span class="line boot-line c-green" style="animation-delay:.05s">  ██████╗ ██████╗ ███████╗ ██████╗  ██████╗ ██████╗ </span>`,
-    `<span class="line boot-line c-green" style="animation-delay:.10s">  ██╔════╝ ██╔══██╗██╔════╝██╔════╝ ██╔═══██╗██╔══██╗</span>`,
-    `<span class="line boot-line c-green" style="animation-delay:.15s">  ██║  ███╗██████╔╝█████╗  ██║  ███╗██║   ██║██████╔╝</span>`,
-    `<span class="line boot-line c-green" style="animation-delay:.20s">  ██║   ██║██╔══██╗██╔══╝  ██║   ██║██║   ██║██╔══██╗</span>`,
-    `<span class="line boot-line c-green" style="animation-delay:.25s">  ╚██████╔╝██║  ██║███████╗╚██████╔╝╚██████╔╝██║  ██║</span>`,
-    `<span class="line boot-line c-dim"   style="animation-delay:.30s">   ╚═════╝ ╚═╝  ╚═╝╚══════╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═╝</span>`,
-    `<span class="line boot-line" style="animation-delay:.40s"> </span>`,
-    `<span class="line boot-line c-cyan"  style="animation-delay:.50s">  Welcome to Gregor's Portfolio Terminal  v1.0.0</span>`,
-    `<span class="line boot-line c-dim"   style="animation-delay:.60s">  Type <span class="c-green">help</span> to see available commands.</span>`,
-    `<span class="line boot-line" style="animation-delay:.65s"> </span>`,
-  ];
-  appendHTML(lines.join(''));
-}
+const savedLang = localStorage.getItem('preferred-lang') || 'et';
+setLanguage(savedLang);
 
-inp.addEventListener('keydown', e => {
-  if (e.key === 'Enter') {
-    const raw = inp.value.trim();
-    inp.value = '';
-    histIdx = -1;
-    if (!raw) return;
-    history.unshift(raw);
-    echoPrompt(raw);
-    const cmd = raw.toLowerCase();
-    const handler = COMMANDS[cmd] || COMMANDS[cmd.split(' ')[0]];
-    if (handler) {
-      const result = handler();
-      if (result.length) appendLines(result);
+document.getElementById('current-year').textContent = new Date().getFullYear();
+
+function updateDarkModeUI(isDark) {
+    const icon = document.getElementById('mode-icon');
+    const etText = document.getElementById('mode-text');
+    const enText = document.getElementById('mode-text-en');
+    
+    if (isDark) {
+        document.body.classList.add('dark-mode');
+        icon.textContent = '☀️';
+        etText.textContent = 'Hele režiim';
+        enText.textContent = 'Light Mode';
     } else {
-      appendLines([
-        h('c-red', `  bash: ${raw}: command not found`),
-        h('c-dim', `  Type <span class="c-green">help</span> for available commands.`),
-        h('', ''),
-      ]);
+        document.body.classList.remove('dark-mode');
+        icon.textContent = '🌙';
+        etText.textContent = 'Tume režiim';
+        enText.textContent = 'Dark Mode';
     }
-  } else if (e.key === 'ArrowUp') {
-    e.preventDefault();
-    if (histIdx < history.length - 1) { histIdx++; inp.value = history[histIdx]; }
-  } else if (e.key === 'ArrowDown') {
-    e.preventDefault();
-    if (histIdx > 0) { histIdx--; inp.value = history[histIdx]; }
-    else { histIdx = -1; inp.value = ''; }
-  } else if (e.key === 'Tab') {
-    e.preventDefault();
-    const partial = inp.value.toLowerCase();
-    const match = Object.keys(COMMANDS).find(c => c.startsWith(partial));
-    if (match) inp.value = match;
-  }
-});
+}
 
-document.querySelector('.terminal-wrap').addEventListener('click', () => inp.focus());
+function toggleDarkMode() {
+    const isDark = !document.body.classList.contains('dark-mode');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    updateDarkModeUI(isDark);
+}
 
-boot();
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'dark') updateDarkModeUI(true);
+
+const bttButton = document.getElementById("backToTop");
+
+window.onscroll = function() {
+    if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+        bttButton.style.display = "block";
+    } else {
+        bttButton.style.display = "none";
+    }
+};
+
+function scrollToTop() {
+    window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('is-visible');
+    });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.fade-in-section').forEach(section => observer.observe(section));
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js')
+      .then(reg => console.log('Service Worker registered! Scope:', reg.scope))
+      .catch(err => console.log('Service Worker registration failed:', err));
+  });
+}
+
+async function sharePortfolio() {
+    const shareData = {
+        title: 'Gregor Opmann – Portfoolio',
+        text: 'Vaata Gregor Opmanni IT-portfooliot!',
+        url: 'https://gregoropmann.github.io/aboutme/'
+    };
+
+    const msgEl = document.getElementById('share-msg');
+    const lang = localStorage.getItem('preferred-lang') || 'et';
+
+    try {
+        if (navigator.share) {
+            await navigator.share(shareData);
+        } else {
+            await navigator.clipboard.writeText('https://gregoropmann.github.io/aboutme/');
+            msgEl.innerText = lang === 'et' ? 'Link kopeeritud lõikelauale!' : 'Link copied to clipboard!';
+            msgEl.style.opacity = '1';
+            
+            setTimeout(() => {
+                msgEl.style.opacity = '0';
+            }, 2000);
+        }
+    } catch (err) {
+        console.log('Sharing failed', err);
+    }
+}
+
 </script>
+
+<script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="gregoropmann" data-description="" data-message="" data-color="#5F7FFF" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
+
 </body>
 </html>
