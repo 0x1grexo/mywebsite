@@ -1,4 +1,4 @@
-const CACHE_NAME = 'gregor_opmann-portfolio-v3';
+const CACHE_NAME = 'gregor_opmann-portfolio-v3.2';
 
 const ASSETS_TO_CACHE = [
   './',
@@ -23,6 +23,8 @@ const ASSETS_TO_CACHE = [
   './android_app.apk',
   './images/android_app.png',
   './terminal.html',
+  './images/webb.png',
+  './images/webb-dark.png',
 ];
 
 self.addEventListener('install', (event) => {
