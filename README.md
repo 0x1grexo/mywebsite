@@ -25,9 +25,7 @@ Visit the live site: [gregoropmann.github.io/aboutme/](https://gregoropmann.gith
 7. Branch: main, /(root); Save
 
 Good luck!
-
-
-
+---------------------------------------------------------------------------------------------------------------------------------------------------------
 # Gregor Opmann – IT Portfoolio
 
 Kõrge jõudlusega reageeriv portfoolio-veebisait, mille loomisel on keskendutud optimeerimisele ja puhtale kasutajaliidesele.
