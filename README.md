@@ -21,9 +21,9 @@ Visit the live site: [gregoropmann.github.io/aboutme/](https://gregoropmann.gith
 2. Make a new GitHub repo [New](https://github.com/new/)
 3. Replace the text in my code, sounds, images, documents with your own.
 4. Publish with GitHub Pages:
-   Repo➡️Settings➡️Pages;
-   Source: Deploy from a branch;
-   Branch: main, /(root); Save
+5. Repo➡️Settings➡️Pages;
+6. Source: Deploy from a branch;
+7. Branch: main, /(root); Save
 
 Good luck!
 
@@ -52,8 +52,8 @@ Külasta veebisaiti: [gregoropmann.github.io/aboutme/](https://gregoropmann.gith
 2. Loo uus GitHub repo [Uus](https://github.com/new/)
 3. Asenda koodis olev tekst, helid, pildid ja dokumendid enda omadega.
 4. Avalda GitHub Pagesi kaudu:
-   Repo➡️Sätted➡️Lehed; (Repo➡️Settings➡️Pages)
-   Allikas (Source): Juuruta harust (Deploy from a branch);
-   Haru (Branch):  peamine, /(juur); Salvesta (main, /(root))
+5. Repo➡️Sätted➡️Lehed; (Repo➡️Settings➡️Pages)
+6. Allikas (Source): Juuruta harust (Deploy from a branch);
+7. Haru (Branch):  peamine, /(juur); Salvesta (main, /(root))
    
 Edu!
