@@ -13,14 +13,11 @@ A high-performance, responsive portfolio website built with a focus on optimizat
 * **Tools:** VS Code, GitHub Pages, Google Analytics
 * **Hardware Experience:** Python (ProgeStart 2025), Arduino, Raspberry Pi
 
-## 🎮 Python Game
-A custom game built in Python. The download includes both the Windows executable for immediate play and the source code for those interested in the logic behind it.
-
 ## 📸 Preview
 Visit the live site: [gregoropmann.github.io/aboutme/](https://gregoropmann.github.io/aboutme/)
 
 ## You are welcome to use this as a template!
-1. Download the 'aboutme-main.zip'
+1. Download the 'aboutme-main.zip' [Download ZIP](https://github.com/gregoropmann/aboutme/archive/refs/heads/main.zip)
 2. Make a new GitHub repo
 3. Replace the text in my code, sounds, images, documents with your own.
 4. Publish with GitHub Pages
@@ -44,14 +41,11 @@ Kõrge jõudlusega reageeriv portfoolio-veebisait, mille loomisel on keskendutud
 * **Tööriistad:** VS Code, GitHub Pages, Google Analytics
 * **Riistvaraline kogemus:** Python (ProgeStart 2025), Arduino, Raspberry Pi
 
-## 🎮 Pythoni mäng
-Pythonis loodud kohandatud mäng. Allalaadimine sisaldab nii Windowsi käivitusfaili (.exe) koheseks mängimiseks kui ka lähtekoodi neile, keda huvitab selle taga peituv loogika.
-
 ## 📸 Eelvaade
 Külasta veebisaiti: [gregoropmann.github.io/aboutme/](https://gregoropmann.github.io/aboutme/)
 
 ## Kasuta seda julgelt mallina!
-1. Lae alla 'aboutme-main.zip'
+1. Lae alla 'aboutme-main.zip'  [Lae alla ZIP](https://github.com/gregoropmann/aboutme/archive/refs/heads/main.zip)
 2. Loo uus GitHub repo
 3. Asenda koodis olev tekst, helid, pildid ja dokumendid enda omadega.
 4. Avalda GitHub Pagesi kaudu
