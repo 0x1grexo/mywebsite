@@ -1,9 +1,11 @@
-
     body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         line-height: 1.6;
         margin: 0;
         background-color: #f4f4f9;
+        background-image: url('images/webb.png');
+        background-repeat: repeat;
+        background-size: auto;
         color: #333;
         transition: background-color 0.3s, color 0.3s;
     }
@@ -149,6 +151,9 @@
 
     body.dark-mode {
         background-color: #121212;
+        background-image: url('images/webb-dark.png');
+        background-repeat: repeat;
+        background-size: auto;
         color: #f0f0f0;
     }
 
