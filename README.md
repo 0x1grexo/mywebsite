@@ -18,9 +18,12 @@ Visit the live site: [gregoropmann.github.io/aboutme/](https://gregoropmann.gith
 
 ## You are welcome to use this as a template!
 1. Download the 'aboutme-main.zip' [Download ZIP](https://github.com/gregoropmann/aboutme/archive/refs/heads/main.zip)
-2. Make a new GitHub repo
+2. Make a new GitHub repo [New](https://github.com/new/)
 3. Replace the text in my code, sounds, images, documents with your own.
-4. Publish with GitHub Pages
+4. Publish with GitHub Pages:
+   Repo➡️Settings➡️Pages;
+   Source: Deploy from a branch;
+   Branch: main, /(root); Save
 
 Good luck!
 
@@ -46,8 +49,11 @@ Külasta veebisaiti: [gregoropmann.github.io/aboutme/](https://gregoropmann.gith
 
 ## Kasuta seda julgelt mallina!
 1. Lae alla 'aboutme-main.zip'  [Lae alla ZIP](https://github.com/gregoropmann/aboutme/archive/refs/heads/main.zip)
-2. Loo uus GitHub repo
+2. Loo uus GitHub repo [Uus](https://github.com/new/)
 3. Asenda koodis olev tekst, helid, pildid ja dokumendid enda omadega.
-4. Avalda GitHub Pagesi kaudu
-
+4. Avalda GitHub Pagesi kaudu:
+   Repo➡️Sätted➡️Lehed; (Repo➡️Settings➡️Pages)
+   Allikas (Source): Juuruta harust (Deploy from a branch);
+   Haru (Branch):  peamine, /(juur); Salvesta (main, /(root))
+   
 Edu!
