@@ -474,7 +474,7 @@
     .github-source-button {
         display: inline-flex;
         align-items: center;
-        background-color: #24292e; /* GitHubi tüüpiline tumehall */
+        background-color: #24292e;
         color: #ffffff !important;
         padding: 10px 20px;
         border-radius: 6px;
