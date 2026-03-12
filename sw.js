@@ -1,4 +1,4 @@
-const CACHE_NAME = 'gregor_opmann-portfolio-v3.2';
+const CACHE_NAME = 'gregor_opmann-portfolio-v3.3';
 
 const ASSETS_TO_CACHE = [
   './',
@@ -25,6 +25,7 @@ const ASSETS_TO_CACHE = [
   './terminal.html',
   './images/webb.png',
   './images/webb-dark.png',
+  './images/dark.paths.png',
 ];
 
 self.addEventListener('install', (event) => {
