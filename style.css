@@ -483,6 +483,51 @@ body.dark-mode #share-msg {
     border: 1px solid rgba(255,255,255,0.1);
 }
 
+.debloat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.opt-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 20px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s, border-color 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.opt-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--blue);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.opt-icon {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.opt-title {
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+}
+
+.opt-desc {
+    font-size: 0.85rem;
+    opacity: 0.7;
+}
+
 .github-source-button:hover {
     background-color: #444d56;
     transform: translateY(-2px);
