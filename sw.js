@@ -26,6 +26,7 @@ const ASSETS_TO_CACHE = [
   './images/webb.png',
   './images/webb-dark.png',
   './images/dark.paths.png',
+  './images/profile.png',
 ];
 
 self.addEventListener('install', (event) => {
