@@ -26,8 +26,6 @@ Visit the live site: [gregoropmann.github.io/aboutme/](https://gregoropmann.gith
 
 Good luck!
 
-// Hello, reader!
-
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -58,5 +56,3 @@ Külasta veebisaiti: [gregoropmann.github.io/aboutme/](https://gregoropmann.gith
 7. Haru (Branch):  peamine, /(juur); Salvesta (main, /(root))
    
 Edu!
-
-// Tere, lugeja!
