@@ -52,7 +52,9 @@
 
 <body>
 
-<p>Session Time: <span id="timer">00:00</span></p>
+<div style="display: flex; justify-content: center; align-items: center; text-align: center;">
+  <p>Session Time: <span id="timer">00:00</span></p>
+</div>
 <script>
   let sessionStart = sessionStorage.getItem('sessionStartTime');
   if (!sessionStart) {
@@ -69,6 +71,7 @@
   updateTimer();
   setInterval(updateTimer, 1000);
 </script>
+
 
 <nav>
   <ul>
