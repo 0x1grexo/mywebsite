@@ -52,27 +52,6 @@
 
 <body>
 
-<div style="display: flex; justify-content: center; align-items: center; text-align: center;">
-  <p>Session Time: <span id="timer">00:00</span></p>
-</div>
-<script>
-  let sessionStart = sessionStorage.getItem('sessionStartTime');
-  if (!sessionStart) {
-    sessionStart = Date.now();
-    sessionStorage.setItem('sessionStartTime', sessionStart);
-  }
-  function updateTimer() {
-    const now = Date.now();
-    const totalSeconds = Math.floor((now - sessionStart) / 1000);
-    const mins = Math.floor(totalSeconds / 60).toString().padStart(2, '0');
-    const secs = (totalSeconds % 60).toString().padStart(2, '0');
-    document.getElementById('timer').innerText = `${mins}:${secs}`;
-  }
-  updateTimer();
-  setInterval(updateTimer, 1000);
-</script>
-
-
 <nav>
   <ul>
     <li>
@@ -129,6 +108,26 @@
         <button onclick="setLanguage('en')">English</button>
     </div>
 </header>
+
+<div style="display: flex; justify-content: center; align-items: center; text-align: center;">
+  <p>Session Time: <span id="timer">00:00</span></p>
+</div>
+<script>
+  let sessionStart = sessionStorage.getItem('sessionStartTime');
+  if (!sessionStart) {
+    sessionStart = Date.now();
+    sessionStorage.setItem('sessionStartTime', sessionStart);
+  }
+  function updateTimer() {
+    const now = Date.now();
+    const totalSeconds = Math.floor((now - sessionStart) / 1000);
+    const mins = Math.floor(totalSeconds / 60).toString().padStart(2, '0');
+    const secs = (totalSeconds % 60).toString().padStart(2, '0');
+    document.getElementById('timer').innerText = `${mins}:${secs}`;
+  }
+  updateTimer();
+  setInterval(updateTimer, 1000);
+</script>
 
 <div style="text-align: center; margin: 20px 0;">
   <a href="terminal.html" class="action-button">
