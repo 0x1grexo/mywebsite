@@ -27,6 +27,7 @@ const ASSETS_TO_CACHE = [
   './images/webb-dark.png',
   './images/dark.paths.png',
   './images/profile.png',
+  './images/pov-fedora.png',
 ];
 
 self.addEventListener('install', (event) => {
