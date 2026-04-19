@@ -549,14 +549,18 @@ function playMailSound(event) {
     const link = event.currentTarget;
     const audio = document.getElementById('mailSound');
     
-    audio.play().catch(err => console.log("Audio play blocked"));
+    audio.play().catch(err => console.log("Audio blocked"));
 
     setTimeout(() => {
-        window.location.assign(link.href); 
-        
-        // window.open(link.href, '_self');
+        const hiddenLink = document.createElement('a');
+        hiddenLink.href = link.href; 
+        hiddenLink.target = '_blank'; 
+        document.body.appendChild(hiddenLink);
+        hiddenLink.click();
+        document.body.removeChild(hiddenLink);
     }, 800);
 }
+
 
 function setLanguage(lang) {
     document.querySelectorAll('[data-lang]').forEach(el => {
