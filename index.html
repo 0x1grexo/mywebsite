@@ -547,25 +547,15 @@ document.addEventListener('keydown', e => {
 function playMailSound(event) {
     event.preventDefault();
     const link = event.currentTarget;
-    const originalText = link.innerHTML;
     const audio = document.getElementById('mailSound');
     
-    link.style.opacity = '0.5';
-    link.innerText = 'Opening...'; 
+    audio.play().catch(err => console.log("Audio play blocked"));
 
-    const navigate = () => {
-        window.location.href = link.href;
-        setTimeout(() => {
-            link.style.opacity = '1';
-            link.innerHTML = originalText;
-        }, 2000);
-    };
-
-    audio.play().then(() => {
-        setTimeout(navigate, 800);
-    }).catch(() => {
-        navigate();
-    });
+    setTimeout(() => {
+        window.location.assign(link.href); 
+        
+        // window.open(link.href, '_self');
+    }, 800);
 }
 
 function setLanguage(lang) {
