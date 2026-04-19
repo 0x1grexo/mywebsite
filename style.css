@@ -610,7 +610,8 @@ body.dark-mode .wip-desc { color: #aaa; }
 body.dark-mode .wip-tag { background: #4db8ff; color: #121212; }
 
 
-.skills li a {
-    color: inherit;
-    text-decoration: none;
+.skills li a,
+body.dark-mode .skills li a {
+    color: white !important;
+    text-decoration: none !important;
 }
