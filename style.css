@@ -609,7 +609,8 @@ body.dark-mode .wip-title { color: #e0e0e0; }
 body.dark-mode .wip-desc { color: #aaa; }
 body.dark-mode .wip-tag { background: #4db8ff; color: #121212; }
 
+
 .skills li a {
-    color: white;
+    color: inherit;
     text-decoration: none;
 }
