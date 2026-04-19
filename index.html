@@ -481,25 +481,46 @@ I am a dedicated IT enthusiast and computer builder interested in the inner work
     </a>
 </div>
 
+
 <div style="display: flex; justify-content: center; align-items: center; text-align: center;">
   <p>System Uptime: <span id="timer">00:00</span></p>
 </div>
+
 <script>
+  const dialUpAudio = new Audio('sounds/dialup_screech.mp3');
+  dialUpAudio.loop = true;
+
   let sessionStart = sessionStorage.getItem('sessionStartTime');
   if (!sessionStart) {
     sessionStart = Date.now();
     sessionStorage.setItem('sessionStartTime', sessionStart);
   }
+
   function updateTimer() {
     const now = Date.now();
     const totalSeconds = Math.floor((now - sessionStart) / 1000);
+    
     const mins = Math.floor(totalSeconds / 60).toString().padStart(2, '0');
     const secs = (totalSeconds % 60).toString().padStart(2, '0');
     document.getElementById('timer').innerText = `${mins}:${secs}`;
+
+    if (totalSeconds === 1800 && document.hidden) {
+      dialUpAudio.play().catch(err => console.log("Audio play blocked until user interaction."));
+    }
   }
+
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) {
+      dialUpAudio.pause();
+      dialUpAudio.currentTime = 0;
+    }
+  });
+
   updateTimer();
   setInterval(updateTimer, 1000);
 </script>
+
+
 
 <footer>
     &copy; <span id="current-year"></span> Gregor Opmann · GitHub Pages
