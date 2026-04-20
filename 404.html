@@ -52,8 +52,12 @@
     <a href="https://gregoropmann.github.io/aboutme/" class="btn">Tagasi avalehele / Back Home</a>
 
     <footer>
-    &copy; <span id="current-year"></span> Gregor Opmann · GitHub Pages
+        &copy; <span id="current-year"></span> Gregor Opmann · GitHub Pages
     </footer>
-
+    
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear(
+    </script>
+    
 </body>
 </html>
