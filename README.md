@@ -1,5 +1,6 @@
 # Gregor Opmann – IT Portfolio
 
+
 A high-performance, responsive portfolio website built with a focus on optimization and clean UI.
 
 ## 🚀 Features
