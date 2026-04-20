@@ -1,0 +1,16 @@
+name: Update Sitemap
+on:
+  push:
+    branches: [main]
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Update lastmod
+        run: |
+          DATE=$(date +%Y-%m-%d)
+          sed -i "s|<lastmod>.*</lastmod>|<lastmod>$DATE</lastmod>|" sitemap.xml
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Update sitemap lastmod"
