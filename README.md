@@ -66,7 +66,7 @@ Edu!
 
 [Linux riik rahvaalgatus](https://rahvaalgatus.ee/initiatives/1439-linux-riik)
 
-[R. Ellermaa](https://ellermaasoft.ee)
+[R. Ellermaa](http://www.ellermaasoft.ee/)
 
 [Linux.ee](https://linux.ee)
 
