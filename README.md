@@ -31,7 +31,6 @@ It just works.
 
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # Gregor Opmann – IT Portfoolio
 
@@ -60,3 +59,23 @@ Külasta veebisaiti: [gregoropmann.github.io/aboutme/](https://gregoropmann.gith
 7. Haru (Branch):  peamine, /(juur); Salvesta (main, /(root))
    
 Edu!
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+## Honorable mentions
+
+[Linux riik rahvaalgatus](https://rahvaalgatus.ee/initiatives/1439-linux-riik)
+
+[R. Ellermaa](http://ellermaasoft.ee)
+
+[Linux.ee](https://linux.ee)
+
+[Pingviin](https://pingviin.org/portal.php)
+
+[Kuutõrvaja](https://kuutorvaja.eenet.ee)
+
+[Estobuntu](https://et.wikipedia.org/wiki/Estobuntu)
+
+[Mageia](https://www.mageia.org/et/)
+
+[Aarne](https://toompark.com/aarne/urban-terror-minu-lemmik/?fbclid=PAT01DUARgr-VleHRuA2FlbQIxMABzcnRjBmFwcF9pZA81NjcwNjczNDMzNTI0MjcAAacFR1Dw_ghAjSTwC2G0JhwzYwEnkCWUxFvSgCRPeZHBd1cfnlT_9Z-J-uTtwA_aem_3_o_W3LNyhvuKDntUwI1eg)
