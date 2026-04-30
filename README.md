@@ -52,7 +52,7 @@ Külasta veebisaiti: [gregoropmann.github.io/aboutme/](https://gregoropmann.gith
 ## Kasuta seda julgelt mallina!
 1. Lae alla 'aboutme-main.zip'  [Lae alla ZIP](https://github.com/gregoropmann/aboutme/archive/refs/heads/main.zip)
 2. Loo uus GitHub repo [Uus](https://github.com/new/)
-###3. Asenda koodis olev tekst, helid, pildid ja dokumendid enda omadega.
+3. Asenda koodis olev tekst, helid, pildid ja dokumendid enda omadega.
 4. Avalda GitHub Pagesi kaudu:
 5. Repo➡️Sätted➡️Lehed; (Repo➡️Settings➡️Pages)
 6. Allikas (Source): Juuruta harust (Deploy from a branch);
