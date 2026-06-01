@@ -66,6 +66,8 @@ Edu!
 
 [Linux riik rahvaalgatus](https://rahvaalgatus.ee/initiatives/1439-linux-riik)
 
+[TempleOS](https://templeos.org)
+
 [R. Ellermaa (http)](http://www.ellermaasoft.ee/)
 
 [Linux.ee](https://linux.ee)
