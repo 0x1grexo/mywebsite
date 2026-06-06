@@ -3,7 +3,7 @@
  * Licensed under the GNU General Public License v3.0
  * SPDX-License-Identifier: GPL-3.0-only
  *
- * REUSED FROM https://github.com/keepandroidopen/keepandroidopen.github.io/blob/main/public/banner.js TO SET CUSTOM LINK TO HIGHLIGHTED TEXT ON https://keepandroidopen.org
+ * PERSONAL FORK FROM https://github.com/keepandroidopen/keepandroidopen.github.io/blob/main/public/banner.js TO SET CUSTOM LINK TO HIGHLIGHTED TEXT ON https://keepandroidopen.org
  *
  * A self-contained, embeddable script that injects a countdown banner into any
  * web page. No external dependencies.
