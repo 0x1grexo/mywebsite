@@ -7,7 +7,7 @@
  * web page. No external dependencies.
  *
  * Usage:
- *   <script src="https://keepandroidopen.org/banner.js"></script>
+ *   <script src="https://gregoropmann.github.io/aboutme/banner.js"></script>
  *
  * Query parameters (appended to the script src URL):
  *   lang=fr       Override the browser language (default: auto-detected)
@@ -28,7 +28,6 @@
   var messages = {
     fa:      "اندروید، یک سکّوی بسته خواهد شد!",
     ar:      "سيصبح نظام أندرويد منصة مغلقة في",
-    he:      "אנדרואיד תהפוך לפלטפורמה נעולה בעוד",
     en:      "Android will become a locked-down platform in",
     ca:      "Android es convertir\u00E0 en una plataforma tancada",
     cs:      "Android se stane uzamčenou platformou za",
@@ -114,7 +113,7 @@
 
   // ── Link ────────────────────────────────────────────────────────────
   var linkParam = params.link;
-  var defaultLink = "https://keepandroidopen.org" + (locale === "en" ? "" : "/" + locale + "/");
+  var defaultLink = "https://keepandroidopen.org/#:~:text=A%20teenager%27s%20first%20app" + (locale === "en" ? "" : "/" + locale + "/");
   var linkUrl = linkParam === "none" ? null : (linkParam || defaultLink);
 
   // ── Close button ────────────────────────────────────────────────────
