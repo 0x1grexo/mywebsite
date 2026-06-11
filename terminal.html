@@ -446,25 +446,29 @@ const COMMANDS = {
       return [
         h('c-red', '  Error: No file specified.'),
         h('c-dim', '  Usage: libreoffice [filename.pdf]'),
-        h('c-dim', '  Available files: loovtoo_raport.pdf, srcdoc.pdf'),
+        h('c-dim', '  Available files: loovtoo_raport.pdf, loovtoo_kiituskiri_hindamine.pdf, srcdoc.pdf'),
         h('', '')
       ];
     }
 
     const filename = args[0].toLowerCase();
 
-    if (filename === 'loovtoo_raport.pdf' || filename === 'raport.pdf') {
+    if (filename === 'loovtoo_raport.pdf' || filename === 'loovtoo_raport.pdf') {
       appendLines([h('c-dim', '  Opening loovtoo_raport.pdf in LibreOffice...'), h('', '')]);
       setTimeout(() => { window.open('docs/loovtoo_raport.pdf', '_blank'); }, 600);
       return [];
-    } else if (filename === 'srcdoc.pdf' || filename === 'certificate.pdf') {
+      } else if (filename === 'loovtoo_kiituskiri_hindamine.pdf' || filename === 'loovtoo_kiituskiri_hindamine.pdf') {
+      appendLines([h('c-dim', '  Opening loovtoo_kiituskiri_hindamine.pdf in LibreOffice...'), h('', '')]);
+      setTimeout(() => { window.open('docs/loovtoo_kiituskiri_hindamine.pdf', '_blank'); }, 600);
+      return [];
+    } else if (filename === 'srcdoc.pdf' || filename === 'srcdoc.pdf') {
       appendLines([h('c-dim', '  Opening srcdoc.pdf in LibreOffice...'), h('', '')]);
       setTimeout(() => { window.open('docs/srcdoc.pdf', '_blank'); }, 600);
       return [];
     } else {
       return [
         h('c-red', `  Error: File "${args[0]}" not found.`),
-        h('c-dim', '  Available files: loovtoo_raport.pdf, srcdoc.pdf'),
+        h('c-dim', '  Available files: loovtoo_raport.pdf, loovtoo_kiituskiri_hindamine.pdf, srcdoc.pdf'),
         h('', '')
       ];
     }
@@ -479,7 +483,7 @@ const COMMANDS = {
     }
     return [];
   }
-}; // <-- This closing brace was missing!
+};
 
 function h(cls, text) {
   return `<span class="line ${cls}">${text}</span>`;
@@ -537,7 +541,6 @@ inp.addEventListener('keydown', e => {
       helpCount = 0;
     }
 
-    // Cleaned up handler lookup
     const handler = COMMANDS[cmd];
     if (handler) {
       const result = handler(args);
