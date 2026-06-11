@@ -269,7 +269,7 @@ const NEOFETCH_INFO = [
 ];
 
 const COMMANDS = {
-  help() {
+    help() {
     return [
       h('', ''),
       h('c-cyan', '  Available commands:'),
@@ -281,12 +281,16 @@ const COMMANDS = {
       h('c-green',  '  specs       ') + h('c-dim','  my PC hardware specs'),
       h('c-green',  '  neofetch    ') + h('c-dim','  system info'),
       h('c-green',  '  contact     ') + h('c-dim','  get in touch'),
+      h('c-green',  '  uptime      ') + h('c-dim','  display system uptime'),
+      h('c-green',  '  ping        ') + h('c-dim','  ping...'),
+      h('c-green',  '  libreoffice ') + h('c-dim','  open documents (e.g. libreoffice raport.pdf)'),
       h('c-green',  '  clear       ') + h('c-dim','  clear the terminal'),
       h('c-green',  '  exit        ') + h('c-dim','  return to main site'),
       h('c-green',  '  cd /        ') + h('c-dim','  same as exit'),
       h('', ''),
     ];
   },
+
 
   about() {
     const lines = [h('',''), h('c-yellow','  ── About Me ──────────────────────────────────'), h('','')];
@@ -352,6 +356,82 @@ const COMMANDS = {
     return [];
   },
 
+  uptime() {
+    let start = sessionStorage.getItem('sessionStartTime');
+    if (!start) start = Date.now();
+    
+    const totalSeconds = Math.floor((Date.now() - start) / 1000);
+    const mins = Math.floor(totalSeconds / 60).toString().padStart(2, '0');
+    const secs = (totalSeconds % 60).toString().padStart(2, '0');
+    
+    return [
+      h('', ''),
+      h('c-text', `  System uptime: ${mins}:${secs}`),
+      h('', '')
+    ];
+  },
+
+  ping() {
+    appendLines([
+      h('', ''),
+      h('c-cyan', '  PING google.com (142.250.74.46) 56(84) bytes of data.')
+    ]);
+
+    let count = 0;
+    const maxPings = 4;
+
+    const pingInterval = setInterval(() => {
+      count++;
+      
+      const ms = (Math.random() * 10 + 12).toFixed(1); 
+      const seq = count;
+      
+      appendLines([
+        h('c-text', `  64 bytes from bud02s37-in-f14.1e100.net (142.250.74.46): icmp_seq=${seq} ttl=116 time=${ms} ms`)
+      ]);
+      if (count >= maxPings) {
+        clearInterval(pingInterval);
+        appendLines([
+          h('', ''),
+          h('c-yellow', '  --- google.com ping statistics ---'),
+          h('c-text', `  ${maxPings} packets transmitted, ${maxPings} received, 0% packet loss`),
+          h('', '')
+        ]);
+      }
+    }, 800);
+    return [];
+  },
+
+  libreoffice(args) {
+    if (!args || args.length === 0) {
+      return [
+        h('c-red', '  Error: No file specified.'),
+        h('c-dim', '  Usage: libreoffice [filename.pdf]'),
+        h('c-dim', '  Available files: loovtoo_raport.pdf, srcdoc.pdf'),
+        h('', '')
+      ];
+    }
+
+    const filename = args[0].toLowerCase();
+
+    if (filename === 'loovtoo_raport.pdf' || filename === 'raport.pdf') {
+      appendLines([h('c-dim', '  Opening loovtoo_raport.pdf in LibreOffice...'), h('', '')]);
+      setTimeout(() => { window.open('docs/loovtoo_raport.pdf', '_blank'); }, 600);
+      return [];
+    } else if (filename === 'srcdoc.pdf' || filename === 'certificate.pdf') {
+      appendLines([h('c-dim', '  Opening srcdoc.pdf in LibreOffice...'), h('', '')]);
+      setTimeout(() => { window.open('docs/srcdoc.pdf', '_blank'); }, 600);
+      return [];
+    } else {
+      return [
+        h('c-red', `  Error: File "${args[0]}" not found.`),
+        h('c-dim', '  Available files: loovtoo_raport.pdf, srcdoc.pdf'),
+        h('', '')
+      ];
+    }
+  },
+
+
   'cd /'() {
     appendLines([h('c-dim', '  Redirecting / ...'), h('', '')]);
     setTimeout(() => { window.location.href = 'https://gregoropmann.github.io/aboutme/'; }, 1200);
@@ -406,14 +486,18 @@ inp.addEventListener('keydown', e => {
     if (!raw) return;
     history.unshift(raw);
     echoPrompt(raw);
-    const cmd = raw.toLowerCase();
-    const handler = COMMANDS[cmd] || COMMANDS[cmd.split(' ')[0]];
+    
+    const parts = raw.split(' ');
+    const cmd = parts[0].toLowerCase();
+    const args = parts.slice(1);
+
+    const handler = COMMANDS[raw.toLowerCase()] || COMMANDS[cmd];
     if (handler) {
-      const result = handler();
-      if (result.length) appendLines(result);
+      const result = handler(args);
+      if (result && result.length) appendLines(result);
     } else {
       appendLines([
-        h('c-red', `  bash: ${raw}: command not found`),
+        h('c-red', `  bash: ${parts[0]}: command not found`),
         h('c-dim', `  Type <span class="c-green">help</span> for available commands.`),
         h('', ''),
       ]);
@@ -433,9 +517,11 @@ inp.addEventListener('keydown', e => {
   }
 });
 
+
 document.querySelector('.terminal-wrap').addEventListener('click', () => inp.focus());
 
 boot();
 </script>
 </body>
 </html>
+ 
