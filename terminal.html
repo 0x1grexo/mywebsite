@@ -297,13 +297,7 @@ const COMMANDS = {
       h('', ''),
     ];
 
-    if (helpCount === 2) {
-      lines.push(h('c-purple', '  [System] Are you stupid?'));
-      lines.push(h('', ''));
-    } else if (helpCount >= 3) {
-      lines.push(h('c-purple', '  [System] You Are An Idiot'));
-      lines.push(h('', ''));
-      } else if (helpCount >= 5) {
+    if (helpCount >= 5) {
       lines.push(h('c-red', '  [System] The emergency telephone number is 112'));
       lines.push(h('', ''));
 
@@ -317,9 +311,17 @@ const COMMANDS = {
           terminalAudio = null;
         }
       }, 5000); 
+    } else if (helpCount >= 3) {
+      lines.push(h('c-purple', '  [System] You Are An Idiot'));
+      lines.push(h('', ''));
+    } else if (helpCount === 2) {
+      lines.push(h('c-purple', '  [System] Are you stupid?'));
+      lines.push(h('', ''));
     }
+
     return lines;
   },
+};
 
   about() {
     const lines = [h('',''), h('c-yellow','  ── About Me ──────────────────────────────────'), h('','')];
