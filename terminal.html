@@ -25,7 +25,7 @@
     }
 
 ::selection {
-  background: rgba(0, 229, 255, 0.2); /* Transparent Cyan matching --cyan */
+  background: rgba(0, 229, 255, 0.2);
   color: var(--green);
 }
 
@@ -188,7 +188,6 @@
 </div>
 
 <script>
-// 1. Initialize session time right away
 if (!sessionStorage.getItem('sessionStartTime')) {
   sessionStorage.setItem('sessionStartTime', Date.now());
 }
@@ -289,6 +288,7 @@ const COMMANDS = {
       h('c-green',  '  neofetch    ') + h('c-dim','  system info'),
       h('c-green',  '  contact     ') + h('c-dim','  get in touch'),
       h('c-green',  '  uptime      ') + h('c-dim','  display system uptime'),
+h('c-green',  '  date        ') + h('c-dim','  print the current date and time'),
       h('c-green',  '  ping        ') + h('c-dim','  ping...'),
       h('c-green',  '  libreoffice ') + h('c-dim','  open documents (e.g. libreoffice raport.pdf)'),
       h('c-green',  '  clear       ') + h('c-dim','  clear the terminal'),
@@ -426,6 +426,17 @@ const COMMANDS = {
     }, 800);
     return [];
   },
+
+  date() {
+    const now = new Date();
+    const str = now.toString().split(' ').slice(0, 5).join(' ') + ' ' + now.getFullYear();
+    return [
+      h('', ''),
+      h('c-text', `  ${str}`),
+      h('', '')
+    ];
+  },
+
 
   libreoffice(args) {
     if (!args || args.length === 0) {
