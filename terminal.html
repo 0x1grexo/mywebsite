@@ -274,54 +274,57 @@ const NEOFETCH_INFO = [
 ];
 
 const COMMANDS = {
-  help() {
-    helpCount++;
-    const lines = [
-      h('', ''),
-      h('c-cyan', '  Available commands:'),
-      h('', ''),
-      h('c-green',  '  help        ') + h('c-dim','  you already know what this does'),
-      h('c-green',  '  about       ') + h('c-dim','  who am I'),
-      h('c-green',  '  whoami      ') + h('c-dim','  alias for about'),
-      h('c-green',  '  skills      ') + h('c-dim','  technologies I work with'),
-      h('c-green',  '  specs       ') + h('c-dim','  my PC hardware specs'),
-      h('c-green',  '  neofetch    ') + h('c-dim','  system info'),
-      h('c-green',  '  contact     ') + h('c-dim','  get in touch'),
-      h('c-green',  '  uptime      ') + h('c-dim','  display system uptime'),
-      h('c-green',  '  date        ') + h('c-dim','  print the current date and time'),
-      h('c-green',  '  ping        ') + h('c-dim','  ping...'),
-      h('c-green',  '  libreoffice ') + h('c-dim','  open documents (e.g. libreoffice raport.pdf)'),
-      h('c-green',  '  clear       ') + h('c-dim','  clear the terminal'),
-      h('c-green',  '  exit        ') + h('c-dim','  return to main site'),
-      h('c-green',  '  cd /          ') + h('c-dim','  return to main site'),
-      h('', ''),
-    ];
+help() {
+  helpCount++;
+  const lines = [
+    h('', ''),
+    h('c-cyan', '  Available commands:'),
+    h('', ''),
+    h('c-green',  '  help        ') + h('c-dim','  you already know what this does'),
+    h('c-green',  '  about       ') + h('c-dim','  who am I'),
+    h('c-green',  '  whoami      ') + h('c-dim','  alias for about'),
+    h('c-green',  '  skills      ') + h('c-dim','  technologies I work with'),
+    h('c-green',  '  specs       ') + h('c-dim','  my PC hardware specs'),
+    h('c-green',  '  neofetch    ') + h('c-dim','  system info'),
+    h('c-green',  '  contact     ') + h('c-dim','  get in touch'),
+    h('c-green',  '  uptime      ') + h('c-dim','  display system uptime'),
+    h('c-green',  '  date        ') + h('c-dim','  print the current date and time'),
+    h('c-green',  '  ping        ') + h('c-dim','  ping...'),
+    h('c-green',  '  libreoffice ') + h('c-dim','  open documents (e.g. libreoffice raport.pdf)'),
+    h('c-green',  '  clear       ') + h('c-dim','  clear the terminal'),
+    h('c-green',  '  exit        ') + h('c-dim','  return to main site'),
+    h('c-green',  '  cd /          ') + h('c-dim','  return to main site'),
+    h('', ''),
+  ];
 
-    if (helpCount >= 5) {
-      lines.push(h('c-red', '  [System] The emergency telephone number is 112'));
-      lines.push(h('', ''));
+  if (helpCount === 2) {
+    lines.push(h('c-purple', '  [System] Are you stupid?'));
+    lines.push(h('', ''));
+  } 
+  else if (helpCount >= 5) {
+    lines.push(h('c-purple', '  [System] You Are An Idiot'));
+    lines.push(h('', ''));
+    lines.push(h('c-red', '  [System] The emergency telephone number is 112'));
+    lines.push(h('', ''));
+  } 
+  else if (helpCount >= 3) {
+    lines.push(h('c-purple', '  [System] You Are An Idiot'));
+    lines.push(h('', ''));
+  }
 
-      if (terminalAudio) terminalAudio.pause();
-      terminalAudio = new Audio('sounds/terminal-song.mp3');
-      terminalAudio.play().catch(err => console.log("Sound play error", err));
-
-      setTimeout(() => {
-        if (terminalAudio) {
-          terminalAudio.pause();
-          terminalAudio = null;
-        }
-      }, 5000); 
-    } else if (helpCount >= 3) {
-      lines.push(h('c-purple', '  [System] You Are An Idiot'));
-      lines.push(h('', ''));
-    } else if (helpCount === 2) {
-      lines.push(h('c-purple', '  [System] Are you stupid?'));
-      lines.push(h('', ''));
-    }
-
-    return lines;
-  },
-};
+  if (helpCount >= 3) {
+    if (terminalAudio) terminalAudio.pause();
+    terminalAudio = new Audio('sounds/terminal-song.mp3');
+    terminalAudio.play().catch(err => console.log("Sound play error", err));
+    setTimeout(() => {
+      if (terminalAudio) {
+        terminalAudio.pause();
+        terminalAudio = null;
+      }
+    }, 5000); 
+  }
+  return lines;
+},
 
   about() {
     const lines = [h('',''), h('c-yellow','  ── About Me ──────────────────────────────────'), h('','')];
