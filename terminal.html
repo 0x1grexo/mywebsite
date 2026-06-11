@@ -298,10 +298,13 @@ h('c-green',  '  date        ') + h('c-dim','  print the current date and time')
     ];
 
     if (helpCount === 2) {
-      lines.push(h('c-red', '  [System] Are you stupid?'));
+      lines.push(h('c-purple', '  [System] Are you stupid?'));
       lines.push(h('', ''));
     } else if (helpCount >= 3) {
       lines.push(h('c-purple', '  [System] You Are An Idiot'));
+      lines.push(h('', ''));
+      } else if (helpCount >= 5) {
+      lines.push(h('c-red', '  [System] The emergency telephone number is 112'));
       lines.push(h('', ''));
 
       if (terminalAudio) terminalAudio.pause();
