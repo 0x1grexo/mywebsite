@@ -24,6 +24,12 @@
       --prompt-path:  #b48eff;
     }
 
+::selection {
+  background: rgba(0, 229, 255, 0.2); /* Transparent Cyan matching --cyan */
+  color: var(--green);
+}
+
+
     html, body {
       height: 100%;
       background: var(--bg);
@@ -182,19 +188,20 @@
 </div>
 
 <script>
+// 1. Initialize session time right away
+if (!sessionStorage.getItem('sessionStartTime')) {
+  sessionStorage.setItem('sessionStartTime', Date.now());
+}
+
 const out = document.getElementById('output');
 const inp = document.getElementById('cmd-input');
 const history = [];
+let helpCount = 0;
+let terminalAudio = null;
 let histIdx = -1;
 
 const DATA = {
-  about: `I'm a dedicated IT enthusiast and computer builder fascinated by the inner
-workings of digital systems. My primary focus is hardware optimization,
-custom PC assembly, and seamless software-hardware integration.
-
-I've built high-performance gaming rigs, solar-powered cooling systems, and
-more. Beyond hardware, I'm actively developing skills in Python & Bash
-scripting, plus IoT projects on Raspberry Pi and Arduino platforms.`,
+  about: `I'm a dedicated IT enthusiast and computer builder fascinated by the inner\nworkings of digital systems. My primary focus is hardware optimization,\ncustom PC assembly, and seamless software-hardware integration.\n\nI've built high-performance gaming rigs, solar-powered cooling systems, and\nmore. Beyond hardware, I'm actively developing skills in Python & Bash\nscripting, plus IoT projects on Raspberry Pi and Arduino platforms.`,
 
   specs: [
     ['CPU',        'AMD Ryzen 5 7600X'],
@@ -214,7 +221,6 @@ scripting, plus IoT projects on Raspberry Pi and Arduino platforms.`,
     ['Email', 'opmanngregor@gmail.com'],
   ],
 };
-
 
 const CACHY_LOGO =
 `          .-------------------------:
@@ -269,8 +275,9 @@ const NEOFETCH_INFO = [
 ];
 
 const COMMANDS = {
-    help() {
-    return [
+  help() {
+    helpCount++;
+    const lines = [
       h('', ''),
       h('c-cyan', '  Available commands:'),
       h('', ''),
@@ -286,11 +293,30 @@ const COMMANDS = {
       h('c-green',  '  libreoffice ') + h('c-dim','  open documents (e.g. libreoffice raport.pdf)'),
       h('c-green',  '  clear       ') + h('c-dim','  clear the terminal'),
       h('c-green',  '  exit        ') + h('c-dim','  return to main site'),
-      h('c-green',  '  cd /        ') + h('c-dim','  same as exit'),
+      h('c-green',  '  cd          ') + h('c-dim','  cd / returns to main site'),
       h('', ''),
     ];
-  },
 
+    if (helpCount === 2) {
+      lines.push(h('c-red', '  [System] Are you stupid?'));
+      lines.push(h('', ''));
+    } else if (helpCount >= 3) {
+      lines.push(h('c-purple', '  [System] You Are An Idiot'));
+      lines.push(h('', ''));
+
+      if (terminalAudio) terminalAudio.pause();
+      terminalAudio = new Audio('sounds/terminal-song.mp3');
+      terminalAudio.play().catch(err => console.log("Sound play error", err));
+
+      setTimeout(() => {
+        if (terminalAudio) {
+          terminalAudio.pause();
+          terminalAudio = null;
+        }
+      }, 5000); 
+    }
+    return lines;
+  },
 
   about() {
     const lines = [h('',''), h('c-yellow','  ── About Me ──────────────────────────────────'), h('','')];
@@ -382,7 +408,6 @@ const COMMANDS = {
 
     const pingInterval = setInterval(() => {
       count++;
-      
       const ms = (Math.random() * 10 + 12).toFixed(1); 
       const seq = count;
       
@@ -431,13 +456,16 @@ const COMMANDS = {
     }
   },
 
-
-  'cd /'() {
-    appendLines([h('c-dim', '  Redirecting / ...'), h('', '')]);
-    setTimeout(() => { window.location.href = 'https://gregoropmann.github.io/aboutme/'; }, 1200);
+  cd(args) {
+    if (args.length === 0 || args[0] === '/') {
+      appendLines([h('c-dim', '  Redirecting / ...'), h('', '')]);
+      setTimeout(() => { window.location.href = 'https://gregoropmann.github.io/aboutme/'; }, 1200);
+    } else {
+      return [h('c-red', `  bash: cd: ${args[0]}: No such file or directory`), h('', '')];
+    }
     return [];
-  },
-};
+  }
+}; // <-- This closing brace was missing!
 
 function h(cls, text) {
   return `<span class="line ${cls}">${text}</span>`;
@@ -487,11 +515,16 @@ inp.addEventListener('keydown', e => {
     history.unshift(raw);
     echoPrompt(raw);
     
-    const parts = raw.split(' ');
+    const parts = raw.split(/\s+/);
     const cmd = parts[0].toLowerCase();
     const args = parts.slice(1);
 
-    const handler = COMMANDS[raw.toLowerCase()] || COMMANDS[cmd];
+    if (cmd !== 'help') {
+      helpCount = 0;
+    }
+
+    // Cleaned up handler lookup
+    const handler = COMMANDS[cmd];
     if (handler) {
       const result = handler(args);
       if (result && result.length) appendLines(result);
@@ -517,11 +550,9 @@ inp.addEventListener('keydown', e => {
   }
 });
 
-
-document.querySelector('.terminal-wrap').addEventListener('click', () => inp.focus());
+document.body.addEventListener('click', () => inp.focus());
 
 boot();
 </script>
 </body>
 </html>
- 
