@@ -16,6 +16,7 @@ const ASSETS_TO_CACHE = [
   './images/game.png',
   './sounds/yougotmail.mp3',
   './docs/loovtoo_kiituskiri.pdf',
+  './docs/loovtoo_kiituskiri_hindamine.pdf',
   './game.zip',
   './docs/loovtoo_raport.pdf',
   './images/klassi_naljamees.png',
@@ -28,6 +29,19 @@ const ASSETS_TO_CACHE = [
   './images/dark.paths.png',
   './images/profile.png',
   './images/pov-fedora.png',
+  './images/404.png',
+  './images/OSdesktops.png',
+  './images/klassi_naljamees.png',
+  './images/ouamaitrum.png',
+  './images/teachersday.png',
+  './images/vikingsauna.png',
+  './sounds/dialup_screech.mp3',
+  './sounds/terminal-song.mp3',
+  './404.html',
+  './banner.js',
+  './robots.txt',
+  './sitemap.xml',
+  './.github/workflows/update-sitemap.yml',
 ];
 
 self.addEventListener('install', (event) => {
