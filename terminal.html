@@ -480,7 +480,7 @@ help() {
   },
 
   cd(args) {
-    if (args.length === 0 || args[0] === '/') {
+    if (args.length === 0 || args[0] === '/' || args[0] === '..' || args[0] === '~') {
       appendLines([h('c-dim', '  Redirecting / ...'), h('', '')]);
       setTimeout(() => { window.location.href = 'https://gregoropmann.github.io/aboutme/'; }, 1200);
     } else {
