@@ -1,0 +1,27 @@
+(function () {
+  tp = window['tp'] || [];
+
+  tp.push(['setAid', 'WSdSTXR9pe']);
+  tp.push(['setComposerHost', 'https://c2.piano.delfi.ee']);
+  tp.push(['setEndpoint', 'https://vx.piano.delfi.ee']);
+  tp.push(['setStaticDomain', 'https://cdn.piano.delfi.ee']);
+  tp.push(['setUseTinypassAccounts', false]);
+  tp.push(['setPianoIdUrl', 'https://auth.piano.delfi.ee']);
+  tp.push(['setApplePayMerchantId', 'acct_1NBCpCHJ8MUWt0zL']);
+  // s
+  tp.push([
+    'init',
+    function () {
+      tp.experience.init();
+    },
+  ]);
+})();
+
+(function (src) {
+  const a = document.createElement('script');
+  a.type = 'text/javascript';
+  a.async = true;
+  a.src = src;
+  const b = document.getElementsByTagName('script')[0];
+  b.parentNode.insertBefore(a, b);
+})('https://cdn.piano.delfi.ee/api/tinypass.min.js');

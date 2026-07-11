@@ -1,0 +1,91 @@
+/* financier-display-light */
+@font-face {
+  font-family: 'Financier Display';
+  font-style: normal;
+  font-weight: 300;
+  src: url('FinancierDisplay-Light.otf') format('opentype');
+}
+/* financier-display-light-italic */
+@font-face {
+  font-family: 'Financier Display';
+  font-style: italic;
+  font-weight: 300;
+  src: url('FinancierDisplay-LightItalic.otf') format('opentype');
+}
+/* financier-display-medium */
+@font-face {
+  font-family: 'Financier Display';
+  font-style: normal;
+  font-weight: 500;
+  src: url('FinancierDisplay-Medium.otf') format('opentype');
+}
+/* financier-display-medium-italic */
+@font-face {
+  font-family: 'Financier Display';
+  font-style: italic;
+  font-weight: 500;
+  src: url('FinancierDisplay-MediumItalic.otf') format('opentype');
+}
+/* financier-display-semibold */
+@font-face {
+  font-family: 'Financier Display';
+  font-style: normal;
+  font-weight: 600;
+  src: url('FinancierDisplay-Semibold.otf') format('opentype');
+}
+/* financier-display-bold */
+@font-face {
+  font-family: 'Financier Display';
+  font-style: normal;
+  font-weight: 700;
+  src: url('FinancierDisplay-Bold.otf') format('opentype');
+}
+/* financier-display-black */
+@font-face {
+  font-family: 'Financier Display';
+  font-style: normal;
+  font-weight: 900;
+  src: url('FinancierDisplay-Black.otf') format('opentype');
+}
+/* financier-text-regular */
+@font-face {
+  font-family: 'Financier Text';
+  font-style: normal;
+  font-weight: 400;
+  src: url('FinancierText-Regular.otf') format('opentype');
+}
+/* financier-text-regular-italic */
+@font-face {
+  font-family: 'Financier Text';
+  font-style: italic;
+  font-weight: 400;
+  src: url('FinancierText-RegularItalic.otf') format('opentype');
+}
+/* financier-text-medium */
+@font-face {
+  font-family: 'Financier Text';
+  font-style: normal;
+  font-weight: 500;
+  src: url('FinancierText-Medium.otf') format('opentype');
+}
+/* financier-text-bold */
+@font-face {
+  font-family: 'Financier Text';
+  font-style: normal;
+  font-weight: 700;
+  src: url('FinancierText-Bold.otf') format('opentype');
+}
+/* financier-text-bold-italic */
+@font-face {
+  font-family: 'Financier Text';
+  font-style: italic;
+  font-weight: 700;
+  src: url('FinancierText-BoldItalic.otf') format('opentype');
+}
+/* financier-text-black */
+@font-face {
+  font-family: 'Financier Text';
+  font-style: normal;
+  font-weight: 900;
+  src: url('FinancierText-Black.otf') format('opentype');
+}

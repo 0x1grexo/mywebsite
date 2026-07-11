@@ -1,0 +1,98 @@
+/* metric-thin */
+@font-face {
+  font-family: 'Metric';
+  font-style: normal;
+  font-weight: 100;
+  src: url('Metric-Thin.otf') format('opentype');
+}
+/* metric-thin-italic */
+@font-face {
+  font-family: 'Metric';
+  font-style: italic;
+  font-weight: 100;
+  src: url('Metric-ThinItalic.otf') format('opentype');
+}
+/* metric-light */
+@font-face {
+  font-family: 'Metric';
+  font-style: normal;
+  font-weight: 300;
+  src: url('Metric-Light.otf') format('opentype');
+}
+/* metric-light-italic */
+@font-face {
+  font-family: 'Metric';
+  font-style: italic;
+  font-weight: 300;
+  src: url('Metric-LightItalic.otf') format('opentype');
+}
+/* metric-regular */
+@font-face {
+  font-family: 'Metric';
+  font-style: normal;
+  font-weight: 400;
+  src: url('Metric-Regular.otf') format('opentype');
+}
+/* metric-regular-italic */
+@font-face {
+  font-family: 'Metric';
+  font-style: italic;
+  font-weight: 400;
+  src: url('Metric-RegularItalic.otf') format('opentype');
+}
+/* metric-medium */
+@font-face {
+  font-family: 'Metric';
+  font-style: normal;
+  font-weight: 500;
+  src: url('Metric-Medium.otf') format('opentype');
+}
+/* metric-medium-italic */
+@font-face {
+  font-family: 'Metric';
+  font-style: italic;
+  font-weight: 500;
+  src: url('Metric-MediumItalic.otf') format('opentype');
+}
+/* metric-semibold */
+@font-face {
+  font-family: 'Metric';
+  font-style: normal;
+  font-weight: 600;
+  src: url('Metric-Semibold.otf') format('opentype');
+}
+/* metric-semibold-italic */
+@font-face {
+  font-family: 'Metric';
+  font-style: italic;
+  font-weight: 600;
+  src: url('Metric-SemiboldItalic.otf') format('opentype');
+}
+/* metric-bold */
+@font-face {
+  font-family: 'Metric';
+  font-style: normal;
+  font-weight: 700;
+  src: url('Metric-Bold.otf') format('opentype');
+}
+/* metric-bold-italic */
+@font-face {
+  font-family: 'Metric';
+  font-style: italic;
+  font-weight: 700;
+  src: url('Metric-BoldItalic.otf') format('opentype');
+}
+/* metric-black */
+@font-face {
+  font-family: 'Metric';
+  font-style: normal;
+  font-weight: 900;
+  src: url('Metric-Black.otf') format('opentype');
+}
+/* metric-black-italic */
+@font-face {
+  font-family: 'Metric';
+  font-style: italic;
+  font-weight: 900;
+  src: url('Metric-BlackItalic.otf') format('opentype');
+}

@@ -1,0 +1,902 @@
+window.en_adf_trackAD = function (en_container_id, parent_window) {
+  if (
+    parent_window &&
+    parent_window.frameElement &&
+    parent_window.frameElement.parentNode
+  ) {
+    var frameParentNode = parent_window.frameElement;
+    frameParentNode.enrFrameCont = 1;
+    frameParentNode.setAttribute("en_id", en_container_id);
+    if (frameParentNode.id) {
+      en_container_id = frameParentNode.id;
+    } else {
+      frameParentNode.id = en_container_id;
+    }
+    function handleClilck(e) {
+      if (frameParentNode && window.parent.alen_onactiveelementchange) {
+        window.parent.alen_onactiveelementchange(frameParentNode);
+      }
+    }
+    if (parent_window.document.attachEvent) {
+      parent_window.document.attachEvent(
+        "onclick",
+        function (e) {
+          handleClilck(e);
+        },
+        false
+      );
+    } else {
+      parent_window.document.addEventListener(
+        "click",
+        function (e) {
+          handleClilck(e);
+        },
+        false
+      );
+    }
+  }
+  admp_.initTracking(en_container_id);
+};
+var iframeConfObj = { iframeMouseOver: false };
+window.addEventListener("blur", function (e) {
+  if (iframeConfObj.iframeMouseOver) {
+    let activeElement = document.getElementById(iframeConfObj.id);
+    window.alen_onactiveelementchange(activeElement);
+  }
+});
+var en_container_id;
+function setEnContainerId(id) {
+  en_container_id = id;
+  document
+    .getElementById(en_container_id)
+    .addEventListener("mouseover", function () {
+      iframeConfObj.iframeMouseOver = true;
+      iframeConfObj.id = en_container_id;
+    });
+  document
+    .getElementById(en_container_id)
+    .addEventListener("mouseout", function () {
+      iframeConfObj.iframeMouseOver = false;
+    });
+}
+var configId;
+function setConfigId(id) {
+  configId = id;
+}
+({
+  name: "adtlgcen_Cookie",
+  set: function (a, c, b) {
+    this.shouldSendSameSiteNone()
+      ? this.setSecure(a, c, b)
+      : this.setNonSecure(a, c, b);
+  },
+  setNonSecure: function (a, c, b) {
+    var d;
+    d = "";
+    d = new Date();
+    b && d.setTime(d.getTime() + 36e5 * b);
+    d = "; expires=" + d.toUTCString();
+    document.cookie = escape(a) + "=" + c + d + "; path=/";
+  },
+  setSecure: function (a, c, b) {
+    var d;
+    d = "";
+    d = new Date();
+    b && d.setTime(d.getTime() + 36e5 * b);
+    d = "; expires=" + d.toUTCString();
+    document.cookie =
+      escape(a) + "=" + c + d + "; path=/; SameSite=None; Secure";
+  },
+  get: function (a) {
+    var c,
+      b,
+      d = document.cookie;
+    b = a + "=";
+    c = d.indexOf("; " + b);
+    if (-1 == c) {
+      if (((c = d.indexOf(b)), 0 !== c)) return "";
+    } else c += 2;
+    a = d.indexOf(";", c);
+    -1 == a && (a = d.length);
+    return unescape(d.substring(c + b.length, a));
+  },
+  unset: function (a) {
+    return this.set(a, "");
+  },
+  init: function () {
+    window[this.name] = this;
+  },
+  shouldSendSameSiteNone: function () {
+    return !this.isSameSiteNoneIncompatible(navigator.userAgent);
+  },
+  isSameSiteNoneIncompatible: function (a) {
+    return (
+      this.hasWebKitSameSiteBug(a) || this.dropsUnrecognizedSameSiteCookies(a)
+    );
+  },
+  hasWebKitSameSiteBug: function (a) {
+    return (
+      this.isIosVersion(12, a) ||
+      (this.isMacosxVersion(10, 14, a) &&
+        (this.isSafari(a) || this.isMacEmbeddedBrowser(a)))
+    );
+  },
+  dropsUnrecognizedSameSiteCookies: function (a) {
+    return this.isUcBrowser(a)
+      ? !this.isUcBrowserVersionAtLeast(12, 13, 2, a)
+      : this.isChromiumBased(a) &&
+          this.isChromiumVersionAtLeast(51, a) &&
+          !this.isChromiumVersionAtLeast(67, a);
+  },
+  isIosVersion: function (a, c) {
+    var b = c.match(/iP.+;\sCPU\s.*OS\s(\d+)[_\d]*.*AppleWebKit/i);
+    return b && b[1] == a;
+  },
+  isMacosxVersion: function (a, c, b) {
+    return (
+      (b = b.match(
+        /Macintosh;\s.*Mac\sOS\sX\s(\d+)_(\d+)[_\d+]*.*AppleWebKit/i
+      )) &&
+      2 < b.length &&
+      b[1] == a &&
+      b[2] == c
+    );
+  },
+  isSafari: function (a) {
+    return a.match(/Version.*Safari/i) && !isChromiumBased(a);
+  },
+  isMacEmbeddedBrowser: function (a) {
+    return (
+      (a = a.match(
+        /^Mozilla\/[\.\d]+.*\(Macintosh;.*Mac OS X\s*[_\d]?.*\) AppleWebKit\/[\.\d]+.*\(KHTML, like Gecko.*\)/i
+      )) && 0 < a.length
+    );
+  },
+  isChromiumBased: function (a) {
+    return (a = a.match(/Chrom[[e|ium]+/i)) && 0 < a.length;
+  },
+  isChromiumVersionAtLeast: function (a, c) {
+    var b = c.match(/Chrom[^ \/]+\/(\d+)[\.\d]*/i);
+    return b && 0 < b.length && b[0] >= a;
+  },
+  isUcBrowser: function (a) {
+    return (a = a.match(/UCBrowser/i)) && 0 < a.length;
+  },
+  isUcBrowserVersionAtLeast: function (a, c, b, d) {
+    var e = d.match(/UCBrowser\/(\d+)\.(\d+)\.(\d+)[\.\d]*/i);
+    if (e && 4 <= e.length) {
+      d = parseInt(e[1]);
+      var f = parseInt(e[2]),
+        e = parseInt(e[3]);
+      return d != a ? d > a : f != c ? f > c : e >= b;
+    }
+  },
+}).init();
+var cX = cX || {};
+cX.callQueue = cX.callQueue || [];
+window.en_ads = window.en_ads || [];
+if (!window.admp_) {
+  var CUSTOMER_ID = "00XX";
+  try {
+    window.loc_ =
+      window.location.href == "undefined" &&
+      JSON &&
+      JSON.parse &&
+      JSON.stringify
+        ? JSON.parse(JSON.stringify(window.location))
+        : window.location;
+  } catch (err) {
+    window.loc_ = window.location;
+  }
+  if (!window.loc_.origin) {
+    window.loc_.origin =
+      window.loc_.protocol +
+      "//" +
+      window.loc_.hostname +
+      (window.loc_.port ? ":" + window.loc_.port : "");
+  }
+  var adtlgcen_SETTINGS = {
+    TC_URL: "https://stats-collector.cxense.com/cr-stats/event/",
+    minPercOfVisibility: 50,
+    maxDwellTimeToSend: 60,
+  };
+  var enr_vars = {
+    evid: "evid_" + CUSTOMER_ID,
+    inview_data_container: "en_data",
+  };
+  window.en_slots = window.en_slots || {};
+  window.adtlgcen = window.adtlgcen || {};
+  adtlgcen.config = adtlgcen.config || {};
+  adtlgcen.util = adtlgcen.util || {};
+  adtlgcen.event = adtlgcen.event || {};
+  adtlgcen.config.tagsToMonitor = {
+    A: "",
+    EMBED: "",
+    OBJECT: "",
+    IFRAME: "",
+    IMG: "",
+    AREA: "",
+    CANVAS: "",
+    SVG: "",
+    DIV: "",
+  };
+  adtlgcen.config.blocksToTrack = adtlgcen.config.blocksToTrack || [];
+  adtlgcen.config.bannersToTrack = adtlgcen.config.bannersToTrack || [];
+  adtlgcen.config.bannersImpIds = adtlgcen.config.bannersImpIds || [];
+  adtlgcen.config.eventsCache = adtlgcen.config.eventsCache || [];
+  adtlgcen.config.suspendAdEvents = true;
+  function BaseSize() {
+    this.width = 0;
+    this.height = 0;
+    this.toString = function () {
+      var result = "{";
+      for (var i in this) {
+        if (typeof this[i] != "function") {
+          result += i + ": " + this[i] + ", ";
+        }
+      }
+      return result.substring(0, result.length - 2) + "}";
+    };
+  }
+  function InViewNode(opt_options) {
+    function init(elements, callback) {
+      if (!(elements instanceof Array)) {
+        elements = [elements];
+      }
+      for (var i = 0; i < elements.length; i++) {
+        addElementToTrack(elements[i]);
+      }
+      callback_ = callback;
+      run_();
+    }
+    this["init"] = init;
+    function addElementToTrack(element) {
+      if (typeof element == "string") {
+        element = doc_.getElementById(element);
+      }
+      if (element) {
+        element[dataKey_] = new InViewData();
+        elements_.push(element);
+      }
+    }
+    this["addElementToTrack"] = addElementToTrack;
+    function removeElementToTrack(elementToRemove) {
+      if (typeof element == "string") {
+        elementToRemove = doc_.getElementById(elementToRemove);
+      }
+      var newList = [];
+      for (var i = 0; i < elements_.length; i++) {
+        var element = elements_[i];
+        if (element.id == elementToRemove.id) {
+          elementToRemove[dataKey_] = new InViewData();
+        } else {
+          newList.push(element);
+        }
+      }
+      elements_ = newList;
+    }
+    this["removeElementToTrack"] = removeElementToTrack;
+    function run_() {
+      if (elements_ && elements_.length > 0) {
+        var viewBox = getViewBox_();
+        var root = getRoot_();
+        for (var i = 0; i < elements_.length; i++) {
+          var element = elements_[i];
+          var nodeBox = getNodeBox_(element);
+          element[dataKey_].height = parseInt(
+            (getVisibleHeight_(viewBox, nodeBox) * 100) / nodeBox.height,
+            10
+          );
+          element[dataKey_].width = parseInt(
+            (getVisibleWidth_(viewBox, nodeBox) * 100) / nodeBox.width,
+            10
+          );
+          if (contains_(viewBox, nodeBox)) {
+            if (!element[dataKey_].start_) {
+              element[dataKey_].start_ = new Date().getTime();
+            }
+            element[dataKey_]["time"] =
+              new Date().getTime() - (element[dataKey_].start_ || 0);
+            element[dataKey_]["visible"] = true;
+            callback_(element);
+          } else {
+            if (element[dataKey_].start_) {
+              element[dataKey_]["time"] =
+                new Date().getTime() - element[dataKey_].start_;
+              element[dataKey_]["visible"] = false;
+              element[dataKey_].start_ = 0;
+              callback_(element);
+            }
+          }
+        }
+      }
+      if (timer_) {
+        win_.clearTimeout(timer_);
+      }
+      timer_ = win_.setTimeout(function () {
+        run_();
+      }, timeout_);
+    }
+    function contains_(viewBox, nodeBox) {
+      return (
+        nodeBox.top + nodeBox.height > viewBox.top &&
+        nodeBox.top < viewBox.top + viewBox.height &&
+        nodeBox.left + nodeBox.width > viewBox.left &&
+        nodeBox.left < viewBox.left + viewBox.width
+      );
+    }
+    function getVisibleHeight_(viewBox, nodeBox) {
+      var result = viewBox.height;
+      if (nodeBox.top - viewBox.top > 0) {
+        result -= nodeBox.top - viewBox.top;
+      }
+      if (viewBox.top + viewBox.height - (nodeBox.top + nodeBox.height) > 0) {
+        result -= viewBox.top + viewBox.height - (nodeBox.top + nodeBox.height);
+      }
+      if (result < 0) {
+        result = 0;
+      }
+      return result;
+    }
+    function getVisibleWidth_(viewBox, nodeBox) {
+      var result = viewBox.width;
+      if (nodeBox.left - viewBox.left > 0) {
+        result -= nodeBox.left - viewBox.left;
+      }
+      if (viewBox.left + viewBox.width - (nodeBox.left + nodeBox.width) > 0) {
+        result -= viewBox.left + viewBox.width - (nodeBox.left + nodeBox.width);
+      }
+      if (result < 0) {
+        result = 0;
+      }
+      return result;
+    }
+    function getRoot_() {
+      if (!root_) {
+        root_ =
+          doc_.compatMode == "CSS1Compat" ? doc_.documentElement : doc_.body;
+      }
+      return root_;
+    }
+    function getViewBox_() {
+      var root = getRoot_();
+      var box = new ClientRectImpl();
+      box.height = win_.innerHeight || root.clientHeight || 0;
+      box.width = win_.innerWidth || root.clientWidth || 0;
+      box.top = win_.pageYOffset || root.scrollTop || 0;
+      box.left = win_.pageXOffset || root.scrollLeft || 0;
+      if (+"\v1") {
+        if (root.scrollHeight) {
+          box.height -= getScrollBarSize_();
+        }
+        if (root.scrollWidth) {
+          box.width -= getScrollBarSize_();
+        }
+      }
+      return box;
+    }
+    function getNodeBox_(element) {
+      var root = getRoot_();
+      var box = new ClientRectImpl();
+      box.height = element.offsetHeight;
+      box.width = element.offsetWidth;
+      while (element.offsetParent) {
+        box.top += element.offsetTop;
+        box.left += element.offsetLeft;
+        element = element.offsetParent;
+      }
+      return box;
+    }
+    function getScrollBarSize_() {
+      if (!scrollBarSizeInitialized_) {
+        var outer = doc_.createElement("P");
+        outer.style.position = "absolute";
+        outer.style.top = "0px";
+        outer.style.left = "0px";
+        outer.style.visibility = "hidden";
+        outer.style.width = "200px";
+        outer.style.height = "150px";
+        outer.style.overflow = "hidden";
+        var inner = outer.appendChild(doc_.createElement("P"));
+        inner.style.width = "100%";
+        inner.style.height = "200px";
+        doc_.body.appendChild(outer);
+        var w1 = inner.offsetWidth;
+        outer.style.overflow = "scroll";
+        var w2 = inner.offsetWidth;
+        if (w1 == w2) {
+          w2 = outer.clientWidth;
+        }
+        doc_.body.removeChild(outer);
+        scrollBarSize_ = w1 - w2;
+        scrollBarSizeInitialized_ = 1;
+      }
+      return scrollBarSize_;
+    }
+    var win_ = window;
+    var doc_ = win_.document;
+    var root_ = null;
+    var elements_ = [];
+    var callback_ = null;
+    var timer_ = 0;
+    var scrollBarSize_ = 0;
+    var scrollBarSizeInitialized_ = 0;
+    var timeout_ = opt_options["timeout"] || 400;
+    var dataKey_ = opt_options["key"] || "en_data";
+  }
+  window["InViewNode"] = InViewNode;
+  function InViewData() {
+    BaseSize.call(this);
+    this.time = 0;
+    this.visible = false;
+    this.iteration = 1;
+    this["time"] = this.time;
+    this["visible"] = this.visible;
+    this.sentDwellTime = 0;
+  }
+  function ClientRectImpl() {
+    BaseSize.call(this);
+    this.top = 0;
+    this.right = 0;
+    this.bottom = 0;
+    this.left = 0;
+  }
+  window.en_regAD = function (contId) {
+    admp_.initTracking(contId);
+  };
+  adtlgcen.util.fib = function (n) {
+    return n < 2 ? n : adtlgcen.util.fib(n - 1) + adtlgcen.util.fib(n - 2);
+  };
+  adtlgcen.util.interval = function (n) {
+    return n > 6 ? 10 : adtlgcen.util.fib(n + 2) - 1;
+  };
+  adtlgcen.util.send = function (url, skipExtraparams, pixelImage) {
+    if (!skipExtraparams) {
+      url += "&evid=" + window[enr_vars.evid];
+    }
+    if (pixelImage) {
+      setTimeout(function () {
+        var imgRequest = new Image(0, 0);
+        imgRequest.src = url;
+      }, 100);
+      return;
+    }
+    if (navigator.appVersion.indexOf("MSIE") != -1) {
+      var version = parseFloat(navigator.appVersion.split("MSIE")[1]);
+      if (version < 8) {
+        setTimeout(function () {
+          var request = new Image(0, 0);
+          request.src = url;
+        }, 1e3);
+        return;
+      }
+    }
+    var result = false;
+    if (!result && typeof XDomainRequest != "undefined") {
+      result = new XDomainRequest();
+    }
+    if (!result && typeof XMLHttpRequest != "undefined") {
+      try {
+        result = new XMLHttpRequest();
+      } catch (e) {
+        result = false;
+      }
+    }
+    if (!result && window.createRequest) {
+      try {
+        result = window.createRequest();
+      } catch (e) {
+        result = false;
+      }
+    }
+    if (result) {
+      result.open("GET", url, true);
+      result.send("");
+    }
+    return result;
+  };
+  adtlgcen.util.extractAdMeta = function (p) {
+    var result = null;
+    if (p) {
+      result = p["adtlgcAdMeta"];
+      if (!result) {
+        for (var i = 0; i < 2; i++) {
+          var pid = p.getAttribute("en_id");
+          if (!pid) {
+            pid = p.getAttribute("id");
+          }
+          if (pid && /\d+\$\d+\$\d+/.test(pid)) {
+            var vs = pid.split("$");
+            if (vs.length == 3) {
+              result = { cuid: vs[0], adid: vs[1], bnid: vs[2] };
+              p["adtlgcAdMeta"] = result;
+            }
+            break;
+          } else {
+            p = p.parentNode;
+          }
+        }
+      }
+    }
+    return result;
+  };
+  adtlgcen.util.processIframes = function (element) {
+    var iframes = element.getElementsByTagName("iframe");
+    if (element.tagName == "IFRAME") {
+      try {
+        iframes = element.contentDocument.getElementsByTagName("iframe");
+      } catch (e) {}
+    }
+    for (var f = 0; f < iframes.length; f++) {
+      try {
+        var fdocument = iframes[f].contentDocument;
+        if (fdocument && !iframes[f].getAttribute("en_processed")) {
+          fdocument.enr_frame_win =
+            iframes[f].contentWindow || iframes[f].contentDocument.parentWindow;
+          adtlgcen.util.assignIframeClickHandlers(iframes[f], fdocument, 4);
+        }
+      } catch (e) {}
+    }
+  };
+  adtlgcen.util.processCanvasAds = function (element) {
+    var canvasElements = element.getElementsByTagName("canvas");
+    for (var f = 0; f < canvasElements.length; f++) {
+      var canvasEl = canvasElements[f];
+      if (!canvasEl.getAttribute("en_processed")) {
+        adtlgcen.util.assignClickHandler(canvasEl, false);
+        canvasEl.setAttribute("en_processed", "1");
+      }
+    }
+  };
+  adtlgcen.util.assignIframeClickHandlers = function (
+    iframeEl,
+    frameDocument,
+    count
+  ) {
+    if (count > 0) {
+      var array = [];
+      var tagsToGather = ["div", "p", "canvas", "a", "img", "svg"];
+      for (var i = 0; i < tagsToGather.length; i++) {
+        var elements = frameDocument.getElementsByTagName(tagsToGather[i]);
+        for (var j = 0; i < elements.length; j++) {
+          array.push(elements[j]);
+        }
+      }
+      var iframes = frameDocument.getElementsByTagName("iframe");
+      if (iframes.length > 0) {
+        adtlgcen.util.processIframes(frameDocument);
+      }
+      if (array.length > 0) {
+        for (var d = 0; d < array.length; d++) {
+          var targetElem = array[d];
+          adtlgcen.util.assignClickHandler(targetElem, true);
+        }
+        iframeEl.setAttribute("en_processed", "1");
+      } else {
+        setTimeout(function () {
+          adtlgcen.util.assignIframeClickHandlers(
+            iframeEl,
+            frameDocument,
+            count--
+          );
+        }, 1e3);
+      }
+    }
+  };
+  adtlgcen.event.reportImp = function (adid, bnid, cuid) {
+    var impId = [...Array(16)]
+      .map((i) => (~~(Math.random() * 36)).toString(36))
+      .join("");
+    adtlgcen.config.bannersImpIds[adid + ":" + bnid] = impId;
+    var extra_params = "&impRndId=" + impId;
+    adtlgcen.event.reportEventBase("imp", adid, bnid, cuid, extra_params);
+    adtlgcen.config.bannersToTrack[adid + ":" + bnid] = "true";
+  };
+  adtlgcen.event.reportClick = function (adid, bnid, cuid) {
+    adtlgcen.event.reportEventBase("click", adid, bnid, cuid);
+  };
+  adtlgcen.event.reportEventBase = function (
+    event,
+    adid,
+    bnid,
+    cuid,
+    extra_params
+  ) {
+    var campaignData = "?adId=" + adid + "&bnId=" + bnid + "&pId=" + cuid;
+    campaignData +=
+      "&location=" +
+      (encodeURIComponent || escape)(window.loc_.href) +
+      "&t=" +
+      encodeURIComponent(document.title) +
+      "&cb=" +
+      new Date().getTime();
+    campaignData +=
+      "&cxSiteId=" +
+      encodeURIComponent(cX.library.m_siteId) +
+      "&cxId=" +
+      encodeURIComponent(cX.getCxenseUserId());
+    campaignData +=
+      "&cxprnd=" + encodeURIComponent(cX.getPageContext().pageViewRandom);
+    var event_url =
+      adtlgcen_SETTINGS.TC_URL +
+      event +
+      campaignData +
+      "&configId=" +
+      (typeof configId === "undefined" ? "" : configId);
+    if (typeof configId !== "undefined")
+      adtlgcen.util.send(event_url + (extra_params || ""));
+  };
+  adtlgcen.event.reportDwellTime = function (
+    adid,
+    bnid,
+    cuid,
+    currInterval,
+    v_imp
+  ) {
+    var impId = adtlgcen.config.bannersImpIds[adid + ":" + bnid];
+    var extra_params =
+      "&timeOnScreen=" +
+      currInterval +
+      (v_imp ? "" : "&v_imp=true") +
+      (impId ? "&impRndId=" + impId : "");
+    adtlgcen.event.reportEventBase("in-screen", adid, bnid, cuid, extra_params);
+  };
+  adtlgcen.event.processEvents = function () {
+    var events = adtlgcen.config.eventsCache;
+    adtlgcen.config.suspendAdEvents = false;
+    for (var i = 0; i < events.length; i++) {
+      var data_arr = events[i].split(":");
+      if (data_arr[0] == "imp") {
+        adtlgcen.event.reportImp(data_arr[1], data_arr[2], data_arr[3]);
+      } else if (data_arr[0] == "click") {
+        adtlgcen.event.reportClick(data_arr[1], data_arr[2], data_arr[3]);
+      } else if (data_arr[0] == "dwell") {
+        adtlgcen.event.reportDwellTime(
+          data_arr[1],
+          data_arr[2],
+          data_arr[3],
+          data_arr[4],
+          data_arr[5]
+        );
+      }
+    }
+    adtlgcen.config.eventsCache = [];
+  };
+  window.alen_onactiveelementchange = function (p) {
+    var adMeta = "";
+    if (p.enrFrameCont) {
+      adMeta = adtlgcen.util.extractAdMeta(p);
+    } else {
+      if (!p || !p.tagName || !(p.tagName in adtlgcen.config.tagsToMonitor)) {
+        return;
+      }
+      for (var i = 0; i < 5; i++) {
+        if (!p) break;
+        if (p.tagName == "BODY") break;
+        if (p.tagName == "DIV" && p.id && adtlgcen.util.extractAdMeta(p)) break;
+        p = p.parentNode;
+      }
+      adMeta = adtlgcen.util.extractAdMeta(p);
+    }
+    if (adMeta) {
+      var cuid = adMeta["cuid"],
+        adid = adMeta["adid"],
+        bnid = adMeta["bnid"];
+      if (cuid && adid && bnid) {
+        if (adtlgcen.config.bannersToTrack[adid + ":" + bnid]) {
+          if (adtlgcen.config.suspendAdEvents) {
+            adtlgcen.config.eventsCache.push(
+              "click:" + adid + ":" + bnid + ":" + cuid
+            );
+            return;
+          }
+          adtlgcen.event.reportClick(adid, bnid, cuid);
+        }
+      }
+    }
+  };
+  function onClickHandler(e, useIframeElem) {
+    var activeElement = e.srcElement ? e.srcElement : e.target;
+    if (activeElement) {
+      if (window.alen_onactiveelementchange) {
+        if (
+          useIframeElem &&
+          activeElement.ownerDocument.enr_frame_win &&
+          activeElement.ownerDocument.enr_frame_win.frameElement
+        ) {
+          activeElement =
+            activeElement.ownerDocument.enr_frame_win.frameElement;
+        }
+        window.alen_onactiveelementchange(activeElement);
+      }
+    }
+  }
+  adtlgcen.util.assignClickHandler = function (targetElem, useIframeElem) {
+    if (!targetElem) {
+      targetElem = document;
+    }
+    if (targetElem.attachEvent) {
+      targetElem.attachEvent(
+        "onclick",
+        function (e) {
+          onClickHandler(e, useIframeElem);
+        },
+        false
+      );
+    } else {
+      targetElem.addEventListener(
+        "click",
+        function (e) {
+          onClickHandler(e, useIframeElem);
+        },
+        false
+      );
+    }
+  };
+  adtlgcen.util.assignClickHandler();
+  adtlgcen.util.setOriginForIframeADs = function () {
+    var iframes = document.getElementsByTagName("IFRAME");
+    var requestObj = { action: "setOrigin", origin: window.loc_.origin };
+    for (var i = 0; i < iframes.length; i++) {
+      try {
+        if (
+          iframes[i].src &&
+          iframes[i].src.indexOf("googlesyndication.com") > -1
+        ) {
+          iframes[i].contentWindow.postMessage(JSON.stringify(requestObj), "*");
+        }
+      } catch (e) {}
+    }
+    setTimeout(adtlgcen.util.setOriginForIframeADs, 1e3);
+  };
+  window.admp_ = new (function () {
+    this.inViewNode = new InViewNode({});
+    this.inViewCallback = function (element) {
+      if (element) {
+        var adMeta = adtlgcen.util.extractAdMeta(element);
+        var cuid = adMeta["cuid"],
+          adid = adMeta["adid"],
+          bnid = adMeta["bnid"];
+        if (
+          bnid &&
+          element[enr_vars.inview_data_container].sentDwellTime <
+            adtlgcen_SETTINGS.maxDwellTimeToSend
+        ) {
+          var percOfVisibility =
+            (element[enr_vars.inview_data_container].width *
+              element[enr_vars.inview_data_container].height) /
+            100;
+          if (percOfVisibility >= adtlgcen_SETTINGS.minPercOfVisibility) {
+            var visibleTime = parseInt(
+              element[enr_vars.inview_data_container].time / 1e3,
+              10
+            );
+            var currInterval = adtlgcen.util.interval(
+              element[enr_vars.inview_data_container].iteration
+            );
+            var toSend =
+              adtlgcen_SETTINGS.maxDwellTimeToSend -
+              element[enr_vars.inview_data_container].sentDwellTime;
+            if (currInterval > toSend) {
+              currInterval = toSend;
+            }
+            if (visibleTime > 0 && visibleTime % currInterval == 0) {
+              var v_imp = element[enr_vars.inview_data_container].sentDwellTime;
+              if (adtlgcen.config.suspendAdEvents) {
+                adtlgcen.config.eventsCache.push(
+                  "dwell:" +
+                    adid +
+                    ":" +
+                    bnid +
+                    ":" +
+                    cuid +
+                    ":" +
+                    currInterval +
+                    ":" +
+                    v_imp
+                );
+              } else {
+                adtlgcen.event.reportDwellTime(
+                  adid,
+                  bnid,
+                  cuid,
+                  currInterval,
+                  v_imp
+                );
+              }
+              element[enr_vars.inview_data_container].start_ = 0;
+              element[enr_vars.inview_data_container].time = 0;
+              element[enr_vars.inview_data_container].iteration++;
+              element[enr_vars.inview_data_container].sentDwellTime +=
+                currInterval;
+            }
+          } else {
+            element[enr_vars.inview_data_container].start_ = 0;
+            element[enr_vars.inview_data_container].time = 0;
+            element[enr_vars.inview_data_container].iteration = 1;
+          }
+        }
+      }
+    };
+    this.initTracking = function (contId) {
+      var adContainer;
+      if (typeof contId === "string") {
+        adContainer = document.getElementById(contId);
+      } else {
+        adContainer = contId;
+      }
+      var adMeta = adtlgcen.util.extractAdMeta(adContainer);
+      if (adMeta) {
+        var cuid = adMeta["cuid"],
+          adid = adMeta["adid"],
+          bnid = adMeta["bnid"];
+        if (bnid) {
+          if (adtlgcen.config.suspendAdEvents) {
+            adtlgcen.config.eventsCache.push(
+              "imp:" + adid + ":" + bnid + ":" + cuid
+            );
+          } else {
+            adtlgcen.event.reportImp(adid, bnid, cuid);
+          }
+          adtlgcen.config.bannersToTrack[adid + ":" + bnid] = "true";
+          adtlgcen.config.blocksToTrack.push(adContainer);
+          this.inViewNode.addElementToTrack(adContainer);
+        }
+      }
+    };
+  })();
+  admp_.init = function () {
+    adtlgcen.util.setOriginForIframeADs();
+    if (
+      !cX.isConsentRequired() ||
+      (cX.isConsentRequired() && cX.hasConsent("pv"))
+    ) {
+      window[enr_vars.evid] = cX.getCxenseUserId();
+      adtlgcen_Cookie.set(enr_vars.evid, window[enr_vars.evid], 90 * 24);
+      adtlgcen.event.processEvents();
+    }
+    var eventMethod = window.addEventListener
+      ? "addEventListener"
+      : "attachEvent";
+    var eventer = window[eventMethod];
+    var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
+    eventer(
+      messageEvent,
+      function (e) {
+        try {
+          var responseObj = JSON.parse(e.data);
+          if (responseObj["action"] == "ad_event") {
+            var url = responseObj["url"];
+            url +=
+              "&location=" + (encodeURIComponent || escape)(window.loc_.href);
+            url +=
+              "&cxSiteId=" +
+              encodeURIComponent(cX.library.m_siteId) +
+              "&cxId=" +
+              encodeURIComponent(cX.getCxenseUserId());
+            url +=
+              "&cxprnd=" +
+              encodeURIComponent(cX.getPageContext().pageViewRandom);
+            adtlgcen.util.send(url);
+          }
+        } catch (e) {}
+      },
+      false
+    );
+    this.inViewNode.init(adtlgcen.config.blocksToTrack, this.inViewCallback);
+  };
+  cX.callQueue.push([
+    "invoke",
+    function () {
+      (function exec() {
+        if (cX.getCxenseUserId && cX.getCxenseUserId()) {
+          admp_.init();
+        } else {
+          setTimeout(function () {
+            exec();
+          }, 50);
+        }
+      })();
+    },
+  ]);
+}
