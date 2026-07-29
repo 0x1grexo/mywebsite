@@ -27,8 +27,6 @@ Visit the live site: [gregoropmann.github.io/aboutme/](https://gregoropmann.gith
 
 Good luck!
 
-It just works.
-
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
 
