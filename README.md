@@ -14,7 +14,7 @@ A high-performance, responsive portfolio website built with a focus on optimizat
 * **Tools:** VS Code, GitHub Pages, Google Analytics
 
 ## 📸 Preview
-Visit the live site: [gregoropmann.github.io/aboutme/](https://gregoropmann.github.io/aboutme/)
+Visit the live site: [gregoropmann.otset.ee](https://gregoropmann.otset.ee)
 
 ## You are welcome to use this as a template!
 1. Download the 'aboutme-main.zip' [Download ZIP](https://github.com/gregoropmann/aboutme/archive/refs/heads/main.zip)
@@ -45,7 +45,7 @@ Kõrge jõudlusega reageeriv portfoolio-veebisait, mille loomisel on keskendutud
 * **Tööriistad:** VS Code, GitHub Pages, Google Analytics
 
 ## 📸 Eelvaade
-Külasta veebisaiti: [gregoropmann.github.io/aboutme/](https://gregoropmann.github.io/aboutme/)
+Külasta veebisaiti: [gregoropmann.otset.ee](https://gregoropmann.otset.ee)
 
 ## Kasuta seda julgelt mallina!
 1. Lae alla 'aboutme-main.zip'  [Lae alla ZIP](https://github.com/gregoropmann/aboutme/archive/refs/heads/main.zip)
