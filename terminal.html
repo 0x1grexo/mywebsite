@@ -386,7 +386,7 @@ help() {
 
   exit() {
     appendLines([h('c-dim', '  Redirecting to the main site...'), h('', '')]);
-    setTimeout(() => { window.location.href = 'https://gregoropmann.github.io/aboutme/'; }, 1200);
+    setTimeout(() => { window.location.href = 'https://gregoropmann.otset.ee'; }, 1200);
     return [];
   },
 
@@ -482,7 +482,7 @@ help() {
   cd(args) {
     if (args.length === 0 || args[0] === '/' || args[0] === '..' || args[0] === '~') {
       appendLines([h('c-dim', '  Redirecting / ...'), h('', '')]);
-      setTimeout(() => { window.location.href = 'https://gregoropmann.github.io/aboutme/'; }, 1200);
+      setTimeout(() => { window.location.href = 'https://gregoropmann.otset.ee'; }, 1200);
     } else {
       return [h('c-red', `  bash: cd: ${args[0]}: No such file or directory`), h('', '')];
     }
