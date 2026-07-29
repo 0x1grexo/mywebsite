@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://gregoropmann.github.io/aboutme/sitemap.xml
+Sitemap: https://gregoropmann.otset.ee/sitemap.xml
