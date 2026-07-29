@@ -1,3 +1,34 @@
+  const dialUpAudio = new Audio('sounds/dialup_screech.mp3'); // I forgot this existed, went off page to make something else and got confused by my own easter egg...
+  dialUpAudio.loop = true;
+
+  let sessionStart = sessionStorage.getItem('sessionStartTime');
+  if (!sessionStart) {
+    sessionStart = Date.now();
+    sessionStorage.setItem('sessionStartTime', sessionStart);
+  }
+
+  function updateTimer() {
+    const now = Date.now();
+    const totalSeconds = Math.floor((now - sessionStart) / 1000);
+    
+    const mins = Math.floor(totalSeconds / 60).toString().padStart(2, '0');
+    const secs = (totalSeconds % 60).toString().padStart(2, '0');
+    document.getElementById('timer').innerText = `${mins}:${secs}`;
+
+    if (totalSeconds === 1800 && document.hidden) {
+      dialUpAudio.play().catch(err => console.log("Audio play blocked until user interaction."));
+    }
+  }
+
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) {
+      dialUpAudio.pause();
+      dialUpAudio.currentTime = 0;
+    }
+  });
+
+  updateTimer();
+  setInterval(updateTimer, 1000);
 
 document.addEventListener('keydown', e => {
   if (e.ctrlKey && e.altKey && e.key === 't') {
