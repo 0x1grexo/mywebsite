@@ -292,7 +292,7 @@
   }
 
   // ── Countdown logic ───────────────────────────────────────────────────
-  var countDownDate = new Date("Sep 1, 2026 00:00:00").getTime();
+  var countDownDate = new Date("Jan 1, 2027 00:00:00").getTime();
 
   var unitFormatters = {
     day: new Intl.NumberFormat(locale, { style: "unit", unit: "day", unitDisplay: "narrow" }),
