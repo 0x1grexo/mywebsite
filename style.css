@@ -615,3 +615,128 @@ body.dark-mode .skills li a {
     color: white !important;
     text-decoration: none !important;
 }
+
+/* ===== GAMES SECTION STYLES ===== */
+
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.game-card {
+    border: 2px solid #3498db;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    background: rgba(52, 152, 219, 0.05);
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s, background-color 0.2s;
+}
+
+.game-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(52, 152, 219, 0.25);
+    border-color: #2980b9;
+    background: rgba(52, 152, 219, 0.1);
+}
+
+.game-icon {
+    font-size: 3rem;
+    margin-bottom: 12px;
+    display: block;
+}
+
+.game-title {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #2c3e50;
+    transition: color 0.3s;
+}
+
+.game-desc {
+    margin-bottom: 15px;
+    color: #555;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    transition: color 0.3s;
+}
+
+.game-card button {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.game-card button:hover {
+    background-color: #2980b9;
+    transform: scale(1.05);
+}
+
+.game-card button:active {
+    transform: scale(0.98);
+}
+
+/* Dark mode support */
+body.dark-mode .game-card {
+    background: rgba(77, 184, 255, 0.05);
+    border-color: #4db8ff;
+}
+
+body.dark-mode .game-card:hover {
+    background: rgba(77, 184, 255, 0.1);
+    border-color: #3ca0e6;
+    box-shadow: 0 8px 20px rgba(77, 184, 255, 0.25);
+}
+
+body.dark-mode .game-title {
+    color: #e0e0e0;
+}
+
+body.dark-mode .game-desc {
+    color: #aaa;
+}
+
+body.dark-mode .game-card button {
+    background-color: #4db8ff;
+    color: #121212;
+}
+
+body.dark-mode .game-card button:hover {
+    background-color: #3ca0e6;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .games-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .game-card {
+        padding: 15px;
+    }
+
+    .game-icon {
+        font-size: 2.5rem;
+    }
+
+    .game-title {
+        font-size: 1.1rem;
+    }
+
+    .game-desc {
+        font-size: 0.9rem;
+    }
+
+    .game-card button {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+    }
+}
