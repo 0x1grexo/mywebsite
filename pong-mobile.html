@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Pong Mobile</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #0f0c29 0%, #1a1547 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .header {
+            text-align: center;
+            padding: 10px 0;
+            z-index: 10;
+        }
+
+        h1 {
+            color: #00ff88;
+            font-size: 1.8rem;
+            text-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+
+        .score-display {
+            color: #00ff88;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+        }
+
+        .game-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+            width: 100%;
+            padding: 10px;
+        }
+
+        #gameCanvas {
+            display: block;
+            background: #000;
+            border: 2px solid #00ff88;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+            max-width: 100%;
+            max-height: 100%;
+            aspect-ratio: 2 / 1;
+            object-fit: contain;
+        }
+
+        .difficulty-container {
+            width: 100%;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            border-top: 1px solid #00ff88;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .difficulty-label {
+            color: #666;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .difficulty-buttons {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .diff-btn {
+            padding: 6px 12px;
+            background: rgba(0, 255, 136, 0.1);
+            border: 2px solid #666;
+            color: #666;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            cursor: pointer;
+            border-radius: 3px;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .diff-btn:active {
+            transform: scale(0.95);
+        }
+
+        .diff-btn.active {
+            border-color: #00ff88;
+            color: #00ff88;
+            background: rgba(0, 255, 136, 0.2);
+            box-shadow: 0 0 8px rgba(0, 255, 136, 0.4);
+        }
+
+        .slider-container {
+            width: 100%;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.5);
+            border-top: 2px solid #00ff88;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .slider-label {
+            color: #666;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .slider {
+            width: 90%;
+            max-width: 400px;
+            height: 50px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: transparent;
+            outline: none;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .slider::-webkit-slider-track {
+            width: 100%;
+            height: 4px;
+            background: #333;
+            border-radius: 2px;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 40px;
+            height: 40px;
+            background: #00ff88;
+            border: 2px solid #00ff88;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 255, 136, 0.6);
+            transition: all 0.1s;
+        }
+
+        .slider::-webkit-slider-thumb:active {
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.9);
+            transform: scale(1.1);
+        }
+
+        .slider::-moz-range-track {
+            background: #333;
+            height: 4px;
+            border-radius: 2px;
+            border: none;
+        }
+
+        .slider::-moz-range-thumb {
+            width: 40px;
+            height: 40px;
+            background: #00ff88;
+            border: 2px solid #00ff88;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 255, 136, 0.6);
+            transition: all 0.1s;
+        }
+
+        .slider::-moz-range-thumb:active {
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.9);
+            transform: scale(1.1);
+        }
+
+        .tap-to-start {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: rgba(0, 255, 136, 0.5);
+            font-size: 1rem;
+            text-align: center;
+            z-index: 5;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .info {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #666;
+            font-size: 0.75rem;
+            text-align: right;
+        }
+
+        @media (max-height: 500px) {
+            h1 {
+                font-size: 1.3rem;
+                margin-bottom: 2px;
+            }
+
+            .score-display {
+                font-size: 0.85rem;
+            }
+
+            .slider-container {
+                padding: 10px;
+                gap: 5px;
+            }
+
+            .slider {
+                height: 35px;
+            }
+
+            .slider::-webkit-slider-thumb {
+                width: 30px;
+                height: 30px;
+            }
+
+            .slider::-moz-range-thumb {
+                width: 30px;
+                height: 30px;
+            }
+        }
+
+        @media (orientation: landscape) {
+            body {
+                padding: env(safe-area-inset-top) env(safe-area-inset-right) 0 env(safe-area-inset-left);
+            }
+
+            .container {
+                flex-direction: row;
+            }
+
+            .header {
+                writing-mode: vertical-rl;
+                text-orientation: mixed;
+                padding: 20px 10px;
+                justify-self: flex-start;
+            }
+
+            .game-wrapper {
+                flex: 1;
+                padding: 10px;
+            }
+
+            .slider-container {
+                flex-direction: row;
+                width: auto;
+                height: 100%;
+                padding: 20px 15px;
+                border-top: none;
+                border-left: 2px solid #00ff88;
+                gap: 20px;
+            }
+
+            .slider {
+                width: 50px;
+                height: 90%;
+                max-height: 300px;
+            }
+
+            .slider-label {
+                writing-mode: vertical-rl;
+                text-orientation: mixed;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>PONG</h1>
+            <div class="score-display">
+                <span>YOU: <span id="score1">0</span></span>
+                <br>
+                <span>AI: <span id="score2">0</span></span>
+            </div>
+            <div class="info" id="info"></div>
+        </div>
+
+        <div class="game-wrapper">
+            <canvas id="gameCanvas" width="600" height="300"></canvas>
+            <div id="tapMessage" class="tap-to-start">Tap canvas to start</div>
+        </div>
+
+        <div class="difficulty-container">
+            <div class="difficulty-label">Difficulty</div>
+            <div class="difficulty-buttons">
+                <button class="diff-btn" onclick="setDifficulty('easy')">Easy</button>
+                <button class="diff-btn active" onclick="setDifficulty('medium')">Medium</button>
+                <button class="diff-btn" onclick="setDifficulty('hard')">Hard</button>
+            </div>
+        </div>
+
+        <div class="slider-container">
+            <div class="slider-label">MOVE</div>
+            <input type="range" id="slider" class="slider" min="0" max="100" value="50">
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const slider = document.getElementById('slider');
+        const tapMessage = document.getElementById('tapMessage');
+
+        // Game objects
+        const paddleWidth = 8;
+        const paddleHeight = 60;
+        const ballSize = 6;
+
+        let gameState = {
+            playing: false,
+            leftScore: 0,
+            rightScore: 0,
+            difficulty: 'medium'
+        };
+
+        // Difficulty settings
+        const difficultySettings = {
+            easy: {
+                aiSpeed: 2.5,
+                accuracy: 0.65,
+                missChance: 0.35
+            },
+            medium: {
+                aiSpeed: 4.5,
+                accuracy: 0.85,
+                missChance: 0.05
+            },
+            hard: {
+                aiSpeed: 5.5,
+                accuracy: 0.98,
+                missChance: 0
+            }
+        };
+
+        const leftPaddle = {
+            x: 8,
+            y: canvas.height / 2 - paddleHeight / 2,
+            width: paddleWidth,
+            height: paddleHeight,
+            speed: 6
+        };
+
+        const rightPaddle = {
+            x: canvas.width - 16,
+            y: canvas.height / 2 - paddleHeight / 2,
+            width: paddleWidth,
+            height: paddleHeight,
+            speed: 4.5
+        };
+
+        const ball = {
+            x: canvas.width / 2,
+            y: canvas.height / 2,
+            dx: 3,
+            dy: 3,
+            radius: ballSize,
+            maxSpeed: 6
+        };
+
+        // Touch/slider input
+        slider.addEventListener('input', (e) => {
+            const sliderValue = parseFloat(e.target.value) / 100;
+            const targetY = sliderValue * (canvas.height - paddleHeight);
+            leftPaddle.y = targetY;
+        });
+
+        // Canvas tap to start
+        canvas.addEventListener('click', () => {
+            gameState.playing = !gameState.playing;
+            if (gameState.playing) {
+                tapMessage.style.display = 'none';
+            }
+        });
+
+        canvas.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            gameState.playing = !gameState.playing;
+            if (gameState.playing) {
+                tapMessage.style.display = 'none';
+            }
+        });
+
+        function resetGame() {
+            gameState.playing = false;
+            gameState.leftScore = 0;
+            gameState.rightScore = 0;
+            ball.x = canvas.width / 2;
+            ball.y = canvas.height / 2;
+            ball.dx = 3;
+            ball.dy = 3;
+            leftPaddle.y = canvas.height / 2 - paddleHeight / 2;
+            rightPaddle.y = canvas.height / 2 - paddleHeight / 2;
+            slider.value = 50;
+            updateScore();
+            tapMessage.style.display = 'block';
+        }
+
+        function updateAIPaddle() {
+            const settings = difficultySettings[gameState.difficulty];
+            
+            // Easy mode: occasionally miss
+            if (Math.random() < settings.missChance) {
+                return;
+            }
+
+            const paddleCenter = rightPaddle.y + paddleHeight / 2;
+            const targetY = ball.y;
+
+            // Predict where ball will be
+            const predictedY = ball.y + (ball.dy * 25);
+            
+            // Adjust prediction based on accuracy
+            const adjustedTarget = targetY + (predictedY - targetY) * (1 - settings.accuracy);
+
+            // Move toward target with some deadzone
+            if (paddleCenter < adjustedTarget - 8) {
+                rightPaddle.y = Math.min(canvas.height - paddleHeight, rightPaddle.y + settings.aiSpeed);
+            } else if (paddleCenter > adjustedTarget + 8) {
+                rightPaddle.y = Math.max(0, rightPaddle.y - settings.aiSpeed);
+            }
+        }
+
+        function setDifficulty(level) {
+            gameState.difficulty = level;
+            
+            // Update button states
+            document.querySelectorAll('.diff-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Reset game
+            resetGame();
+        }
+
+        function updateBall() {
+            if (!gameState.playing) return;
+
+            ball.x += ball.dx;
+            ball.y += ball.dy;
+
+            // Top/bottom collision
+            if (ball.y - ball.radius < 0 || ball.y + ball.radius > canvas.height) {
+                ball.dy = -ball.dy;
+                ball.y = Math.max(ball.radius, Math.min(canvas.height - ball.radius, ball.y));
+            }
+
+            // Left paddle collision
+            if (ball.x - ball.radius < leftPaddle.x + leftPaddle.width &&
+                ball.y > leftPaddle.y &&
+                ball.y < leftPaddle.y + paddleHeight) {
+                ball.dx = Math.abs(ball.dx);
+                let deltaY = ball.y - (leftPaddle.y + paddleHeight / 2);
+                ball.dy += deltaY * 0.06;
+                ball.dy = Math.max(-ball.maxSpeed, Math.min(ball.maxSpeed, ball.dy));
+            }
+
+            // Right paddle collision
+            if (ball.x + ball.radius > rightPaddle.x &&
+                ball.y > rightPaddle.y &&
+                ball.y < rightPaddle.y + paddleHeight) {
+                ball.dx = -Math.abs(ball.dx);
+                let deltaY = ball.y - (rightPaddle.y + paddleHeight / 2);
+                ball.dy += deltaY * 0.06;
+                ball.dy = Math.max(-ball.maxSpeed, Math.min(ball.maxSpeed, ball.dy));
+            }
+
+            // Score points
+            if (ball.x < 0) {
+                gameState.rightScore++;
+                resetBall();
+                updateScore();
+            } else if (ball.x > canvas.width) {
+                gameState.leftScore++;
+                resetBall();
+                updateScore();
+            }
+        }
+
+        function resetBall() {
+            ball.x = canvas.width / 2;
+            ball.y = canvas.height / 2;
+            ball.dx = (Math.random() > 0.5 ? 1 : -1) * 3;
+            ball.dy = (Math.random() - 0.5) * 5;
+            gameState.playing = false;
+        }
+
+        function updateScore() {
+            document.getElementById('score1').textContent = gameState.leftScore;
+            document.getElementById('score2').textContent = gameState.rightScore;
+        }
+
+        function draw() {
+            // Clear canvas
+            ctx.fillStyle = '#000';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Center line
+            ctx.strokeStyle = 'rgba(0, 255, 136, 0.2)';
+            ctx.setLineDash([6, 6]);
+            ctx.beginPath();
+            ctx.moveTo(canvas.width / 2, 0);
+            ctx.lineTo(canvas.width / 2, canvas.height);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            // Paddles
+            ctx.fillStyle = '#00ff88';
+            ctx.fillRect(leftPaddle.x, leftPaddle.y, paddleWidth, paddleHeight);
+            ctx.fillRect(rightPaddle.x, rightPaddle.y, paddleWidth, paddleHeight);
+
+            // Ball
+            ctx.beginPath();
+            ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+            ctx.fillStyle = '#00ff88';
+            ctx.fill();
+
+            // Status text
+            if (!gameState.playing) {
+                ctx.font = 'bold 12px Courier New';
+                ctx.fillStyle = 'rgba(0, 255, 136, 0.4)';
+                ctx.textAlign = 'center';
+                ctx.fillText('TAP TO START', canvas.width / 2, canvas.height / 2 + 30);
+            }
+        }
+
+        function gameLoop() {
+            if (gameState.playing) {
+                updateAIPaddle();
+                updateBall();
+            }
+            draw();
+            requestAnimationFrame(gameLoop);
+        }
+
+        gameLoop();
+
+        // Handle window resize for responsive canvas
+        function resizeCanvas() {
+            const wrapper = document.querySelector('.game-wrapper');
+            const containerHeight = wrapper.clientHeight;
+            const containerWidth = wrapper.clientWidth;
+            
+            const aspectRatio = 600 / 300;
+            let newWidth = containerWidth;
+            let newHeight = containerWidth / aspectRatio;
+
+            if (newHeight > containerHeight) {
+                newHeight = containerHeight;
+                newWidth = containerHeight * aspectRatio;
+            }
+
+            canvas.style.width = newWidth + 'px';
+            canvas.style.height = newHeight + 'px';
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        window.addEventListener('orientationchange', () => {
+            setTimeout(resizeCanvas, 100);
+        });
+
+        resizeCanvas();
+    </script>
+</body>
+</html>
